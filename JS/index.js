@@ -64,7 +64,6 @@ function FuncaoMedianaContinua(array, frequencia, IntervaloClasse, frequenciaacu
         if(frequenciaacumulada[i] >= posicao ){
             i == 0 ? auxiliar = 0: auxiliar = frequenciaacumulada[i-1]
             mediana = (array[i][0] + (((posicao - auxiliar) / frequencia[i]) * IntervaloClasse))
-            mediana = mediana.toFixed(2)
             return mediana
         }
     }
@@ -79,8 +78,9 @@ function Qualitativa_Ordinal(array){
     alert("Qualitativa Ordinal teste")
 }
 
-function Quantitativa_Continua(elementos){
-    let Rol = elementos.sort((a,b) => a - b)
+function Quantitativa_Continua(array){
+    let vet = array.sort((a,b) => a - b)
+    let Rol = vet.map(a => parseFloat(a))
     let Xmin = Rol[0]
     let Xmax = Rol[(Rol.length)-1]
     let At = Xmax - Xmin  // Amplitude da Tabela
@@ -107,7 +107,6 @@ function Quantitativa_Continua(elementos){
         classe.push(i+1)
     }
 
-
     let escopo = [Xmin]
     let frequencia = []
 
@@ -127,7 +126,7 @@ function Quantitativa_Continua(elementos){
     
     let Fac_porcentagem = [0]
     Fr.forEach((a,b) => Fac_porcentagem.push(Fac_porcentagem[b] + a)) //Frequencia acumulada em porcentagem
-    Fac_percontagem.splice(0,1) 
+    Fac_porcentagem.splice(0,1) 
 
 
     escopo.map((a,b) => escopo[b] = [escopo[b],escopo[b+1] ])
@@ -145,17 +144,16 @@ function Quantitativa_Continua(elementos){
     EscreverTabela(classe, escopo, frequencia, Fr, Fac, Fac_porcentagem)
 }
 
-
 function Quantitativa_Discreta(array){
     alert('quantitativa Discreta teste')
 }
 
-EscreverTabela(a,b,c,d,e,f){
-    alert(a)
-    alert(b)
-    alert(c)
-    alert(d)
-    alert(e)
-    alert(f)
+function EscreverTabela(a,b,c,d,e,f){
+    alert(a + " teste")
+    alert(b + " teste")
+    alert(c + " teste")
+    alert(d + " teste")
+    alert(e + " teste")
+    alert(f + " teste")
 }
 
