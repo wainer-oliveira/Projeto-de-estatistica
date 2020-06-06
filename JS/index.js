@@ -125,9 +125,9 @@ function Quantitativa_Continua(elementos){
         Fr.push((frequencia[i] / Fac[K - 1]) * 100) // Frequencia em procentagem
     }
     
-    let Fac_percentagem = [0]
-    Fr.forEach((a,b) => Fac_percentagem.push(Fac_percentagem[b] + a)) //Frequencia acumulada em porcentagem
-    Fac_percentagem.splice(0,1) 
+    let Fac_porcentagem = [0]
+    Fr.forEach((a,b) => Fac_porcentagem.push(Fac_porcentagem[b] + a)) //Frequencia acumulada em porcentagem
+    Fac_percontagem.splice(0,1) 
 
 
     escopo.map((a,b) => escopo[b] = [escopo[b],escopo[b+1] ])
@@ -140,24 +140,9 @@ function Quantitativa_Continua(elementos){
     let moda = FuncaoModa(xi, frequencia)
     let mediana = FuncaoMedianaContinua(escopo, frequencia,IC, Fac)
 
-    console.log(Rol)
-    console.log(At)
-    console.log(K)
-    console.log(classe)
-    console.log(frequencia)
-    console.log(IC)
-    console.log(escopo)
-    console.log(Fac)
-    console.log(Fac_percentagem)
-    console.log(Fr)
-    console.log(xi)
-    console.log(media)
-    console.log(moda)
-    console.log(mediana)
-
     // por % em fr e fac_porcentagem
     // adicionar |-- no escopo
-
+    EscreverTabela(classe, escopo, frequencia, Fr, Fac, Fac_porcentagem)
 }
 
 
@@ -165,4 +150,12 @@ function Quantitativa_Discreta(array){
     alert('quantitativa Discreta teste')
 }
 
+EscreverTabela(a,b,c,d,e,f){
+    alert(a)
+    alert(b)
+    alert(c)
+    alert(d)
+    alert(e)
+    alert(f)
+}
 
