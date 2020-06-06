@@ -14,26 +14,30 @@
     <br><br><br>
     <div id="forms">
         <form action="">
-            <label for="nome">Digite o nome da variável</label>
+            <label for="nome">Digite o nome da variável :</label>
             <input id="nome" name="nome" type="text">
-            <br><br><br>
+            
+            <br><br>
+            <label for="elementos">Digite os elementos : </label>
+            <input type="text" id="elementos" name="elementos">
+            <p> (com espaço entre cada elemento)</p>
+            
 
+            <br> <br>
             <label for="tipo">Digite o tipo de tabela: </label>
-            <select id="tipo" name="tipo" value="tipo">
+            <select id="tipo" name="tipo">
                 <option id= "qualitativa_nominal" name="qualitativa_nominal" value="quali_nom">Qualitativa Nominal</option>
                 <option id= "qualitativa_ordinal" name="qualitativa_ordinal" value="quali_ord">Qualitativa Ordinal</option>
                 <option id="quantitativa_discreta" name="quantitativa_discreta" value="quant_dis">Quantitativa Discreta</option>
                 <option id="quantitativa_continua" name="quantitativa_continua" value="quant_cont">Quantitativa Continua</option>
             </select>
+
             <br><br>
 
-            <label for="elementos">Digite os elementos: </label>
-            <input type="text" id="elementos" name="elementos">
-            <input type="button" id="adicionar" value="Adicionar">
-            <div id="dados" name="dados"></div>
-            <br><br>
+            
 
-            <input type="submit" value="Gerar!" id="submit" name="submit">
+            <input type="button" id="botao" value="Gerar">
+            
         </form>
         
     </div>
