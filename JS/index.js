@@ -29,9 +29,21 @@ btn.onclick = function pega_elementos(){
     
 }
 
+//FUNÇÕES AUXILIARES
+function QuantidadeOcorrencia(elemento, array){
+    let idx = array.indexOf(elemento)
+    if(idx === -1) return 0
+    let indices = []
+    while(idx != -1){
+        indices.push(idx)
+        idx = array.indexOf(elemento, idx + 1)
+    }
+    return indices.length
+}
+
+//FUNÇÕES DE MEDIDAS DE TENDÊNCIA CENTRAL
 function FuncaoMedia(array, frequenciaArray){
-    let media = []
-    array.forEach((a,b) => media.push(a * frequenciaArray[b]) )
+    let media = array.map((a,b) => a * frequenciaArray[b])
     media = (media.reduce ((a,b) => a+b) ) / (frequenciaArray.reduce((a,b) => a+b))
     media = media.toFixed(2)
     return media
@@ -64,14 +76,45 @@ function FuncaoMedianaContinua(array, frequencia, IntervaloClasse, frequenciaacu
         if(frequenciaacumulada[i] >= posicao ){
             i == 0 ? auxiliar = 0: auxiliar = frequenciaacumulada[i-1]
             mediana = (array[i][0] + (((posicao - auxiliar) / frequencia[i]) * IntervaloClasse))
-            return mediana
+            return mediana.toFixed(2)
         }
     }
 }
 
+function FuncaoMediana(){
 
-function Qualitativa_Nominal(array){
-    alert('qualitativa Nominal teste')
+}
+
+//FUNÇÕES DE CALCULOS DE TABULAÇÃO
+function Qualitativa_Nominal(array){ // FAZER MEDIANA
+    let SortArray = array
+    SortArray = SortArray.sort()
+    let elementos = [... new Set(SortArray)]
+    let frequencia = elementos.map(a => QuantidadeOcorrencia(a, SortArray))
+
+    let Fac = [0]
+    frequencia.forEach((a,b) => Fac.push(a + Fac[b]))
+    Fac.splice(0,1)
+
+    let fr = []
+    for(let i = 0; i < frequencia.length; i++){
+        fr.push((frequencia[i] / Fac[Fac.length -1]) * 100)
+    }
+
+    let Fac_porcentagem = [0]
+    fr.forEach((a,b) => Fac_porcentagem.push(Fac_porcentagem[b] + a))
+
+    let moda = FuncaoModa(elementos, frequencia)
+    
+    Fac_porcentagem.splice(0,1) 
+
+    console.log(elementos)
+    console.log(frequencia)
+    console.log(Fac)
+    console.log(fr)
+    console.log(Fac_porcentagem)
+    console.log(moda)
+
 }
 
 function Qualitativa_Ordinal(array){
@@ -85,19 +128,19 @@ function Quantitativa_Continua(array){
     let Xmax = Rol[(Rol.length)-1]
     let At = Xmax - Xmin  // Amplitude da Tabela
     let K = parseInt(Math.sqrt(Rol.length)) // Número de linhas da tabela
-
+    let IC
 
     do{
         At +=1
         if((At % K) == 0){
-            var IC = At / K
+            IC = At / K
         }else if((At % (K - 1)) == 0){
             K -=1
-            var IC = At / K
+            IC = At / K
         }else if(At % (K + 1) == 0){
-            var IC = At / K
+            IC = At / K
         }else{
-            var IC = 0
+            IC = 0
         }
     }while(IC == 0)
 
@@ -144,7 +187,17 @@ function Quantitativa_Continua(array){
     EscreverTabela(classe, escopo, frequencia, Fr, Fac, Fac_porcentagem)
 }
 
-function Quantitativa_Discreta(array){
+function Quantitativa_Discreta(array){ // INCOMPLETA, TERMINAR
+    arr = array.map(a => parseFloat(a))
+    let arraySort = arr.sort((a,b) => a - b)
+    let elementos = [... new Set(arraySort)] // retirando elemento repetidos
+    let frequencia = elementos.map(a => QuantidadeOcorrencia(a,arraySort)) // encontrando frequencia
+
+    console.log(arraySort)
+    console.log(elementos)
+    console.log(frequencia)
+
+    
     alert('quantitativa Discreta teste')
 }
 
