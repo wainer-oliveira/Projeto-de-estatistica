@@ -123,11 +123,11 @@ function Qualitativa_Ordinal(array){
 
 function Quantitativa_Continua(array){
     let vet = array.sort((a,b) => a - b)
-    let Rol = vet.map(a => parseFloat(a))
+    const Rol = vet.map(a => parseFloat(a))
     let Xmin = Rol[0]
     let Xmax = Rol[(Rol.length)-1]
     let At = Xmax - Xmin  // Amplitude da Tabela
-    let K = parseInt(Math.sqrt(Rol.length)) // Número de linhas da tabela
+    const K = parseInt(Math.sqrt(Rol.length)) // Número de linhas da tabela
     let IC
 
     do{
@@ -162,13 +162,13 @@ function Quantitativa_Continua(array){
     frequencia.forEach((a,b) => Fac.push(Fac[b] + a) ) // frequencia acumulada
     Fac.splice(0,1) // retirando primeiro valor dado na declaração do Fac
     
-    let Fr = []
+    let fr = []
     for (let i = 0; i < K; i++){
-        Fr.push((frequencia[i] / Fac[K - 1]) * 100) // Frequencia em procentagem
+        fr.push((frequencia[i] / Fac[K - 1]) * 100) // Frequencia em procentagem
     }
     
     let Fac_porcentagem = [0]
-    Fr.forEach((a,b) => Fac_porcentagem.push(Fac_porcentagem[b] + a)) //Frequencia acumulada em porcentagem
+    fr.forEach((a,b) => Fac_porcentagem.push(Fac_porcentagem[b] + a)) //Frequencia acumulada em porcentagem
     Fac_porcentagem.splice(0,1) 
 
 
@@ -184,19 +184,37 @@ function Quantitativa_Continua(array){
 
     // por % em fr e fac_porcentagem
     // adicionar |-- no escopo
-    EscreverTabela(classe, escopo, frequencia, Fr, Fac, Fac_porcentagem)
+    EscreverTabela(classe, escopo, frequencia, fr, Fac, Fac_porcentagem)
 }
 
-function Quantitativa_Discreta(array){ // INCOMPLETA, TERMINAR
-    arr = array.map(a => parseFloat(a))
+function Quantitativa_Discreta(array){
+    let arr = array.map(a => parseFloat(a))
     let arraySort = arr.sort((a,b) => a - b)
-    let elementos = [... new Set(arraySort)] // retirando elemento repetidos
-    let frequencia = elementos.map(a => QuantidadeOcorrencia(a,arraySort)) // encontrando frequencia
+    const elementos = [... new Set(arraySort)] // retirando elemento repetidos
+    const frequencia = elementos.map(a => QuantidadeOcorrencia(a,arraySort)) // encontrando frequencia
 
-    console.log(arraySort)
+    let Fac = [0]
+    frequencia.forEach((a,b) => Fac.push(Fac[b] + a) ) // frequencia acumulada
+    Fac.splice(0,1) // retirando primeiro valor dado na declaração do Fac
+
+    let fr = []
+    for (let i = 0; i < frequencia.length; i++){
+        fr.push((frequencia[i] / Fac[Fac.length - 1]) * 100) // Frequencia em procentagem
+    }  
+    
+    let Fac_porcentagem = [0]
+    fr.forEach((a,b) => Fac_porcentagem.push(Fac_porcentagem[b] + a)) //Frequencia acumulada em porcentagem
+    Fac_porcentagem.splice(0,1) 
+
+    const media = FuncaoMedia(elementos, frequencia)
+    const mediana = FuncaoMediana()
+    const moda = FuncaoModa(elementos, frequencia)
+
     console.log(elementos)
     console.log(frequencia)
-
+    console.log(Fac)
+    console.log(fr)
+    console.log(Fac_porcentagem)
     
     alert('quantitativa Discreta teste')
 }
