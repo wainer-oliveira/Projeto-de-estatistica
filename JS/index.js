@@ -3,13 +3,15 @@ let btn = document.getElementById('botao')
 //Acionado por clique do Botão
 btn.onclick = function pega_elementos(){
 
-    let tabela = document.getElementById("tipo").value
     //Captura dos elementos do input
+    const tabela = document.getElementById("tabela")
+    const name = document.getElementById("nome")
+    let tipotab = document.getElementById("tipo").value
     let elementsInput = document.getElementById("elementos")
     const elementos = elementsInput.value.split(" ")
     
     //Reconhecendo qual tipo de tabela
-    switch(tabela){
+    switch(tipotab){
         case 'quali_nom' :
             Qualitativa_Nominal(elementos)
             break;
@@ -126,8 +128,8 @@ function Quantitativa_Continua(array){
     const Rol = vet.map(a => parseFloat(a))
     let Xmin = Rol[0]
     let Xmax = Rol[(Rol.length)-1]
-    let At = Xmax - Xmin  // Amplitude da Tabela
-    const K = parseInt(Math.sqrt(Rol.length)) // Número de linhas da tabela
+    let At = Xmax - Xmin  // Amplitude da tipo
+    let K = parseInt(Math.sqrt(Rol.length)) // Número de linhas da tipo
     let IC
 
     do{
@@ -182,9 +184,13 @@ function Quantitativa_Continua(array){
     let moda = FuncaoModa(xi, frequencia)
     let mediana = FuncaoMedianaContinua(escopo, frequencia,IC, Fac)
 
-    // por % em fr e fac_porcentagem
-    // adicionar |-- no escopo
-    EscreverTabela(classe, escopo, frequencia, fr, Fac, Fac_porcentagem)
+    let FacPorcString = Fac_porcentagem.map(a => a + "%")
+    let frString = fr.map(a => a + "%")
+    escopo_string = escopo.map(a => a[0] + " |-- " + a[1])
+
+    let titulos = [" Classe "," Quantidade ", " Frequencia ", " Frequencia(%) ", "Frequencia Acum ", " Frequencia Acum (%) "]
+    let arraydados = [classe, escopo_string, frequencia, fr, Fac, FacPorcString]
+    EscreverTabela(titulos, arraydados)
 }
 
 function Quantitativa_Discreta(array){
@@ -219,12 +225,40 @@ function Quantitativa_Discreta(array){
     alert('quantitativa Discreta teste')
 }
 
-function EscreverTabela(a,b,c,d,e,f){
-    alert(a + " teste")
-    alert(b + " teste")
-    alert(c + " teste")
-    alert(d + " teste")
-    alert(e + " teste")
-    alert(f + " teste")
+
+//escrever tabela (provisório)
+function CriarTag(elemento){
+    return document.createElement(elemento)
+}
+
+function CriarCelula(tag, text){
+    tag = CriarTag(tag)
+    tag.textContent = text
+    return tag
+}
+
+function EscreverTabela(arrayNomes, arrayDados){
+    let thead = CriarTag("thead")
+    let tbody = CriarTag("tbody")
+    let linhahead = CriarTag("tr")
+    for(let i = 0; i < arrayNomes.length; i++){
+        let th = CriarCelula("th", arrayNomes[i])
+        linhahead.appendChild(th)
+    }
+
+    thead.appendChild(linhahead)
+
+    for(let i = 0; i < arrayDados[0].length; i++){
+        let linhabody = CriarTag("tr")
+        for(let j = 0; j < arrayDados.length; j++){
+            let cel = CriarCelula("td", arrayDados[j][i])
+            linhabody.appendChild(cel)
+        }
+        tbody.appendChild(linhabody)
+    }
+
+    tabela.appendChild(thead)
+    tabela.appendChild(tbody)
+
 }
 
