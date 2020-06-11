@@ -74,7 +74,7 @@ function FuncaoMedianaContinua(array, frequencia, IntervaloClasse, frequenciaacu
     let mediana
     let auxiliar
     
-    for(let i=0; i < (frequencia.length - 1); i++){
+    for(let i=0; i < frequencia.length; i++){
         if(frequenciaacumulada[i] >= posicao ){
             i == 0 ? auxiliar = 0: auxiliar = frequenciaacumulada[i-1]
             mediana = (array[i][0] + (((posicao - auxiliar) / frequencia[i]) * IntervaloClasse))
@@ -83,12 +83,43 @@ function FuncaoMedianaContinua(array, frequencia, IntervaloClasse, frequenciaacu
     }
 }
 
-function FuncaoMediana(){
+function FuncaoMediana(array, freqAcum){
+    let acum = freqAcum[freqAcum.length - 1]
+    let posicao
+    let mediana
 
+    if(acum % 2 == 0){
+        posicao = []
+        mediana = []
+        posicao.push(acum / 2)
+        posicao.push(posicao[0] + 1)
+        for(let i = 0; i < freqAcum.length; i++){
+            if(freqAcum[i] >= posicao[0]){
+                 mediana[0] = array[i]
+                  break
+            }
+        }
+        for(let i = 0; i < freqAcum.length; i++){
+            if(freqAcum[i] >= posicao[1]){
+                 mediana.push(array[i])
+                  break
+            }
+        }
+        if(mediana[0] == mediana[1]) mediana = mediana[0] 
+
+    }else{
+        posicao = acum / 2
+        for(let i = 0; i < freqAcum.length; i++){
+            if(freqAcum[i] >= posicao){
+                return mediana = array[i]
+            }
+        }
+    }
+    return mediana
 }
 
 //FUNÇÕES DE CALCULOS DE TABULAÇÃO
-function Qualitativa_Nominal(array){ // FAZER MEDIANA
+function Qualitativa_Nominal(array){ 
     let SortArray = array
     SortArray = SortArray.sort()
     let elementos = [... new Set(SortArray)]
@@ -105,21 +136,51 @@ function Qualitativa_Nominal(array){ // FAZER MEDIANA
 
     let Fac_porcentagem = [0]
     fr.forEach((a,b) => Fac_porcentagem.push(Fac_porcentagem[b] + a))
-
-    let moda = FuncaoModa(elementos, frequencia)
-    
     Fac_porcentagem.splice(0,1) 
 
+    let moda = FuncaoModa(elementos, frequencia)
+    let mediana = FuncaoMediana(elementos, Fac)
+    
     console.log(elementos)
     console.log(frequencia)
     console.log(Fac)
     console.log(fr)
     console.log(Fac_porcentagem)
     console.log(moda)
+    console.log(mediana)
 
 }
 
-function Qualitativa_Ordinal(array){
+function Qualitativa_Ordinal(array){ // arrumar
+    let newArray = array.map(a => a.toLowerCase(a))
+    let elementos = [... new Set(newArray)]
+    console.log(elementos)
+   let freq = elementos.map(a => QuantidadeOcorrencia(a, newArray))
+
+    let Fac = [0]
+    freq.forEach((a,b) => Fac.push(a + Fac[b]))
+    Fac.splice(0,1)
+
+    let fr = []
+    for(let i = 0; i < freq.length; i++){
+        fr.push((freq[i] / Fac[Fac.length -1]) * 100)
+    }
+
+    let Fac_porcentagem = [0]
+    fr.forEach((a,b) => Fac_porcentagem.push(Fac_porcentagem[b] + a))
+    Fac_porcentagem.splice(0,1) 
+
+    let moda = FuncaoModa(elementos, freq)
+    let mediana = FuncaoMediana(elementos, Fac)
+
+    console.log(newArray)
+    console.log(elementos)
+    console.log(freq)
+    console.log(Fac)
+    console.log(fr)
+    console.log(Fac_porcentagem)
+    console.log(moda)
+    console.log(mediana)
     alert("Qualitativa Ordinal teste")
 }
 
@@ -213,15 +274,10 @@ function Quantitativa_Discreta(array){
     Fac_porcentagem.splice(0,1) 
 
     const media = FuncaoMedia(elementos, frequencia)
-    const mediana = FuncaoMediana()
+    const mediana = FuncaoMediana(elementos,Fac)
     const moda = FuncaoModa(elementos, frequencia)
 
-    console.log(elementos)
-    console.log(frequencia)
-    console.log(Fac)
-    console.log(fr)
-    console.log(Fac_porcentagem)
-    
+    console.log(mediana)    
     alert('quantitativa Discreta teste')
 }
 
