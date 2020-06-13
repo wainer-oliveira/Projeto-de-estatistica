@@ -318,5 +318,6 @@ function GeradorTabela(table, data) {
     }
     GeradorTabelaHead(tabela, titulos)
 }
+// fonte: https://www.valentinog.com/blog/html-table/
 
 
