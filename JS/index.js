@@ -151,7 +151,7 @@ function Qualitativa_Nominal(array){
 
 }
 
-function Qualitativa_Ordinal(array){ // arrumar
+function Qualitativa_Ordinal(array){ 
     let newArray = array.map(a => a.toLowerCase(a))
     let elementos = [... new Set(newArray)]
     console.log(elementos)
@@ -249,9 +249,19 @@ function Quantitativa_Continua(array){
     let frString = fr.map(a => a + "%")
     escopo_string = escopo.map(a => a[0] + " |-- " + a[1])
 
-    let titulos = [" Classe "," Quantidade ", " Frequencia ", " Frequencia(%) ", "Frequencia Acum ", " Frequencia Acum (%) "]
-    let arraydados = [classe, escopo_string, frequencia, fr, Fac, FacPorcString]
-    EscreverTabela(titulos, arraydados)
+
+   let ArrayObjetos = []
+   classe.forEach((a,b) => ArrayObjetos.push({
+        Classe : `${a}`,
+        Quantidade : `${escopo_string[b]}`,
+        Frequencia : `${frequencia[b]}`,
+        Frequencia_Percentual : `${frString[b]}`,
+        Frequencia_Acumulada : `${Fac[b]}`,
+        Frequencia_Acumulada_Percentual : `${FacPorcString[b]}`
+        }
+   ))
+        console.log(ArrayObjetos)
+    GeradorTabela(tabela, ArrayObjetos)
 }
 
 function Quantitativa_Discreta(array){
@@ -282,39 +292,31 @@ function Quantitativa_Discreta(array){
 }
 
 
-//escrever tabela (provisório)
-function CriarTag(elemento){
-    return document.createElement(elemento)
-}
 
-function CriarCelula(tag, text){
-    tag = CriarTag(tag)
-    tag.textContent = text
-    return tag
-}
-
-function EscreverTabela(arrayNomes, arrayDados){
-    let thead = CriarTag("thead")
-    let tbody = CriarTag("tbody")
-    let linhahead = CriarTag("tr")
-    for(let i = 0; i < arrayNomes.length; i++){
-        let th = CriarCelula("th", arrayNomes[i])
-        linhahead.appendChild(th)
+//escrever tabela 
+function GeradorTabelaHead(table, data){
+    let thead = table.createTHead()
+    let linha = thead.insertRow()
+    for (let key of data) {
+        let th = document.createElement("th")
+        let text = document.createTextNode(key)
+        th.appendChild(text)
+        linha.appendChild(th)
     }
+}
 
-    thead.appendChild(linhahead)
+function GeradorTabela(table, data) {
+    let titulos = Object.keys(data[0])
 
-    for(let i = 0; i < arrayDados[0].length; i++){
-        let linhabody = CriarTag("tr")
-        for(let j = 0; j < arrayDados.length; j++){
-            let cel = CriarCelula("td", arrayDados[j][i])
-            linhabody.appendChild(cel)
+    for(element of data){
+        let row = table.insertRow()
+        for( key in element){
+            let cell = row.insertCell()
+            let text = document.createTextNode(element[key])
+            cell.appendChild(text)
         }
-        tbody.appendChild(linhabody)
     }
-
-    tabela.appendChild(thead)
-    tabela.appendChild(tbody)
-
+    GeradorTabelaHead(tabela, titulos)
 }
+
 
