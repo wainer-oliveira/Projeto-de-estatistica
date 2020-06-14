@@ -10,39 +10,46 @@
 
     </header>
 
-    <p1>Projeto de Estatística</p1>
-    <br><br><br>
-    <div id="forms">
+    <h1>Projeto de Estatística</h1>
+    <section>
         <form action="">
-            <label for="nome">Digite o nome da variável :</label>
-            <input id="nome" name="nome" type="text">
             
-            <br><br>
-            <label for="elementos">Digite os elementos : </label>
-            <input type="text" id="elementos" name="elementos">
-            <p> (com espaço entre cada elemento)</p>
-            
-            <br> <br>
-            <label for="tipo">Digite o tipo de tabela: </label>
-            <select id="tipo" name="tipo">
-                <option id= "qualitativa_nominal" name="qualitativa_nominal" value="quali_nom">Qualitativa Nominal</option>
-                <option id= "qualitativa_ordinal" name="qualitativa_ordinal" value="quali_ord">Qualitativa Ordinal</option>
-                <option id="quantitativa_discreta" name="quantitativa_discreta" value="quant_dis">Quantitativa Discreta</option>
-                <option id="quantitativa_continua" name="quantitativa_continua" value="quant_cont">Quantitativa Continua</option>
-            </select>
-            <br><br>
-        
-            <input type="button" id="botao" value="Gerar">
+            <div>
+                <label for="nome">Digite o nome da variável :</label>
+                <input id="nome" name="nome" type="text"  placeholder="Nome Variável">
+                <br><br>
+            </div>
 
+            <div>
+                <label for="elementos">Digite os elementos : </label>
+                <input type="text" id="elementos" name="elementos" placeholder="Exemplo: 1 2 3" required>
+                <br><br>
+            </div>
+
+            <div>
+                <label for="tipo">Digite o tipo de tabela: </label>
+                <select id="tipo" name="tipo">
+                    <option id= "qualitativa_nominal" name="qualitativa_nominal" value="quali_nom">Qualitativa Nominal</option>
+                    <option id= "qualitativa_ordinal" name="qualitativa_ordinal" value="quali_ord">Qualitativa Ordinal</option>
+                    <option id="quantitativa_discreta" name="quantitativa_discreta" value="quant_dis">Quantitativa Discreta</option>
+                    <option id="quantitativa_continua" name="quantitativa_continua" value="quant_cont">Quantitativa Continua</option>
+                </select>
+                <br><br>
+            </div>
+            <div>
+                <input type="button" id="btnGerar" value="Gerar">
+                <br><br>
+            </div>
         </form>
         
-    </div>
-
-    <div id = "tabela_dinamica">
-        <table id="tabela" border="1">
-                
-        </table>
-    </div>
+    </section>
+        
+    <section>
+        <div>
+            <table id="tabelaPrincipal" border="1">  
+            </table>
+        </div>    
+    </section>
    
     <script src="JS/index.js" ></script>
 </body>
