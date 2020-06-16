@@ -1,5 +1,6 @@
 let btnGerar = document.getElementById('btnGerar')
 const tabela_main = document.getElementById("tabelaPrincipal")
+const tabela_MCentrais = document.getElementById("tabelaSecundaria")
 
 btnGerar.onclick = function pega_elementos(){
     //Captura dos elementos do input
@@ -38,6 +39,42 @@ function QuantidadeOcorrencia(elemento, array){
         idx = array.indexOf(elemento, idx + 1)
     }
     return indices.length
+}
+
+function CalculosFrequencias(variavel,freq, media){
+    let freq_acum = [0]
+    freq.forEach((a,b) => freq_acum.push(a + freq_acum[b]))
+    freq_acum.splice(0,1)
+
+    let freq_rel = freq.map(a => (a / freq_acum[freq_acum.length -1]) * 100 )
+    let freq_rel_string = freq_rel.map(a => a.toFixed(2) + "%") 
+
+    let freq_acum_por = [0]
+    freq_rel.forEach((a,b) => freq_acum_por.push(freq_acum_por[b] + a))
+    freq_acum_por.splice(0,1)
+    let freq_acum_por_string = freq_acum_por.map(a => a.toFixed(2) + "%")
+
+    let moda = FuncaoModa(variavel, freq)
+    let mediana = FuncaoMediana(variavel, freq_acum)
+
+    if(media == "nao") media = "---"
+
+    let ArrayObjt = []
+    variavel.forEach((a,b) => ArrayObjt.push({
+         Variavel : ` ${a} `,
+         Frequencia : ` ${freq[b]} `,
+         Frequencia_Relativa : ` ${freq_rel_string[b]} `,
+         Freq_Porcentual : ` ${freq_acum[b]} `,
+         Freq_Acumulada : ` ${freq_acum_por_string[b]} `
+    }))
+    GeradorTabela(tabela_main, ArrayObjt)
+
+    let MediaModaMediana = [{
+        Media : `${media}`,
+        Moda : `${moda}`,
+        Mediana : `${mediana}`}
+    ]
+    GeradorTabela(tabela_MCentrais, MediaModaMediana)
 }
 
 //FUNÇÕES DE MEDIDAS DE TENDÊNCIA CENTRAL
@@ -117,68 +154,19 @@ function FuncaoMediana(array, freqAcum){
 
 //FUNÇÕES DE CALCULOS DE TABULAÇÃO
 function Qualitativa_Nominal(array){ 
-    let SortArray = array
-    SortArray = SortArray.sort()
-    let variavel = [... new Set(SortArray)]
-    let freq = variavel.map(a => QuantidadeOcorrencia(a, SortArray))
-
-    let freq_acum = [0]
-    freq.forEach((a,b) => freq_acum.push(a + freq_acum[b]))
-    freq_acum.splice(0,1)
-
-    let freq_rel = freq.map(a => (a / freq_acum[freq_acum.length -1]) * 100 )
-    let freq_rel_string = freq_rel.map(a => a.toFixed(2) + "%") 
-
-    let freq_acum_por = [0]
-    freq_rel.forEach((a,b) => freq_acum_por.push(freq_acum_por[b] + a))
-    freq_acum_por.splice(0,1)
-    let freq_acum_por_string = freq_acum_por.map(a => a.toFixed(2) + "%")
-
-    let moda = FuncaoModa(elementos, freq)
-    let mediana = FuncaoMediana(elementos, freq_acum)
-
-    let ArrayObjt = []
-    variavel.forEach((a,b) => ArrayObjt.push({
-         Variavel : `${a}`,
-         Frequencia : `${freq[b]}`,
-         Frequencia_Relativa : `${freq_rel_string[b]}`,
-         freq_Percentual : `${freq_acum[b]}`,
-         freq_Acumulada : `${freq_acum_por_string[b]}`
-    }))
-
-    GeradorTabela(tabela_main, ArrayObjt)
+    const SortArray = array.sort((a,b) => a - b)
+    const variavel = [... new Set(SortArray)]
+    const freq = variavel.map(a => QuantidadeOcorrencia(a, SortArray))
+    let media = "nao"
+    CalculosFrequencias(variavel,freq, media)
 }
 
 function Qualitativa_Ordinal(array){ 
-    let newArray = array.map(a => a.toLowerCase(a))
-    let variavel = [... new Set(newArray)]
-    let freq = variavel.map(a => QuantidadeOcorrencia(a, newArray))
-
-    let freq_acum = [0]
-    freq.forEach((a,b) => freq_acum.push(a + freq_acum[b]))
-    freq_acum.splice(0,1)
-
-    let freq_rel = freq.map(a => (a / freq_acum[freq_acum.length -1]) * 100 )
-    let freq_rel_string = freq_rel.map(a => a.toFixed(2) + "%") 
-
-    let freq_acum_por = [0]
-    freq_rel.forEach((a,b) => freq_acum_por.push(freq_acum_por[b] + a))
-    freq_acum_por.splice(0,1)
-    let freq_acum_por_string = freq_acum_por.map(a => a.toFixed(2) + "%")
-
-    let moda = FuncaoModa(elementos, freq)
-    let mediana = FuncaoMediana(elementos, freq_acum)
-
-    let ArrayObjt = []
-    variavel.forEach((a,b) => ArrayObjt.push({
-        Variavel : `${a}`,
-        Frequencia : `${freq[b]}`,
-        Frequencia_Relativa : `${freq_rel_string[b]}`,
-        freq_Percentual : `${freq_acum[b]}`,
-        freq_Acumulada : `${freq_acum_por_string[b]}`
-    }))
-
-    GeradorTabela(tabela_main, ArrayObjt)
+    const newArray = array.map(a => a.toLowerCase(a))
+    const variavel = [... new Set(newArray)]
+    const freq = variavel.map(a => QuantidadeOcorrencia(a, newArray))
+    const media = "nao"
+    CalculosFrequencias(variavel, freq, media)
 }
 
 function Quantitativa_Continua(array){
@@ -233,8 +221,7 @@ function Quantitativa_Continua(array){
     variavel.map((a,b) => variavel[b] = [variavel[b],variavel[b+1] ])
     variavel.pop()
  
-    //Valor médio entre cada escopo
-    let xi = variavel.map(a => (a[0] + a[1]) / 2)
+    let xi = variavel.map(a => (a[0] + a[1]) / 2) //Valor médio entre cada escopo
 
     let media = FuncaoMedia(xi,freq)
     let moda = FuncaoModa(xi, freq)
@@ -244,51 +231,31 @@ function Quantitativa_Continua(array){
 
     let ArrayObjetos = []
     classe.forEach((a,b) => ArrayObjetos.push({
-        Classe : `${a}`,
-        Quantidade : `${variavel_string[b]}`,
-        Frequencia : `${freq[b]}`,
-        Freq_Percentual : `${freq_rel_string[b]}`,
-        Freq_Acumulada : `${freq_acum[b]}`,
-        Freq_Acumulada_Percentual : `${freq_acum_por_string[b]}`
+        Classe : ` ${a} `,
+        Variavel : ` ${variavel_string[b]} `,
+        Frequencia : ` ${freq[b]} `,
+        Frequencia_Relativa : ` ${freq_rel_string[b]} `,
+        Freq_Porcentual : ` ${freq_acum[b]} `,
+        Freq_Acumulada : ` ${freq_acum_por_string[b]} `
     }))
     GeradorTabela(tabela_main, ArrayObjetos)
+
+    let MediaModaMediana = [{
+        Media : `${media}`,
+        Moda : `${moda}`,
+        Mediana : `${mediana}`}
+    ]
+    GeradorTabela(tabela_MCentrais, MediaModaMediana)
 }
 
 function Quantitativa_Discreta(array){
-    let arr = array.map(a => parseFloat(a))
-    let arraySort = arr.sort((a,b) => a - b)
+    const arr = array.map(a => parseFloat(a))
+    const arraySort = arr.sort((a,b) => a - b)
     const variavel = [... new Set(arraySort)] // retirando elemento repetidos
     const freq = variavel.map( a => QuantidadeOcorrencia( a, arraySort)) // encontrando freq
-
-
-    let freq_acum = [0]
-    freq.forEach((a,b) => freq_acum.push(a + freq_acum[b]))
-    freq_acum.splice(0,1)
-
-    let freq_rel = freq.map(a => (a / freq_acum[freq_acum.length -1]) * 100 )
-    let freq_rel_string = freq_rel.map(a => a.toFixed(2) + "%") 
-
-    let freq_acum_por = [0]
-    freq_rel.forEach((a,b) => freq_acum_por.push(freq_acum_por[b] + a))
-    freq_acum_por.splice(0,1)
-    let freq_acum_por_string = freq_acum_por.map(a => a.toFixed(2) + "%")
-
     const media = FuncaoMedia(variavel, freq)
-    const mediana = FuncaoMediana(variavel,freq_acum)
-    const moda = FuncaoModa(variavel, freq)
-
-    let ArrayObjt = []
-    variavel.forEach((a,b) => ArrayObjt.push({
-        Variavel : `${a}`,
-        Frequencia : `${freq[b]}`,
-        Frequencia_Relativa : `${freq_rel_string[b]}`,
-        freq_Percentual : `${freq_acum[b]}`,
-        freq_Acumulada : `${freq_acum_por_string[b]}`
-    }))
-    GeradorTabela(tabela_main, ArrayObjt)
+    CalculosFrequencias(variavel, freq,media)
 }
-
-
 
 //escrever tabela 
 function GeradorTabelaHead(table, data){
@@ -316,6 +283,3 @@ function GeradorTabela(table, data) {
     }
     GeradorTabelaHead(tabela, titulos)
 }
-
-
-
