@@ -1,11 +1,36 @@
 let btnGerar = document.getElementById('btnGerar')
-const tabela_main = document.getElementById("tabelaPrincipal")
-const tabela_MCentrais = document.getElementById("tabelaSecundaria")
+// const tabela_main = document.getElementById("tabelaPrincipal")
+// const tabela_MCentrais = document.getElementById("tabelaSecundaria")
+
+
+function DefineStep(){
+    let InputRange = document.getElementById("InputRange")
+    let TipoMedida = document.getElementById("TipoMedida").value
+    console.log(TipoMedida)
+    switch(TipoMedida){
+    case 'porcentil' :
+        InputRange.setAttribute("step","1")
+        break;
+
+    case 'decil' :
+        InputRange.setAttribute("step","10")
+        break;
+
+    case 'quartil' :
+        InputRange.setAttribute("step","25")
+        break;
+
+    case 'quintil' :
+        InputRange.setAttribute("step","20")
+        break;
+    }
+}
+
 
 btnGerar.onclick = function pega_elementos(){
     //Captura dos elementos do input
     const nome = document.getElementById("nome")
-    let tipo_tabela = document.getElementById("tipo").value
+    let tipo_tabela = document.getElementById("TipoTabela").value
     let elementosInput = document.getElementById("elementos")
     const elementos = elementosInput.value.split(" ")
     
@@ -75,6 +100,7 @@ function CalculosFrequencias(variavel,freq, media){
         Mediana : `${mediana}`}
     ]
     GeradorTabela(tabela_MCentrais, MediaModaMediana)
+    grafiqueira(ArrayObjt)
 }
 
 //FUNÇÕES DE MEDIDAS DE TENDÊNCIA CENTRAL
@@ -104,7 +130,7 @@ function FuncaoModa(array, freqArray){
 }
 
 function FuncaoMedianaContinua(array, freq, IntervaloClasse, freqacumulada){
-    let posicao = freq.reduce((a,b) => a+b) / 2
+    let posicao = freq.reduce((a,b) => a + b) / 2
     let mediana
     let auxiliar
     
@@ -140,7 +166,6 @@ function FuncaoMediana(array, freqAcum){
             }
         }
         if(mediana[0] == mediana[1]) mediana = mediana[0] 
-
     }else{
         posicao = acum / 2
         for(let i = 0; i < freqAcum.length; i++){
