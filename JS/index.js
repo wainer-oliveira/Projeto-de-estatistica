@@ -1,31 +1,38 @@
 let btnGerar = document.getElementById('btnGerar')
+const DivMostrarDados = document.getElementById("MostrarDados")
 // const tabela_main = document.getElementById("tabelaPrincipal")
 // const tabela_MCentrais = document.getElementById("tabelaSecundaria")
-
 
 function DefineStep(){
     let InputRange = document.getElementById("InputRange")
     let TipoMedida = document.getElementById("TipoMedida").value
-    console.log(TipoMedida)
+
     switch(TipoMedida){
     case 'porcentil' :
         InputRange.setAttribute("step","1")
+        InputRange.setAttribute("min","1")
+        InputRange.setAttribute("max","100")
         break;
 
     case 'decil' :
-        InputRange.setAttribute("step","10")
+        InputRange.setAttribute("step","1")
+        InputRange.setAttribute("min","1")
+        InputRange.setAttribute("max","10")
         break;
 
     case 'quartil' :
-        InputRange.setAttribute("step","25")
+        InputRange.setAttribute("step","1")
+        InputRange.setAttribute("min","1")
+        InputRange.setAttribute("max","4")
         break;
 
     case 'quintil' :
-        InputRange.setAttribute("step","20")
+        InputRange.setAttribute("step","1")
+        InputRange.setAttribute("min","1")
+        InputRange.setAttribute("max","5")
         break;
     }
 }
-
 
 btnGerar.onclick = function pega_elementos(){
     //Captura dos elementos do input
@@ -92,15 +99,22 @@ function CalculosFrequencias(variavel,freq, media){
          Freq_Porcentual : ` ${freq_acum[b]} `,
          Freq_Acumulada : ` ${freq_acum_por_string[b]} `
     }))
-    GeradorTabela(tabela_main, ArrayObjt)
+
+    let titulos = Object.keys(ArrayObjt[0])
+    titulos[0] = `${nome.value}`
+    let tabela = CriaTabela(DivMostrarDados)
+    GeradorTabelaHead(tabela, titulos)
+    GeradorTabela(tabela,ArrayObjt)
 
     let MediaModaMediana = [{
         Media : `${media}`,
         Moda : `${moda}`,
         Mediana : `${mediana}`}
     ]
-    GeradorTabela(tabela_MCentrais, MediaModaMediana)
-    grafiqueira(ArrayObjt)
+    let Tabela2 = CriaTabela(DivMostrarDados)
+    let Titulos2 = Object.keys(MediaModaMediana[0])
+    GeradorTabelaHead(Tabela2, Titulos2)
+    GeradorTabela(Tabela2, MediaModaMediana)
 }
 
 //FUNÇÕES DE MEDIDAS DE TENDÊNCIA CENTRAL
@@ -254,8 +268,8 @@ function Quantitativa_Continua(array){
 
     variavel_string = variavel.map(a => a[0] + " |-- " + a[1])
 
-    let ArrayObjetos = []
-    classe.forEach((a,b) => ArrayObjetos.push({
+    let ArrayObjt = []
+    classe.forEach((a,b) => ArrayObjt.push({
         Classe : ` ${a} `,
         Variavel : ` ${variavel_string[b]} `,
         Frequencia : ` ${freq[b]} `,
@@ -263,14 +277,22 @@ function Quantitativa_Continua(array){
         Freq_Porcentual : ` ${freq_acum[b]} `,
         Freq_Acumulada : ` ${freq_acum_por_string[b]} `
     }))
-    GeradorTabela(tabela_main, ArrayObjetos)
 
     let MediaModaMediana = [{
         Media : `${media}`,
         Moda : `${moda}`,
-        Mediana : `${mediana}`}
-    ]
-    GeradorTabela(tabela_MCentrais, MediaModaMediana)
+        Mediana : `${mediana}`}]
+
+    let titulos = Object.keys(ArrayObjt[0])
+    titulos[1] = `${nome.value}`
+    let tabela = CriaTabela(DivMostrarDados)
+    GeradorTabelaHead(tabela, titulos)
+    GeradorTabela(tabela,ArrayObjt)
+
+    let titulos2 = Object.keys(MediaModaMediana[0])
+    let tabela2 = CriaTabela(DivMostrarDados)
+    GeradorTabelaHead(tabela2, titulos2)
+    GeradorTabela(tabela2, MediaModaMediana)
 }
 
 function Quantitativa_Discreta(array){
@@ -283,9 +305,18 @@ function Quantitativa_Discreta(array){
 }
 
 //escrever tabela 
+function CriaTabela(registro){
+    let tabela = document.createElement("table")
+    registro.appendChild(tabela)
+    tabela.setAttribute("class", "tabela")
+    tabela.setAttribute("border","1")
+    return(tabela)
+}
+
 function GeradorTabelaHead(table, data){
     let thead = table.createTHead()
     let linha = thead.insertRow()
+    linha.setAttribute("class", "linhaHead")
     for (let key of data) {
         let th = document.createElement("th")
         let text = document.createTextNode(key)
@@ -296,15 +327,16 @@ function GeradorTabelaHead(table, data){
 
 function GeradorTabela(table, data) {
     let tabela = table
-    let titulos = Object.keys(data[0])
+    //let titulos = Object.keys(data[0])
 
     for(element of data){
         let row = table.insertRow()
+        row.setAttribute("class","linha")
         for( key in element){
             let cell = row.insertCell()
             let text = document.createTextNode(element[key])
             cell.appendChild(text)
         }
     }
-    GeradorTabelaHead(tabela, titulos)
+    //GeradorTabelaHead(tabela, titulos)
 }
