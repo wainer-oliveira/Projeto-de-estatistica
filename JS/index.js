@@ -1,7 +1,11 @@
 let btnGerar = document.getElementById('btnGerar')
 const DivMostrarDados = document.getElementById("MostrarDados")
-// const tabela_main = document.getElementById("tabelaPrincipal")
-// const tabela_MCentrais = document.getElementById("tabelaSecundaria")
+
+function ModificaAtributos(maximo, InputRange){
+    InputRange.setAttribute("step","1")
+    InputRange.setAttribute("min","1")
+    InputRange.setAttribute("max",`${maximo}`)
+}
 
 function DefineStep(){
     let InputRange = document.getElementById("InputRange")
@@ -9,27 +13,16 @@ function DefineStep(){
 
     switch(TipoMedida){
     case 'porcentil' :
-        InputRange.setAttribute("step","1")
-        InputRange.setAttribute("min","1")
-        InputRange.setAttribute("max","100")
+        ModificaAtributos(100, InputRange)
         break;
-
     case 'decil' :
-        InputRange.setAttribute("step","1")
-        InputRange.setAttribute("min","1")
-        InputRange.setAttribute("max","10")
+        ModificaAtributos(10, InputRange)
         break;
-
     case 'quartil' :
-        InputRange.setAttribute("step","1")
-        InputRange.setAttribute("min","1")
-        InputRange.setAttribute("max","4")
+        ModificaAtributos(4, InputRange)
         break;
-
     case 'quintil' :
-        InputRange.setAttribute("step","1")
-        InputRange.setAttribute("min","1")
-        InputRange.setAttribute("max","5")
+        ModificaAtributos(5, InputRange)
         break;
     }
 }
@@ -40,7 +33,6 @@ btnGerar.onclick = function pega_elementos(){
     let tipo_tabela = document.getElementById("TipoTabela").value
     let elementosInput = document.getElementById("elementos")
     const elementos = elementosInput.value.split(" ")
-    
     //Reconhecendo qual tipo de tabela
     switch(tipo_tabela){
         case 'quali_nom' :
@@ -62,6 +54,38 @@ btnGerar.onclick = function pega_elementos(){
 }
 
 //FUNÇÕES AUXILIARES
+function CapturaElementosSeparatrizes(){
+    const InputSeparatriz = document.querySelector('input[name="TipoDado"]:checked')
+    let separatriz =[]
+    if(InputSeparatriz.id == "populacao"){
+        separatriz.push(0)
+    }else{
+        separatriz.push(1)
+    }
+
+    const Medida = document.getElementById("TipoMedida").value
+    const InputRange = document.getElementById("InputRange").value
+    separatriz.push(`${Medida} ${InputRange}`)
+    
+    switch(Medida){
+        case 'porcentil' :
+            separatriz.push(0.01)
+            break
+        case 'quartil' :
+            separatriz.push(0.25)
+            break
+        case 'quintil' :
+            separatriz.push(0.2)
+            break
+        case 'decil' :
+            separatriz.push(0.1)
+            break
+    }
+
+    separatriz.push(Number(InputRange))
+    return separatriz
+}
+
 function QuantidadeOcorrencia(elemento, array){
     let idx = array.indexOf(elemento)
     if(idx === -1) return 0
@@ -89,7 +113,12 @@ function CalculosFrequencias(variavel,freq, media){
     let moda = FuncaoModa(variavel, freq)
     let mediana = FuncaoMediana(variavel, freq_acum)
 
-    if(media == "nao") media = "---"
+    if(media == "nao"){
+        media = "---"
+    }else{
+        var DesvioPadrao = FuncaoDesvioPadrao(variavel, freq, media)
+        var CoeficienteVariacao = (((DesvioPadrao/media) * 100).toFixed(2) + "%" )
+    } 
 
     let ArrayObjt = []
     variavel.forEach((a,b) => ArrayObjt.push({
@@ -109,8 +138,11 @@ function CalculosFrequencias(variavel,freq, media){
     let MediaModaMediana = [{
         Media : `${media}`,
         Moda : `${moda}`,
-        Mediana : `${mediana}`}
-    ]
+        Mediana : `${mediana}`,
+        DesvioPadrao : `${DesvioPadrao}`,
+        CV : `${CoeficienteVariacao}`
+    }]
+
     let Tabela2 = CriaTabela(DivMostrarDados)
     let Titulos2 = Object.keys(MediaModaMediana[0])
     GeradorTabelaHead(Tabela2, Titulos2)
@@ -143,7 +175,7 @@ function FuncaoModa(array, freqArray){
     return moda
 }
 
-function FuncaoMedianaContinua(array, freq, IntervaloClasse, freqacumulada){
+function FuncaoMedianaContinua(array, freq, IntervaloClasse, freqacumulada){ //melhorar
     let posicao = freq.reduce((a,b) => a + b) / 2
     let mediana
     let auxiliar
@@ -189,6 +221,15 @@ function FuncaoMediana(array, freqAcum){
         }
     }
     return mediana
+}
+
+//FUNÇÕES DE MEDIDAS DE DISPERSÃO
+function FuncaoDesvioPadrao(variavel, frequencia, media){
+    let separatrizes = CapturaElementosSeparatrizes()
+    let DP = variavel.map((a,b) => ((a - media) ** 2) * frequencia[b])
+    DP = DP.reduce((a,b) => a + b)
+    DP = Math.sqrt(DP / ((frequencia.reduce((a,b) => a + b) - separatrizes[0])))
+    return DP.toFixed(2)
 }
 
 //FUNÇÕES DE CALCULOS DE TABULAÇÃO
@@ -266,6 +307,9 @@ function Quantitativa_Continua(array){
     let moda = FuncaoModa(xi, freq)
     let mediana = FuncaoMedianaContinua(variavel, freq, IC, freq_acum)
 
+    const DesvioPadrao = FuncaoDesvioPadrao(xi, freq, media)
+    const CoeficienteVariacao = (((DesvioPadrao/media) * 100).toFixed(2) + "%" )
+
     variavel_string = variavel.map(a => a[0] + " |-- " + a[1])
 
     let ArrayObjt = []
@@ -281,7 +325,9 @@ function Quantitativa_Continua(array){
     let MediaModaMediana = [{
         Media : `${media}`,
         Moda : `${moda}`,
-        Mediana : `${mediana}`}]
+        Mediana : `${mediana}`,
+        Desvio : `${DesvioPadrao}`,
+        CV : `${CoeficienteVariacao}` }]
 
     let titulos = Object.keys(ArrayObjt[0])
     titulos[1] = `${nome.value}`
@@ -290,6 +336,8 @@ function Quantitativa_Continua(array){
     GeradorTabela(tabela,ArrayObjt)
 
     let titulos2 = Object.keys(MediaModaMediana[0])
+    titulos2[3] = "Desvio Padrão"
+    titulos2[4] = "Coefiente de Variação"
     let tabela2 = CriaTabela(DivMostrarDados)
     GeradorTabelaHead(tabela2, titulos2)
     GeradorTabela(tabela2, MediaModaMediana)
