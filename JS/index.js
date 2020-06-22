@@ -66,23 +66,23 @@ function CapturaElementosSeparatrizes(){
     const Medida = document.getElementById("TipoMedida").value
     const InputRange = document.getElementById("InputRange").value
     separatriz.push(`${Medida} ${InputRange}`)
+    let aux
     
     switch(Medida){
         case 'porcentil' :
-            separatriz.push(0.01)
+            aux = 0.01
             break
         case 'quartil' :
-            separatriz.push(0.25)
+            aux = 0.25
             break
         case 'quintil' :
-            separatriz.push(0.2)
+            aux = 0.2
             break
         case 'decil' :
-            separatriz.push(0.1)
+            aux = 0.1
             break
     }
-
-    separatriz.push(Number(InputRange))
+    separatriz.push(InputRange * aux)
     return separatriz
 }
 
@@ -102,6 +102,8 @@ function CalculosFrequencias(variavel,freq, media){
     freq.forEach((a,b) => freq_acum.push(a + freq_acum[b]))
     freq_acum.splice(0,1)
 
+    let separatriz = FuncaoSeparatriz(variavel, freq_acum)
+
     let freq_rel = freq.map(a => (a / freq_acum[freq_acum.length -1]) * 100 )
     let freq_rel_string = freq_rel.map(a => a.toFixed(2) + "%") 
 
@@ -113,40 +115,50 @@ function CalculosFrequencias(variavel,freq, media){
     let moda = FuncaoModa(variavel, freq)
     let mediana = FuncaoMediana(variavel, freq_acum)
 
-    if(media == "nao"){
-        media = "---"
-    }else{
-        var DesvioPadrao = FuncaoDesvioPadrao(variavel, freq, media)
-        var CoeficienteVariacao = (((DesvioPadrao/media) * 100).toFixed(2) + "%" )
-    } 
-
     let ArrayObjt = []
     variavel.forEach((a,b) => ArrayObjt.push({
          Variavel : ` ${a} `,
          Frequencia : ` ${freq[b]} `,
          Frequencia_Relativa : ` ${freq_rel_string[b]} `,
-         Freq_Porcentual : ` ${freq_acum[b]} `,
-         Freq_Acumulada : ` ${freq_acum_por_string[b]} `
+         Fac : ` ${freq_acum[b]} `,
+         Fac_Acumulada : ` ${freq_acum_por_string[b]} `
     }))
 
-    let titulos = Object.keys(ArrayObjt[0])
-    titulos[0] = `${nome.value}`
+    let titulos = [` ${nome.value} `, " Fi ", " Fr% ", " Fac ", " Fac % "]
     let tabela = CriaTabela(DivMostrarDados)
     GeradorTabelaHead(tabela, titulos)
     GeradorTabela(tabela,ArrayObjt)
 
-    let MediaModaMediana = [{
-        Media : `${media}`,
-        Moda : `${moda}`,
-        Mediana : `${mediana}`,
-        DesvioPadrao : `${DesvioPadrao}`,
-        CV : `${CoeficienteVariacao}`
-    }]
-
-    let Tabela2 = CriaTabela(DivMostrarDados)
-    let Titulos2 = Object.keys(MediaModaMediana[0])
-    GeradorTabelaHead(Tabela2, Titulos2)
-    GeradorTabela(Tabela2, MediaModaMediana)
+    if(media == "nao"){
+        media = "---"
+        let MediaModaMediana = [{
+            Media : `${media}`,
+            Moda : `${moda}`,
+            Mediana : `${mediana}`,
+            Separatriz : `${separatriz[1]}`
+        }]
+    
+        let Tabela2 = CriaTabela(DivMostrarDados)
+        let Titulos2 = [" Média ", " Moda ", " Mediana ", `${separatriz[0]}`]
+        GeradorTabelaHead(Tabela2, Titulos2)
+        GeradorTabela(Tabela2, MediaModaMediana)
+    }else{
+        var DesvioPadrao = FuncaoDesvioPadrao(variavel, freq, media)
+        var CoeficienteVariacao = (((DesvioPadrao/media) * 100).toFixed(2) + "%" )
+        let MediaModaMediana = [{
+            Media : `${media}`,
+            Moda : `${moda}`,
+            Mediana : `${mediana}`,
+            DesvioPadrao : `${DesvioPadrao}`,
+            CV : `${CoeficienteVariacao}`,
+            Separatriz : `${separatriz[1]}`
+        }]
+    
+        let Tabela2 = CriaTabela(DivMostrarDados)
+        let Titulos2 = ["Média", "Moda", "Mediana", "Desvio Padrão", "Coeficiente de Variação",`${separatriz[0]}`]
+        GeradorTabelaHead(Tabela2, Titulos2)
+        GeradorTabela(Tabela2, MediaModaMediana)
+    } 
 }
 
 //FUNÇÕES DE MEDIDAS DE TENDÊNCIA CENTRAL
@@ -223,6 +235,23 @@ function FuncaoMediana(array, freqAcum){
     return mediana
 }
 
+//MEDIDAS SEPARATRIZES
+function FuncaoSeparatriz(array, freqAcum){   
+    let auxiliar = CapturaElementosSeparatrizes()
+    let posicao = Math.round((freqAcum[freqAcum.length - 1]) * auxiliar[2])
+    let medida = []
+    medida.push(auxiliar[1])
+
+    for(let i = 0; i < freqAcum.length; i++){
+        if(freqAcum[i] >= posicao){
+            medida.push(array[i])
+              break
+        }
+    }
+    console.log(medida)
+    return medida
+}
+
 //FUNÇÕES DE MEDIDAS DE DISPERSÃO
 function FuncaoDesvioPadrao(variavel, frequencia, media){
     let separatrizes = CapturaElementosSeparatrizes()
@@ -249,7 +278,7 @@ function Qualitativa_Ordinal(array){
     CalculosFrequencias(variavel, freq, media)
 }
 
-function Quantitativa_Continua(array){
+function Quantitativa_Continua(array){// VERIFICAR A MEDIANA E SEPARATRIZ
     let vet = array.sort((a,b) => a - b)
     const Rol = vet.map(a => parseFloat(a))
     let Xmin = Rol[0]
@@ -309,7 +338,7 @@ function Quantitativa_Continua(array){
 
     const DesvioPadrao = FuncaoDesvioPadrao(xi, freq, media)
     const CoeficienteVariacao = (((DesvioPadrao/media) * 100).toFixed(2) + "%" )
-
+    const separatriz = FuncaoSeparatriz(xi, freq_acum)
     variavel_string = variavel.map(a => a[0] + " |-- " + a[1])
 
     let ArrayObjt = []
@@ -318,29 +347,27 @@ function Quantitativa_Continua(array){
         Variavel : ` ${variavel_string[b]} `,
         Frequencia : ` ${freq[b]} `,
         Frequencia_Relativa : ` ${freq_rel_string[b]} `,
-        Freq_Porcentual : ` ${freq_acum[b]} `,
-        Freq_Acumulada : ` ${freq_acum_por_string[b]} `
+        Fac : ` ${freq_acum[b]} `,
+        Fac_Acumulada : ` ${freq_acum_por_string[b]} `
     }))
 
-    let MediaModaMediana = [{
+    let TendenciaCentral = [{
         Media : `${media}`,
         Moda : `${moda}`,
         Mediana : `${mediana}`,
         Desvio : `${DesvioPadrao}`,
-        CV : `${CoeficienteVariacao}` }]
+        CV : `${CoeficienteVariacao}`,
+        Separatriz : `${separatriz[1]}` }]
 
-    let titulos = Object.keys(ArrayObjt[0])
-    titulos[1] = `${nome.value}`
+    let titulos = [" Média ", " Moda ", " Mediana ", " Desvio Padrão ", " Coeficiênte de Variação ", ` ${separatriz[0]} `]
     let tabela = CriaTabela(DivMostrarDados)
     GeradorTabelaHead(tabela, titulos)
     GeradorTabela(tabela,ArrayObjt)
 
-    let titulos2 = Object.keys(MediaModaMediana[0])
-    titulos2[3] = "Desvio Padrão"
-    titulos2[4] = "Coefiente de Variação"
+    let titulos2 = ["Média", "Moda", "Mediana", "Desvio Padrão", "Coefiente de Variação", `${separatriz[0]}`]
     let tabela2 = CriaTabela(DivMostrarDados)
     GeradorTabelaHead(tabela2, titulos2)
-    GeradorTabela(tabela2, MediaModaMediana)
+    GeradorTabela(tabela2, TendenciaCentral)
 }
 
 function Quantitativa_Discreta(array){
