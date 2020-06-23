@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Probabilidade</title>
+</head>
+<body>
+    <h2>Probabilidade</h2>
+    <br>
+    <div>
+        <fieldset><legend><b>Distribuição Binomial</b></legend>
+            <form>
+                <input type="text" placeholder="Tamanho da Amostra" id="n">
+                <br><br>
+                <input type="text" placeholder="Eventos" id="k">
+                <br><br>
+                <input type="text" placeholder="Sucesso sem %" id="p">
+                <br><br>
+                <input type="text" placeholder="Fracasso sem %" id="q">
+                <br><br>
+                <input type="submit" value="Enviar" id="btnbinomal" >
+            </form> 
+        </fieldset>
+</div>
+<br><br><br>
+
+    <div>
+        <fieldset><legend><b>Distribuição Normal</b></legend>
+            <form>
+                <input type="text" placeholder="Média" id="media">
+                <br><br>
+                <input type="text" placeholder="Desvio Padrão" id="dp">
+                <br><br>
+                <select>
+                    <option selected disabled >Selecione</option>
+                    <option id="maiornormal" >Maior que</option>
+                    <option id="entrenormal" >Entre</option>
+                    <option id="menornormal" >Menor que</option>
+                </select>
+                <br><br>
+                <input type="submit" value="Enviar">
+            </form> 
+        </fieldset>
+    </div>
+    <br><br><br>
+
+    <div>
+        <fieldset><legend><b>Distribuição Uniforme</b></legend>
+            <form>
+                <input type="text" placeholder="Ponto Mínimo" id="pontominimo">
+                <br><br>
+                <input type="text" placeholder="Ponto Máximo" id="pontomaximo">
+                <br><br>
+                <select>
+                    <option selected disabled >Selecione</option>
+                    <option id="maioruniforme" >Maior que</option>
+                    <option id="entreuniforme" >Entre</option>
+                    <option id="menoruniforme" >Menor que</option>
+                </select>
+                <br><br>
+                <input type="submit" value="Enviar">
+            </form> 
+        </fieldset>
+    </div>
+
+    <script src="probabilidade.js"></script>
+</body>
+</html>
