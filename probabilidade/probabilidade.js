@@ -1,4 +1,5 @@
 const btnBi = document.getElementById("btnbinomal")
+const divteste = document.getElementById("testes")
 
 function fatorial(n){
     if(n == 0 || n == 1){
@@ -9,7 +10,6 @@ function fatorial(n){
 }
 
 function AnaliseCombinatoria(n1,n2){
-    if(n1 < n2 ) return "Erro"
     if(n2 == 1) return n1
     if(n1 != n2 && n2 != 0){
         let resultado
@@ -27,6 +27,15 @@ btnBi.onclick = function binomial(){
     let n = document.getElementById("n").value
     let k = document.getElementById("k").value
     let p = document.getElementById("p").value
-    let q = document.getElementById("q").value
-    console.log(fatorial(k))
+    let q = (100 - p) / 100 
+    p = p / 100
+
+    if ( (k - n) >  0 ){
+        alert("N necessita ser maior do que K ")
+    }else{
+        var anacomb = AnaliseCombinatoria(n,k)
+        var resultado = (anacomb * ( p ** k )) * (q ** ( n - k))
+    }
+    console.log(resultado)
 }
+
