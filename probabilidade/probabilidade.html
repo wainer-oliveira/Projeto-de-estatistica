@@ -11,13 +11,13 @@
     <div>
         <fieldset><legend><b>Distribuição Binomial</b></legend>
             <form>
-                <input type="text" placeholder="Tamanho da Amostra N" id="n">
+                <input type="number" placeholder="Tamanho da Amostra N" id="n">
                 <br><br>
-                <input type="text" placeholder="Eventos K" id="k">
+                <input type="text" placeholder="Eventos separados por espaço" id="k">
                 <br><br>
-                <input type="text" placeholder="Sucesso sem % P" id="p">
+                <input type="number" placeholder="Sucesso sem % P" id="p">
                 <br><br>
-                <input type="text" placeholder="Fracasso sem % Q" id="q">
+                <input type="number" placeholder="Fracasso sem % Q" id="q">
                 <br><br>
                 <input type="button" id="btnbinomal" value="Enviar">
             </form> 
@@ -39,7 +39,7 @@
                     <option id="menornormal" >Menor que</option>
                 </select>
                 <br><br>
-                <input type="button" value="Enviar">
+                <input type="button" value="Enviar" id="btnnormal">
             </form> 
         </fieldset>
     </div>
@@ -48,18 +48,21 @@
     <div>
         <fieldset><legend><b>Distribuição Uniforme</b></legend>
             <form>
-                <input type="text" placeholder="Ponto Mínimo" id="pontominimo">
+                <input type="number" placeholder="Ponto Mínimo" id="pontominimo">
                 <br><br>
-                <input type="text" placeholder="Ponto Máximo" id="pontomaximo">
+                <input type="number" placeholder="Ponto Máximo" id="pontomaximo">
                 <br><br>
-                <select>
+                <select id="selecionar">
                     <option selected disabled >Selecione</option>
-                    <option id="maioruniforme" >Maior que</option>
-                    <option id="entreuniforme" >Entre</option>
-                    <option id="menoruniforme" >Menor que</option>
+                    <option id="maioruniforme" value="maior" >Maior que</option>
+                    <option id="entreuniforme" value="entre" >Entre</option>
+                    <option id="menoruniforme" value="menor" >Menor que</option>
+                    <option id="exatamenteuniforme" value="exatamente">Exatamente</option>
                 </select>
                 <br><br>
-                <input type="button" value="Enviar">
+                <input type="text" id="escopo" placeholder="separado por espaço">
+                <br>
+                <input type="button" value="Enviar" id="btnDistUni">
             </form> 
         </fieldset>
     </div>
