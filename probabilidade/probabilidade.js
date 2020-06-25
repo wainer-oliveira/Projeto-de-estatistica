@@ -23,19 +23,38 @@ function AnaliseCombinatoria(n1,n2){
     }
 }
 
-btnBi.onclick = function binomial(){
+function teste(k){
     let n = document.getElementById("n").value
-    let k = document.getElementById("k").value
+    let p = document.getElementById("p").value
+    let q = (100 - p) / 100 
+    p = p / 100
+    if ( (k - n) >  0 ){
+        alert("N necessita ser maior ou igual a que K ")
+    }else{
+        var anacomb = AnaliseCombinatoria(n,k)
+        var resultado = (anacomb * ( p ** k )) * (q ** ( n - k))
+    resultado = resultado * 100
+    }
+    return resultado
+}
+
+btnBi.onclick = function binomialStart(){
+    const elementosInputK = document.getElementById("k")
+    let elementos = elementosInputK.value.split(" ")
+    elementos = elementos.map(a => Number(a))
+    let n = document.getElementById("n").value
     let p = document.getElementById("p").value
     let q = (100 - p) / 100 
     p = p / 100
 
-    if ( (k - n) >  0 ){
-        alert("N necessita ser maior do que K ")
-    }else{
-        var anacomb = AnaliseCombinatoria(n,k)
-        var resultado = (anacomb * ( p ** k )) * (q ** ( n - k))
-    }
-    console.log(resultado)
-}
+    let resultado = elementos.map(a => teste(a))
 
+    if( resultado.length > 1){
+        resultado = resultado.reduce((a,b) => a + b)
+        resultado = resultado.toFixed(2) + ("%")
+    }else{
+        resultado = resultado[0].toFixed(2) + "%"
+    }
+     
+}   
+    
