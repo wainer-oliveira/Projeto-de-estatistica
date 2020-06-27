@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    <link rel="stylesheet" href="css/style.css">
 
 </head>
 <body>
@@ -77,31 +78,8 @@
     </section>
    
     <script src="JS/index.js" ></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script>
-        google.charts.load('current', { packages: [ 'corechart' ] })
-        google.charts.setOnLoadCallback(drawChart)
+    <script src=https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js></script>
+    <canvas id="grafico"></canvas>
 
-        function drawChart() {
-             const container = document.getElementById("MostrarDados")
-             const data = new google.visualization.arrayToDataTable([
-                 [ 'Character', 'Ki' ],
-                 [ 'Goku', 10000 ],
-                 [ 'Vegeta', 9000 ],
-                 [ 'Gohan', 8000 ],
-                 [ 'Freeza', 5000 ],
-                 [ 'Piccolo', 2000 ]
-            ])
-             const options = {
-                 title: 'Dragon Ball Z - Characters Ki',
-                 height: 400,
-                 width: 720
-             }
-
-            const chart = new google.visualization.PieChart(container)
-            chart.draw(data, options)
-        }
-
-    </script>
 </body>
 </html>
