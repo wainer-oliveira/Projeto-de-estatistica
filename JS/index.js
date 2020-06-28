@@ -14,16 +14,16 @@ function DefineStep(){
     switch(TipoMedida){
     case 'porcentil' :
         ModificaAtributos(100, InputRange)
-        break;
+    break;
     case 'decil' :
         ModificaAtributos(10, InputRange)
-        break;
+    break;
     case 'quartil' :
         ModificaAtributos(4, InputRange)
-        break;
+    break;
     case 'quintil' :
         ModificaAtributos(5, InputRange)
-        break;
+    break;
     }
 }
 
@@ -271,7 +271,7 @@ function Qualitativa_Nominal(array){
 
         var ctx = document.getElementById('grafico');
         var grafico = new Chart(ctx, {
-            type: 'pie',
+            type: 'bar',
             data: {
                 labels: ['1', '2', '3', '4', '5', '6'],
                 datasets: [{
