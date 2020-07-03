@@ -2,84 +2,68 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="css/style.css">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="assets/CSS/bootstrap.min.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css">
+    <script src="assets/JS/popper.min.js"></script>
+    <script src="assets/JS/jquery-3.3.1.slim.min.js"></script>
+    <script src="assets/JS/bootstrap.min.js"></script>
+    <title>Index</title>
+    <style>
+      .navbar .navbar-nav .nav-link{
+        color : #FFF
+      }
+    </style>
 </head>
+
 <body>
-    <header>
+  
+    <div class="container-fluid px-0">
 
-    </header>
+      <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-    <h1>Projeto de Estatística</h1>
-    <section>
+          <a class="navbar-brand" href="#">Logo</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          </button>
+        
+          <div class="collapse navbar-collapse " id="navbarSupportedContent">
 
-       <a href="./probabilidade/probabilidade.html"> <button type="submit" >PROBABILIDADES</button></a>
-        <br><br>
+            <ul class="navbar-nav ml-auto">
 
-        <form action="">
-            <fieldset><legend><b>Dados da Variável Pesquisada</b></legend>
-                <div>
-                    <label for="nome">Digite o nome da variável :</label>
-                    <input id="nome" name="nome" type="text"  placeholder="Nome Variável">
-                    <br/><br/>
-                </div>
+              <li class="nav-item">
+                <a class="nav-link " href="index.html" ><i class="fas fa-home"></i> Home </a>
+              </li>
 
-                <div>
-                    <label for="elementos">Digite os elementos : </label>
-                    <input type="text" id="elementos" name="elementos" placeholder="Exemplo: 1 2 3" required>
-                </div>
-            </fieldset>
-            <br>
-            <fieldset><legend><b>Tipo de Tabela</b></legend>
-                <div>
-                    <label for="tipo">Selecione :  </label>
-                    <select id="TipoTabela" name="TipoTabela">
-                        <option id= "qualitativa_nominal" name="qualitativa_nominal" value="quali_nom">Qualitativa Nominal</option>
-                        <option id= "qualitativa_ordinal" name="qualitativa_ordinal" value="quali_ord">Qualitativa Ordinal</option>
-                        <option id="quantitativa_discreta" name="quantitativa_discreta" value="quant_dis">Quantitativa Discreta</option>
-                        <option id="quantitativa_continua" name="quantitativa_continua" value="quant_cont">Quantitativa Continua</option>
-                    </select>                
-                </div>
-            </fieldset>
-            <br>
-            <fieldset><legend><b>Medidas Separatrizes</b></legend>
-                <div>
-                    <label for="populacao">População</label>
-                    <input id="populacao" name="TipoDado" class="InputRadio" type="radio" checked>
-                    <label for="amostra">Amostra</label>
-                    <input id="amostra" name="TipoDado" class="InputRadio" type="radio"> 
-                </div>
-                <br>
-                <div>
-                    <label for = "TipoMedida">Medida Separatriz</label>
-                    <select id = "TipoMedida" onclick = " DefineStep()">
-                        <option id="porcentil" name="porcentil" value="porcentil">Porcentil</option>
-                        <option id="decil" name="decil" value="decil">Decil</option>
-                        <option id="quartil" name="quartil" value="quartil">Quartil</option>
-                        <option id="quintil" name="quintil" value="quintil">Quintil</option>
-                    </select>
-                </div>
-                <div>
-                    <input id="InputRange" type="range">
-                </div>
-            </fieldset>
-            <br>
-            <div>
-                <input type="button" id="btnGerar" value="Gerar">
-            </div>
-        </form> 
-    </section>
+              <li class="nav-item">
+                <a class="nav-link " href="SobreNos.html"> <i class="fas fa-address-card"></i> Sobre nós</a>
+              </li>
 
-    <section>
-        <div id="MostrarDados">
-        </div>    
-    </section>
-   
-    <script src="JS/index.js" ></script>
-    <script src=https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js></script>
-    <canvas id="grafico"></canvas>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="far fa-chart-bar"></i>
+                  Estatística
+                </a>
+
+                <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item " href="descritiva.html">Descritiva</a>
+                  <a class="dropdown-item " href="probabilidade.html">Pobrabilística</a>
+                  <a class="dropdown-item " href="regressao.html">Regressão</a>
+              </li>
+              
+            </ul>
+          </div>
+        </nav>
+      </header>
+
+      <div class="intro"></div>
+
+      <div class="main"></div>
+
+      <footer></footer>
+
+    </div> <!-- Final container-->
+    
 
 </body>
 </html>

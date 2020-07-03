@@ -54,7 +54,7 @@ btnBi.onclick = function binomialStart(){ // falta desvio padrão e média
     }else{
         resultado = resultado[0].toFixed(2) + "%";
     }
-     
+     console.log(resultado)
 }   
     // --------------------------------------------------------------------------------------------------------------------------
 
