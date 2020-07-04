@@ -11,14 +11,24 @@
     <title>Index</title>
     <style>
       .navbar .navbar-nav .nav-link{
-        color : #FFF
+        color : #FFF;
       }
+
+      .mother{
+        background-color: #778899;
+      }
+
+      .main{
+        font-style: italic;
+        background-color: white;
+      }
+
     </style>
 </head>
 
 <body>
   
-    <div class="container-fluid px-0">
+    <div class="container-fluid mother px-0">
 
       <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -31,15 +41,15 @@
 
             <ul class="navbar-nav ml-auto">
 
-              <li class="nav-item">
+              <li class="nav-item px-3">
                 <a class="nav-link " href="index.html" ><i class="fas fa-home"></i> Home </a>
               </li>
 
-              <li class="nav-item">
+              <li class="nav-item px-3">
                 <a class="nav-link " href="SobreNos.html"> <i class="fas fa-address-card"></i> Sobre nós</a>
               </li>
 
-              <li class="nav-item dropdown">
+              <li class="nav-item dropdown px-3">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="far fa-chart-bar"></i>
                   Estatística
@@ -56,11 +66,75 @@
         </nav>
       </header>
 
-      <div class="intro"></div>
+      <div class="jumbotron jumbotron-fluid intro">
+        <div class="container">
+          <div class="row">
 
-      <div class="main"></div>
+            <div class="col-sm-6">
+              <h1 class="display-4"><strong>Estatística</strong></h1>
+              <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate, sequi laborum ullam obcaecati at minima beatae animi repellat odit, architecto eius earum eveniet dignissimos recusandae quidem? Exercitationem itaque voluptate iure!</p>
+            </div>
 
-      <footer></footer>
+            <div class="col-sm-6">
+                <img src="assets/Imagens/img-intro.jpg" alt="imagem-introdução" class="img-fluid">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid main pt-4">
+
+        <div class="card mb-2 border border-dark rounded-mg" style="background-color: red;">
+          <div class="row no-gutters ">
+            <div class="col-md-2 ">
+              <a href="./descritiva.html"><img src="./assets/Imagens/img-descritiva.jpg" class="card-img" alt="imagem gráficos"></a>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title"><strong>Descritiva</strong></h5>
+                <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas sunt incidunt provident aliquid ullam labore soluta nemo ducimus itaque corrupti, recusandae voluptates placeat commodi adipisci odit. Officiis laudantium dolores odit.</p>
+                <a href="./descritiva.html"><button type="button" class="btn btn-primary" >Vamos lá!</button></a>
+              </div>
+            </div>
+          </div>       
+        </div>
+
+        <div class="card mb-2 border border-dark rounded-mg">
+          <div class="row no-gutters ">
+            <div class="col-md-2 ">
+              <a href="./probabilidade.html"><img src="./assets/Imagens/img-probabilidade.jpg" class="card-img" alt="imagem probabilidade"></a>
+            </div>
+
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title"><strong>Probabilidade</strong></h5>
+                <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas sunt incidunt provident aliquid ullam labore soluta nemo ducimus itaque corrupti, recusandae voluptates placeat commodi adipisci odit. Officiis laudantium dolores odit.</p>
+                <a href="./probabilidade.html"><button type="button" class="btn btn-primary" >Vamos lá!</button></a>
+              </div>
+            </div>
+          </div>       
+        </div>
+
+        <div class="card mb-2 border border-dark rounded-mg pt-4" >
+          <div class="row no-gutters ">
+            <div class="col-md-2 ">
+              <a href="./descritiva.html"><img src="./assets/Imagens/img-descritiva.jpg" class="card-img" alt="imagem gráficos"></a>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">Descitiva</h5>
+                <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas sunt incidunt provident aliquid ullam labore soluta nemo ducimus itaque corrupti, recusandae voluptates placeat commodi adipisci odit. Officiis laudantium dolores odit.</p>
+                <a href="./descritiva.html"><button type="button" class="btn btn-primary" >Vamos lá!</button></a>
+              </div>
+            </div>
+          </div>       
+        </div>
+
+      </div> <!-- FIM CONTAINER MAIN-->
+
+      <footer class="footer-dark bg-dark" >
+
+      </footer>
 
     </div> <!-- Final container-->
     
