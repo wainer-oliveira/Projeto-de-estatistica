@@ -14,157 +14,118 @@
       .navbar .navbar-nav .nav-link{
         color : #FFF;
       }
-
-      body{
-        background-color:#A9A9A9;
-      }
-
       .intro{
         background-image: url("assets/Imagens/img-background.jpg");
         color: black;
+      }
+      .main{
+        background-color: #F0F8FF;
+      }
+      footer{
+        color: #FFF;
       }
 
     </style>
 </head>
 
 <body>
-  
-    <div class="container-fluid mother ">
 
-      <header class="fixed-top">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <header >
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-          <a class="navbar-brand" href="#">Logo</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          </button>
-        
-          <div class="collapse navbar-collapse " id="navbarSupportedContent">
+      <a class="navbar-brand" href="#">Logo</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      </button>
+    
+      <div class="collapse navbar-collapse " id="navbarSupportedContent">
 
-            <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ml-auto">
 
-              <li class="nav-item px-3">
-                <a class="nav-link " href="index.html" ><i class="fas fa-home"></i> Home </a>
-              </li>
+          <li class="nav-item px-3">
+            <a class="nav-link " href="index.html" ><i class="fas fa-home"></i> Home </a>
+          </li>
 
-              <li class="nav-item px-3">
-                <a class="nav-link " href="SobreNos.html"> <i class="fas fa-address-card"></i> Sobre nós</a>
-              </li>
+          <li class="nav-item px-3">
+            <a class="nav-link " href="index.html#main"> <i class="fas fa-address-card"></i> Sobre nós</a>
+          </li>
 
-              <li class="nav-item dropdown px-3">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="far fa-chart-bar"></i>
-                  Estatística
-                </a>
+          <li class="nav-item dropdown px-3">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="far fa-chart-bar"></i>
+              Estatística
+            </a>
 
-                <div class="dropdown-menu " aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item " href="descritiva.html">Descritiva</a>
-                  <a class="dropdown-item " href="probabilidade.html">Pobrabilística</a>
-                  <a class="dropdown-item " href="regressao.html">Regressão</a>
-              </li>
-              
-            </ul>
-          </div>
-        </nav>
-      </header>
+            <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+              <a class="dropdown-item " href="descritiva.html">Descritiva</a>
+              <a class="dropdown-item " href="probabilidade.html">Pobrabilística</a>
+              <a class="dropdown-item " href="regressao.html">Regressão</a>
+          </li>
+          
+        </ul>
+      </div>
+    </nav>
+  </header>
 
-      <div class="jumbotron jumbotron-fluid intro">
-        <div class="container">
-          <div class="row">
+  <div class="jumbotron jumbotron-fluid intro mb-0">
+    <div class="container-fluid">
+      <div class="row">
 
-            <div class="col-sm-6 col-md-5 col-xl-5">
-              <h1 class="display-4"><strong>Estatística</strong></h1>
-              <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate, sequi laborum ullam obcaecati at minima beatae animi repellat odit, architecto eius earum eveniet dignissimos recusandae quidem? Exercitationem itaque voluptate iure!</p>
-            </div>
+        <div class="col-sm-6 col-md-5 col-xl-5">
+          <h1 class="display-4"><strong>Estatística</strong></h1>
+          <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate, sequi laborum ullam obcaecati at minima beatae animi repellat odit, architecto eius earum eveniet dignissimos recusandae quidem? Exercitationem itaque voluptate iure!</p>
+        </div>
 
-            <div class="col-sm-6">
-                <img src="assets/Imagens/img-intro.jpg" alt="imagem-introdução" class="img-fluid">
-            </div>
-          </div>
+        <div class="col-sm-6">
+            <img src="assets/Imagens/img-intro.jpg" alt="imagem-introdução" class="img-fluid">
         </div>
       </div>
+    </div>
+  </div><!-- Final Intro-->
 
-      <div class="container  main">
-        <!--
-        <div class="card mb-3" style="max-height: 600px;">
-          <div class="row no-gutters">
-            <div class="col-md-2 col-xl-2">
-              <a href="./descritiva.html"><img src="./assets/Imagens/img-descritiva.jpg" class="card-img-top" alt="Ilustração Estatística Descritiva"></a>
-            </div>
-            <div class="col-md-6">
-              <div class="card-body">
-                <h5 class="card-tittle text-center"><strong>Estatística Descritiva</strong></h5>
-                <p class="card-text text-center">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laboriosam voluptatem qui architecto fugiat, minus itaque cum, vitae numquam beatae alias id harum soluta molestiae iusto quod facilis repellat? Possimus, odit?</p>
-                <a href="./descritiva.html"><button type="button" class="btn btn-primary">Vamos lá!</button></a>
-              </div>
-            </div>
-          </div>
-        </div>
+  <div class="container-fluid main">
+    <h2 class="text-center mb-3">Vamos calcular!</h2>
+    <div class="row">
 
-        <div class="card mb-3" style="max-height: 600px;">
-          <div class="row no-gutters">
-            <div class="col-md-2 col-xl-2">
-              <a href="./probabilidade.html"><img src="./assets/Imagens/img-probabilidade.png" class="card-img-top" alt="Ilustração Estatística Probabilística"></a>
-            </div>
-            <div class="col-md-6">
-              <div class="card-body">
-                <h5 class="card-tittle text-center"><strong>Estatística Probabilística</strong></h5>
-                <p class="card-text text-center">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laboriosam voluptatem qui architecto fugiat, minus itaque cum, vitae numquam beatae alias id harum soluta molestiae iusto quod facilis repellat? Possimus, odit?</p>
-                <a href="./probabilidade.html"><button type="button" class="btn btn-primary">Vamos lá!</button></a>
-                 </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card mb-3" style="max-height: 600px;">
-          <div class="row no-gutters">
-            <div class="col-md-2 col-xl-2">
-              <img src="./assets/Imagens/img-regressaolinear.jpg" class="card-img-top" alt="Ilustração Estatística Descritiva">
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-tittle text-center"><strong>Regressão Linear</strong></h5>
-                <p class="card-text text-center">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laboriosam voluptatem qui architecto fugiat, minus itaque cum, vitae numquam beatae alias id harum soluta molestiae iusto quod facilis repellat? Possimus, odit?</p>
-                <a href="./regressaolinear.html"><button type="button" class="btn btn-primary">Vamos lá!</button></a>
-                </div>
-            </div>
-          </div>
-        </div>
-        -->
-        <div class="row">
-        <div class="card mx-auto" style="width: 18rem;">
-          <img src="./assets/Imagens/img-descritiva.jpg" class="card-img-top" alt="Imagem Descritiva">
-          <div class="card-body">
-            <h5 class="card-title"><strong>Descritiva</strong></h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <div class="card mx-auto mb-3" style="width: 20rem;">
+        <img src="./assets/Imagens/img-descritiva.jpg" class="card-img-top" alt="Imagem Descritiva">
+        <div class="card-body">
+          <h5 class="card-title text-center"><strong>Descritiva</strong></h5>
+          <p class="card-text text-center">Some quick example text to build on the card title and make up the bulk of the card's content.
+            <br><br>
             <a href="./descritiva.html" class="btn btn-primary">Vamos lá!</a>
-          </div>
+          </p>
         </div>
-        
-        <div class="card mx-auto" style="width: 18rem;">
-          <img src="./assets/Imagens/img-probabilidade.png" class="card-img-top" alt="Imagem Descritiva">
-          <div class="card-body">
-            <h5 class="card-title"><strong>Probabilidade</strong></h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      </div>
+      
+      <div class="card mx-auto mb-3" style="width: 20rem;">
+        <img src="./assets/Imagens/img-probabilidade.jpg" class="card-img-top" alt="Imagem Descritiva">
+        <div class="card-body">
+          <h5 class="card-title text-center"><strong>Probabilidade</strong></h5>
+          <p class="card-text text-center">Some quick example text to build on the card title and make up the bulk of the card's content.
+            <br><br>
             <a href="./probabilidade.html" class="btn btn-primary">Vamos lá!</a>
-          </div>
-        </div>
-
-        <div class="card mx-auto" style="width: 18rem;">
-          <img src="./assets/Imagens/img-regressaolinear.jpg" class="card-img-top" alt="Imagem Descritiva">
-          <div class="card-body">
-            <h5 class="card-title"><strong>Regressão Linear</strong></h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="./descritiva.html" class="btn btn-primary">Vamos lá!</a>
-          </div>
+          </p>
         </div>
       </div>
-      </div> <!-- FIM CONTAINER MAIN-->
 
-      <footer class="footer-dark bg-dark" >
-        <p class="text-footer">teste</p>
-      </footer>
+      <div class="card mx-auto mb-3" style="width: 20rem;">
+        <img src="./assets/Imagens/img-regressaolinear.jpg" class="card-img-top" alt="Imagem Descritiva">
+        <div class="card-body">
+          <h5 class="card-title text-center"><strong>Regressão Linear</strong></h5>
+          <p class="card-text text-center">Some quick example text to build on the card title and make up the bulk of the card's content.
+            <br><br>
+            <a href="./descritiva.html" class="btn btn-primary">Vamos lá!</a>
+          </p>
+        </div>
+      </div>
+    </div>
 
-    </div> <!-- Final container-->
+  </div> <!-- FIM CONTAINER MAIN-->
+
+    <footer class="jumbotron jumbotron-fluid bg-dark mb-0">
+      <p class="text-center">Criado com <a href="#">Bootstrap</a></p>
+    </footer>
+
     
 
 </body>
