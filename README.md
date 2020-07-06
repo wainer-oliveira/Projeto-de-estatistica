@@ -14,7 +14,7 @@ Apenas clique aqui > (https://wainer97.github.io/Projeto-de-estatistica/)
 
 ## Quer nos ajudar a desenvolver: 
 
-Siga as instruções em https://docs.github.com/pt/github/getting-started-with-github
+Siga as instruções em https://docs.github.com/pt/github/getting-started-with-github para clonar o projeto
 
 
 ## Meta
