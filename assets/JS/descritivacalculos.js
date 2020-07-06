@@ -54,15 +54,15 @@ function CalcularQualitativaNominal(nome, array){
     frequenciaSimples.forEach((a,b) => dadostabelaprincipal.push(
     [`${elementos[b]}`, `${frequenciaSimples[b]}`, `${frequenciaRelativa[b]}`, `${frequenciaAcumulada[b]}`, `${frequenciaAcumuladaPorcentagem[b]}`]
     ))
-    let dadostabelasecundaria = [moda, mediana] 
-
+     
     let novadiv = CriarDiv()
+
+    novadiv.innerHTML = `<p class="lead">Moda : ${moda}</p>`
+    novadiv.innerHTML += `<p class="lead">mediana :  ${mediana}</p>`
+
     let tabelaprincipal = CriarTabela(novadiv)
-    let tabelasecundaria = CriarTabela(novadiv)
     GerarTableHead(tabelaprincipal, titulosTabelaPrincipal)
     GerarTable(tabelaprincipal, dadostabelaprincipal)
-    //novadiv.innerHTML += `<strong>Moda</strong> : ${moda} <br> <strong>Mediana</strong> : ${mediana}`
-
 }
 
 //FUNÇÕES DE MEDIDAS DE TENDÊNCIA CENTRAL
@@ -150,7 +150,7 @@ function CriarDiv(){
 function CriarTabela(div){
     let tabela = document.createElement("table")
     div.appendChild(tabela)
-    tabela.setAttribute("class", "table")
+    tabela.setAttribute("class", "table mt-5")
     return(tabela)
 }
 
