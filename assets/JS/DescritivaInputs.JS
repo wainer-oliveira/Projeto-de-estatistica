@@ -41,6 +41,7 @@ function MostrarInputRange(){
 }
 
 let btngerar = document.getElementById("btn-gerar")
+
 btngerar.onclick = function CapturarElementos(){
     let inputnome = document.getElementById("InputNomeVariavel")
     let nome
@@ -54,6 +55,7 @@ btngerar.onclick = function CapturarElementos(){
     let elementos
     if(tipotabela == "qualitativanominal"){
         elementos = TratarInputQualitativaNominal()
+        CalcularQualitativaNominal(nome, elementos)
         console.log(elementos)              
     }else if(tipotabela == "qualitativaordinal"){
         elementos = TratarInputQualitativaOrdinal()
