@@ -1,9 +1,9 @@
 # Projeto de Estatística
-> Projeto feito no 3º ciclo de ADS na Fatec Franca, abrangendo as matérias de Estatistica Aplicada, Engenharia de Software e Estrutura de Dados. Feito em Javascript, Html, Css e Bootstrap.
+> Projeto feito no 3º ciclo de ADS na Fatec Franca, abrangendo as matérias de Estatística Aplicada, Engenharia de Software e Estrutura de Dados. Feito em Javascript, Html, Css e Bootstrap.
 
 [Página do projeto](https://wainer97.github.io/Projeto-de-estatistica/)
 
-Esse projeto tem como objetivo a coleta, organização, descrição, análise e interpretação de dados fornecidos pelo usuário. Esses dados envolvem em sua totalidade conchecimentos adquiridos na matéria de Estatística Aplicada, como medidas de tendência central, medidas separatrizes, medidas de dispersão, calculos de tabulação, enttre outros.
+Esse projeto tem como objetivo a coleta, organização, descrição, análise e interpretação de dados fornecidos pelo usuário. Esses dados envolvem em sua totalidade conhecimentos adquiridos na matéria de Estatística Aplicada, como medidas de tendência central, medidas separatrizes, medidas de dispersão, cálculos de tabulação, entre outros.
 
 ![](logo.png)
 
@@ -23,12 +23,12 @@ Wainer de Oliveira – [Github](https://github.com/wainer97)
 
 Evandro Gomes - [Github](https://github.com/evandro-gomes)
 
-Colocar licença. ex: Distribuido pela licença "taus" do ano taus e taus.
+Colocar licença. ex: Distribuído pela licença "taus" do ano taus e taus.
 
 
 Imagens utilizadas:
 
-background introdução, introdução :
+background introdução, introdução:
 Design by rawpixel.com / freepik
 
 card (descritiva) :
