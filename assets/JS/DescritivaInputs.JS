@@ -59,9 +59,11 @@ btngerar.onclick = function CapturarElementos(){
         elementos = TratarInputQualitativaOrdinal()
         console.log(elementos)
     }else if(tipotabela == "quantitativadiscreta"){
-
+        elementos = TratarInputNumber()
+        console.log(elementos.filter(Number))
     }else if (tipotabela == "quantitativacontinua"){
-
+        elementos = TratarInputNumber()
+        console.log(elementos.filter(Number))
     }else{
         alert("Selecione o tipo de tabela para podermos continuar!")
     }
@@ -82,6 +84,18 @@ function TratarInputQualitativaNominal(){
     return elementos
 }
 
-function TratarInputQualitativaOrdinal(){
+function TratarInputNumber(){
+    let inputelementos = document.getElementById("InputDadosVariavel")
+    let elementos = []
 
+    if(inputelementos.value == ""){
+        alert("Insira os elementos para que possamos continuar!")
+    }else{
+        elementos = (inputelementos.value).split(" ")
+        elementos = elementos.sort()
+    }
+  
+    elementos = elementos.filter(a => a != "")
+    elementos = elementos.sort((a,b) => a - b)
+    return elementos
 }
