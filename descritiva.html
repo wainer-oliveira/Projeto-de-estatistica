@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="assets/CSS/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/Bootstrap/CSS/bootstrap.min.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css">
     <link rel="stylesheet" href="./assets/CSS/stylegeral.css">
-    <script src="assets/JS/popper.min.js"></script>
-    <script src="assets/JS/jquery-3.3.1.slim.min.js"></script>
-    <script src="assets/JS/bootstrap.min.js"></script>
+    <script src="./assets/Bootstrap/JS/Jquery/popper.min.js"></script>
+    <script src="./assets/Bootstrap/JS/Jquery/jquery-3.3.1.slim.min.js"></script>
+    <script src="./assets/Bootstrap/JS/bootstrap.min.js"></script>
     <title>Descritiva</title>
 </head>
 <body>
@@ -60,18 +60,18 @@
                 </div>
                 <div class="form-group">
                   <label for="InputDadosVariavel">Insira os dados</label>
-                  <input type="text" class="form-control" id="InputDadosVariavel" placeholder="exemplo: 1 2 3 4 5 6">
+                  <input type="text" class="form-control" id="InputDadosVariavel" placeholder="Separados por espaço">
                 </div>
                 <div class="input-group mb-2 mt-2">
                     <div class="input-group-prepend">
-                      <label class="input-group-text" for="inputGroupSelect01"><strong>Tipo de Tabela</strong></label>
+                      <label class="input-group-text" for="TipoTabela"><strong>Tipo de Tabela</strong></label>
                     </div>
                     <select class="custom-select" id="TipoTabela">
                         <option selected disabled>Escolher</option>
-                        <option id= "qualitativa_nominal" value="quali_nom">Qualitativa Nominal</option>
-                        <option id= "qualitativa_ordinal" value="quali_ord">Qualitativa Ordinal</option>
-                        <option id="quantitativa_discreta" value="quant_dis">Quantitativa Discreta</option>
-                        <option id="quantitativa_continua" value="quant_cont">Quantitativa Continua</option>
+                        <option id= "qualitativa_nominal" value="qualitativanominal">Qualitativa Nominal</option>
+                        <option id= "qualitativa_ordinal" value="qualitativaordinal">Qualitativa Ordinal</option>
+                        <option id="quantitativa_discreta" value="quantitativadiscreta">Quantitativa Discreta</option>
+                        <option id="quantitativa_continua" value="quantitativacontinua">Quantitativa Continua</option>
                     </select>
                 </div>
                 
@@ -93,8 +93,8 @@
                         <div class="input-group-prepend">
                           <label class="input-group-text" for="SelectMedidaSeparatriz"><strong>Medida Separatriz</strong></label>
                         </div>
-                        <select class="custom-select" id="SelectMedidaSeparatriz">
-                          <option selected disabled>Escolher...</option>
+                        <select class="custom-select" id="SelectMedidaSeparatriz" onchange="MudarInputRange()">
+                          <option selected disabled value="inativo">Escolher...</option>
                           <option value="porcentil">Porcentil</option>
                           <option value="quartil">Quartil</option>
                           <option value="quintil">Quintil</option>
@@ -103,23 +103,25 @@
                     </div>
                     <div class="form-group">
                         <label for="valorseparatriz">Selecione o valor</label>
-                        <input type="range" class="custom-range mb-mt-2" id="valorseparatriz">
+                        <input type="range" class="custom-range mb-mt-2" id="valorseparatriz" oninput="MostrarInputRange()">
+                        <p class="form-text" id="valorinputrange"> </p>
                     </div>
                 </div>
                 
-                <button type="submit" class="btn btn-primary">Enviar</button>
+                <button type="button" class="btn btn-primary" id="btn-gerar">Gerar</button>
             </form> 
         </div>
     </div>
-
 
     <canvas id="grafico"></canvas>
 
     <footer class="jumbotron jumbotron-fluid bg-dark mb-0">
         <p class="text-center">Criado com <a href="#">Bootstrap</a></p>
     </footer>
-    <script src="assets/JS/descritiva.js" ></script>
+
+   <!-- <script src="assets/JS/descritiva.js" ></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <script src="./assets/JS/DescritivaInputs.JS"></script>
 
 </body>
 </html>
