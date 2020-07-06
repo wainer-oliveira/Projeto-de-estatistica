@@ -23,7 +23,7 @@ Wainer de Oliveira – [Github](https://github.com/wainer97)
 
 Evandro Gomes - [Github](https://github.com/evandro-gomes)
 
-Colocar licença.
+Colocar licença. ex: Distribuido pela licença "taus" do ano taus e taus.
 
 
 Imagens utilizadas:
