@@ -64,6 +64,7 @@ btngerar.onclick = function CapturarElementos(){
 
     }else if(tipotabela == "quantitativadiscreta"){
         elementos = TratarInputNumber()
+        CalcularQuantitativaDiscreta(nome, elementos)
         console.log(elementos)
 
     }else if (tipotabela == "quantitativacontinua"){

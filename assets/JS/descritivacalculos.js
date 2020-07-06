@@ -1,15 +1,3 @@
-//Funções Auxiliares
-function QuantidadeOcorrencia(elemento, array){
-    let idx = array.indexOf(elemento)
-    if(idx === -1) return 0
-    let indices = []
-    while(idx != -1){
-        indices.push(idx)
-        idx = array.indexOf(elemento, idx + 1)
-    }
-    return indices.length
-}
-
 //Funções de Frequencias
 function CalcularFrequenciaAcumulada(frequenciasimples){
     let frequenciaacumulada = [0]
@@ -65,78 +53,38 @@ function CalcularQualitativaNominal(nome, array){
     GerarTable(tabelaprincipal, dadostabelaprincipal)
 }
 
-//FUNÇÕES DE MEDIDAS DE TENDÊNCIA CENTRAL
-function FuncaoMedia(array, freqArray){
-    let media = array.map((a,b) => a * freqArray[b])
-    media = (media.reduce ((a,b) => a+b) ) / (freqArray.reduce((a,b) => a+b))
-    media = media.toFixed(2)
-    return media
+function CalcularQuantitativaDiscreta(nome, array){ 
+    let arraysort = array.sort((a,b) => a - b)
+    let elementos = [... new Set(arraysort)]
+    let frequenciaSimples = elementos.map(a => QuantidadeOcorrencia(a, arraysort))
+    let frequenciaAcumulada = CalcularFrequenciaAcumulada(frequenciaSimples)
+    let frequenciaRelativa = CalcularFrequenciaRelativa(frequenciaSimples, frequenciaAcumulada)
+    let frequenciaAcumuladaPorcentagem = CalcularFacPorcentagem(frequenciaRelativa)
+    frequenciaRelativa = frequenciaRelativa.map(a => a + "%")
+
+    let media = FuncaoMedia(elementos, frequenciaSimples)
+    let moda = FuncaoModa(elementos, frequenciaSimples)
+    let mediana = FuncaoMediana(elementos, frequenciaAcumulada)
+
+    let titulosTabelaPrincipal = [` ${nome}`, " Fi ", " Fr% ", " Fac ", " Fac % "]
+
+    let dadostabelaprincipal = []
+    frequenciaSimples.forEach((a,b) => dadostabelaprincipal.push(
+    [`${elementos[b]}`, `${frequenciaSimples[b]}`, `${frequenciaRelativa[b]}`, `${frequenciaAcumulada[b]}`, `${frequenciaAcumuladaPorcentagem[b]}`]
+    ))
+     
+    let novadiv = CriarDiv()
+    console.log(media)
+    novadiv.innerHTML = `<hr>`
+    novadiv.innerHTML += `<p class="lead">Média : ${media}</p>` 
+    novadiv.innerHTML += `<p class="lead">Moda : ${moda}</p>`
+    novadiv.innerHTML += `<p class="lead">mediana :  ${mediana}</p>`
+
+    let tabelaprincipal = CriarTabela(novadiv)
+    GerarTableHead(tabelaprincipal, titulosTabelaPrincipal)
+    GerarTable(tabelaprincipal, dadostabelaprincipal)
 }
 
-function FuncaoModa(array, freqArray){
-    let moda
-    let maior = Math.max.apply(Math, freqArray)
-    let vetorIndex = []
-
-    freqArray.forEach((a,b) => {if(a == maior) vetorIndex.push(b) })
-
-    if(vetorIndex.length == freqArray.length){
-        moda = "Amodal"
-    }else if(vetorIndex.length == 1){
-        moda = array[vetorIndex]
-    }else{
-        moda =  vetorIndex.map(a => array[a])
-    }
-    return moda
-}
-
-function FuncaoMedianaContinua(array, freq, IntervaloClasse, freqacumulada){
-    let posicao = freq.reduce((a,b) => a + b) / 2
-    let mediana
-    let auxiliar
-    
-    for(let i=0; i < freq.length; i++){
-        if(freqacumulada[i] >= posicao ){
-            i == 0 ? auxiliar = 0: auxiliar = freqacumulada[i-1]
-            mediana = (array[i][0] + (((posicao - auxiliar) / freq[i]) * IntervaloClasse))
-            return mediana.toFixed(2)
-        }
-    }
-}
-
-function FuncaoMediana(array, freqAcum){
-    let acum = freqAcum[freqAcum.length - 1]
-    let posicao
-    let mediana
-
-    if(acum % 2 == 0){
-        posicao = []
-        mediana = []
-        posicao.push(acum / 2)
-        posicao.push(posicao[0] + 1)
-        for(let i = 0; i < freqAcum.length; i++){
-            if(freqAcum[i] >= posicao[0]){
-                 mediana[0] = array[i]
-                  break
-            }
-        }
-        for(let i = 0; i < freqAcum.length; i++){
-            if(freqAcum[i] >= posicao[1]){
-                 mediana.push(array[i])
-                  break
-            }
-        }
-        if(mediana[0] == mediana[1]) mediana = mediana[0] 
-    }else{
-        posicao = acum / 2
-        for(let i = 0; i < freqAcum.length; i++){
-            if(freqAcum[i] >= posicao){
-                return mediana = array[i]
-            }
-        }
-    }
-    return mediana
-}
 
 //Funções de Tabela
 function CriarDiv(){
