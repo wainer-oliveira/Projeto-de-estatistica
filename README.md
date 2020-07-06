@@ -1,4 +1,5 @@
-# Projeto de Estatistica
+## Projeto feito no 3º ciclo de ADS na Fatec Franca, abrangendo as matérias de Estatistica Aplicada, Engenharia de Software e Estrutura de Dados.
+Feito em Javascript, Html e Css
 
 Imagens utilizadas:
 
