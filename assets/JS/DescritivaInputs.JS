@@ -87,7 +87,6 @@ function TratarInputQualitativaNominal(){
         elementos = elementos.sort()
     }
     elementos = elementos.filter(a => a != "")
-    elementos = elementos.filter(Number)
     return elementos
 }
 
@@ -103,5 +102,6 @@ function TratarInputNumber(){
   
     elementos = elementos.filter(a => a != "")
     elementos = elementos.sort((a,b) => a - b)
+    elementos = elementos.filter(Number)
     return elementos
 }
