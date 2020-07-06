@@ -46,7 +46,10 @@ function CalcularQualitativaNominal(nome, array){
 
     let titulosTabelaPrincipal = [` ${nome}`, " Fi ", " Fr% ", " Fac ", " Fac % "]
     let titulosTabelaSecundaria = ["Moda", "Mediana"]
-    let dadostabelaprincipal = [elementos, frequenciaSimples, frequenciaRelativa, frequenciaAcumulada, frequenciaAcumuladaPorcentagem]
+    let dadostabelaprincipal = []
+    frequenciaSimples.forEach((a,b) => dadostabelaprincipal.push(
+    [`${elementos[b]}`, ${frequenciaSimples[b]}, ${frequenciaRelativa[b]}, ${frequenciaAcumulada[b]}, `${frequenciaAcumuladaPorcentagem[b]}]
+    ))
     let dadostabelasecundaria = [mediana, moda]
     let novadiv = CriarDiv()
     let tabelaprincipal = CriarTabela(novadiv)

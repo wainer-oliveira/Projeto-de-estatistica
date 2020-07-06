@@ -56,16 +56,20 @@ btngerar.onclick = function CapturarElementos(){
     if(tipotabela == "qualitativanominal"){
         elementos = TratarInputQualitativaNominal()
         CalcularQualitativaNominal(nome, elementos)
-        console.log(elementos)              
+        console.log(elementos)
+
     }else if(tipotabela == "qualitativaordinal"){
         elementos = TratarInputQualitativaOrdinal()
         console.log(elementos)
+
     }else if(tipotabela == "quantitativadiscreta"){
         elementos = TratarInputNumber()
-        console.log(elementos.filter(Number))
+        console.log(elementos)
+
     }else if (tipotabela == "quantitativacontinua"){
         elementos = TratarInputNumber()
-        console.log(elementos.filter(Number))
+        console.log(elementos.)
+
     }else{
         alert("Selecione o tipo de tabela para podermos continuar!")
     }
@@ -83,6 +87,7 @@ function TratarInputQualitativaNominal(){
         elementos = elementos.sort()
     }
     elementos = elementos.filter(a => a != "")
+    elementos = elementos.filter(Number)
     return elementos
 }
 
@@ -94,7 +99,6 @@ function TratarInputNumber(){
         alert("Insira os elementos para que possamos continuar!")
     }else{
         elementos = (inputelementos.value).split(" ")
-        elementos = elementos.sort()
     }
   
     elementos = elementos.filter(a => a != "")
