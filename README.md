@@ -23,9 +23,7 @@ Wainer de Oliveira – [Github](https://github.com/wainer97)
 
 Evandro Gomes - [Github](https://github.com/evandro-gomes)
 
-Distributed under the XYZ license. See ``LICENSE`` for more information.
-
-[https://github.com/yourname/github-link](https://github.com/dbader/)
+Colocar licença.
 
 
 Imagens utilizadas:
