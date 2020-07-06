@@ -68,13 +68,11 @@ btngerar.onclick = function CapturarElementos(){
 
     }else if (tipotabela == "quantitativacontinua"){
         elementos = TratarInputNumber()
-        console.log(elementos.)
+        console.log(elementos)
 
     }else{
         alert("Selecione o tipo de tabela para podermos continuar!")
     }
-    
-
 }
 
 function TratarInputQualitativaNominal(){
@@ -87,7 +85,6 @@ function TratarInputQualitativaNominal(){
         elementos = elementos.sort()
     }
     elementos = elementos.filter(a => a != "")
-    elementos = elementos.filter(Number)
     return elementos
 }
 

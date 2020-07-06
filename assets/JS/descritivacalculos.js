@@ -20,13 +20,13 @@ function CalcularFrequenciaAcumulada(frequenciasimples){
 
 function CalcularFrequenciaRelativa(frequenciasimples, frequenciaacumulada){
     let frequenciarelativa = frequenciasimples.map(a => (a / frequenciaacumulada[frequenciaacumulada.length -1]) * 100 )
-    frequenciarelativa = frequenciarelativa.map(a => a.toFixed(2) + "%")
+    frequenciarelativa = frequenciarelativa.map(a => a.toFixed(2))
     return frequenciarelativa
 }
 
 function CalcularFacPorcentagem(fr){
     let facporcentagem = [0]
-    fr.forEach((a,b) => facporcentagem.push(facporcentagem[b] + a))
+    fr.forEach((a,b) => facporcentagem.push(facporcentagem[b] + Number(a)))
     facporcentagem.splice(0,1)
     facporcentagem = facporcentagem.map(a => a + "%")
     return facporcentagem
@@ -41,24 +41,29 @@ function CalcularQualitativaNominal(nome, array){
     let frequenciaAcumulada = CalcularFrequenciaAcumulada(frequenciaSimples)
     let frequenciaRelativa = CalcularFrequenciaRelativa(frequenciaSimples, frequenciaAcumulada)
     let frequenciaAcumuladaPorcentagem = CalcularFacPorcentagem(frequenciaRelativa)
+
+    frequenciaRelativa = frequenciaRelativa.map(a => a + "%")
+
     let mediana = FuncaoMediana(elementos, frequenciaAcumulada)
     let moda = FuncaoModa(elementos, frequenciaSimples)
 
     let titulosTabelaPrincipal = [` ${nome}`, " Fi ", " Fr% ", " Fac ", " Fac % "]
     let titulosTabelaSecundaria = ["Moda", "Mediana"]
+
     let dadostabelaprincipal = []
     frequenciaSimples.forEach((a,b) => dadostabelaprincipal.push(
-    [`${elementos[b]}`, ${frequenciaSimples[b]}, ${frequenciaRelativa[b]}, ${frequenciaAcumulada[b]}, `${frequenciaAcumuladaPorcentagem[b]}]
+    [`${elementos[b]}`, `${frequenciaSimples[b]}`, `${frequenciaRelativa[b]}`, `${frequenciaAcumulada[b]}`, `${frequenciaAcumuladaPorcentagem[b]}`]
     ))
-    let dadostabelasecundaria = [mediana, moda]
+    let dadostabelasecundaria = [moda, mediana] 
+
     let novadiv = CriarDiv()
     let tabelaprincipal = CriarTabela(novadiv)
     let tabelasecundaria = CriarTabela(novadiv)
     GerarTableHead(tabelaprincipal, titulosTabelaPrincipal)
-    GerarTable(tabelasecundaria, titulosTabelaSecundaria)
+    GerarTable(tabelaprincipal, dadostabelaprincipal)
+    //novadiv.innerHTML += `<strong>Moda</strong> : ${moda} <br> <strong>Mediana</strong> : ${mediana}`
 
 }
-
 
 //FUNÇÕES DE MEDIDAS DE TENDÊNCIA CENTRAL
 function FuncaoMedia(array, freqArray){
@@ -82,7 +87,6 @@ function FuncaoModa(array, freqArray){
     }else{
         moda =  vetorIndex.map(a => array[a])
     }
-    
     return moda
 }
 
@@ -138,7 +142,7 @@ function FuncaoMediana(array, freqAcum){
 function CriarDiv(){
     let divMostrarDados = document.getElementById("MostrarDados")
     let newdiv = document.createElement("div")
-    newdiv.setAttribute("class", "container")
+    newdiv.setAttribute("class", "container mb-3")
     divMostrarDados.appendChild(newdiv)
     return newdiv
 }
