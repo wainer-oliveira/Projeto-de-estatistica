@@ -49,10 +49,10 @@
         </nav>
     </header> 
 
-    <div class="container-fluid">
-        <div class="container formulario">
-            <h1 class="text-center">Descritiva</h1>
+    <div class="container-fluid mt-5"> 
 
+        <h2 class="display-5 text-center"> Estatística Descritiva</h2>
+        <div class="form-row justify-content-center formulario"> 
             <form action="">
                 <div class="form-group">
                   <label for="InputNomeVariavel">Nome da variável</label>
@@ -62,8 +62,7 @@
                   <label for="InputDadosVariavel">Insira os dados</label>
                   <input type="text" class="form-control" id="InputDadosVariavel" placeholder="exemplo: 1 2 3 4 5 6">
                 </div>
-
-                <div class="input-group mb-3 mt-4">
+                <div class="input-group mb-2 mt-2">
                     <div class="input-group-prepend">
                       <label class="input-group-text" for="inputGroupSelect01"><strong>Tipo de Tabela</strong></label>
                     </div>
@@ -75,49 +74,44 @@
                         <option id="quantitativa_continua" value="quant_cont">Quantitativa Continua</option>
                     </select>
                 </div>
-
+                
                 <div class="form-check form-check-inline m-3">
                     <input class="form-check-input" type="radio" name="TipoDados" id="populacao" value="populacao" checked>
                     <label class="form-check-label" for="populacao">
                         <strong>População</strong>
                     </label>
-                  </div>
-                  <div class="form-check form-check-inline m-3">
+                </div>
+                <div class="form-check form-check-inline m-3">
                     <input class="form-check-input" type="radio" name="TipoDados" id="amostra" value="amostra">
                     <label class="form-check-label" for="amostra">
                         <strong>Amostra</strong>
                     </label>
-                  </div>
                 </div>
 
-                <fieldset><legend><b>Medidas Separatrizes</b></legend>
-                    <br>
-                    <div>
-                        <label for = "TipoMedida">Medida Separatriz</label>
-                        <select id = "TipoMedida" onclick = " DefineStep()">
-                            <option id="porcentil" name="porcentil" value="porcentil">Porcentil</option>
-                            <option id="decil" name="decil" value="decil">Decil</option>
-                            <option id="quartil" name="quartil" value="quartil">Quartil</option>
-                            <option id="quintil" name="quintil" value="quintil">Quintil</option>
+                <div class="form-group">
+                    <div class="input-group mb-2 mt-2">
+                        <div class="input-group-prepend">
+                          <label class="input-group-text" for="SelectMedidaSeparatriz"><strong>Medida Separatriz</strong></label>
+                        </div>
+                        <select class="custom-select" id="SelectMedidaSeparatriz">
+                          <option selected disabled>Escolher...</option>
+                          <option value="porcentil">Porcentil</option>
+                          <option value="quartil">Quartil</option>
+                          <option value="quintil">Quintil</option>
+                          <option value="decil">Decil</option>
                         </select>
                     </div>
-                    <div>
-                        <input id="InputRange" type="range">
+                    <div class="form-group">
+                        <label for="valorseparatriz">Selecione o valor</label>
+                        <input type="range" class="custom-range mb-mt-2" id="valorseparatriz">
                     </div>
-                </fieldset>
-                <br>
-                <div>
-                    <input type="button" id="btnGerar" value="Gerar">
                 </div>
+                
+                <button type="submit" class="btn btn-primary">Enviar</button>
             </form> 
         </div>
     </div>
 
-
-    <section>
-        <div id="MostrarDados">
-        </div>    
-    </section>
 
     <canvas id="grafico"></canvas>
 
@@ -125,7 +119,7 @@
         <p class="text-center">Criado com <a href="#">Bootstrap</a></p>
     </footer>
     <script src="assets/JS/descritiva.js" ></script>
-    <script src=https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 
 </body>
 </html>

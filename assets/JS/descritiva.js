@@ -29,9 +29,8 @@ function DefineStep(){
 
 btnGerar.onclick = function pega_elementos(){
     //Captura dos elementos do input
-    const nome = document.getElementById("nome")
     let tipo_tabela = document.getElementById("TipoTabela").value
-    let elementosInput = document.getElementById("elementos")
+    let elementosInput = document.getElementById("InputDadosVariavel")
     const elementos = elementosInput.value.split(" ")
     //Reconhecendo qual tipo de tabela
     switch(tipo_tabela){
@@ -55,7 +54,7 @@ btnGerar.onclick = function pega_elementos(){
 
 //FUNÇÕES AUXILIARES
 function CapturaElementosSeparatrizes(){
-    const InputSeparatriz = document.querySelector('input[name="TipoDado"]:checked')
+    let InputSeparatriz = document.querySelector('input[name="TipoDados"]')
     let separatriz =[]
     if(InputSeparatriz.id == "populacao"){
         separatriz.push(0)
@@ -123,7 +122,8 @@ function CalculosFrequencias(variavel,freq, media){
          Fac : ` ${freq_acum[b]} `,
          Fac_Acumulada : ` ${freq_acum_por_string[b]} `
     }))
-
+    
+    const nome = document.getElementById("InputNomeVariavel")
     let titulos = [` ${nome.value} `, " Fi ", " Fr% ", " Fac ", " Fac % "]
     let tabela = CriaTabela(DivMostrarDados)
     GeradorTabelaHead(tabela, titulos)
@@ -418,11 +418,10 @@ function Quantitativa_Discreta(array){
 }
 
 //escrever tabela 
-function CriaTabela(registro){
+function CriaTabela(div){
     let tabela = document.createElement("table")
-    registro.appendChild(tabela)
-    tabela.setAttribute("class", "tabela")
-    tabela.setAttribute("border","1")
+    div.appendChild(tabela)
+    tabela.setAttribute("class", "table")
     return(tabela)
 }
 
@@ -440,8 +439,6 @@ function GeradorTabelaHead(table, data){
 
 function GeradorTabela(table, data) {
     let tabela = table
-    //let titulos = Object.keys(data[0])
-
     for(element of data){
         let row = table.insertRow()
         row.setAttribute("class","linha")
@@ -451,5 +448,4 @@ function GeradorTabela(table, data) {
             cell.appendChild(text)
         }
     }
-    //GeradorTabelaHead(tabela, titulos)
 }
