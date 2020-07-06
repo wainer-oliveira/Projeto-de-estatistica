@@ -100,5 +100,6 @@ function TratarInputNumber(){
   
     elementos = elementos.filter(a => a != "")
     elementos = elementos.sort((a,b) => a - b)
+    elementos = elementos.filter(Number)
     return elementos
 }
