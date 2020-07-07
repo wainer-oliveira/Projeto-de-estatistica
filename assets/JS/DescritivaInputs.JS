@@ -41,7 +41,6 @@ function MostrarInputRange(){
 }
 
 let btngerar = document.getElementById("btn-gerar")
-
 btngerar.onclick = function CapturarElementos(){
     let inputnome = document.getElementById("InputNomeVariavel")
     let nome
@@ -54,38 +53,34 @@ btngerar.onclick = function CapturarElementos(){
     let tipotabela = document.getElementById("TipoTabela").value
     let elementos
     if(tipotabela == "qualitativanominal"){
-        elementos = TratarInputQualitativaNominal()
-        CalcularQualitativaNominal(nome, elementos)
-        console.log(elementos)
+        let array = TratarInputString()
+        elementos = array.sort()
+        CalcularQualitativa(nome, elementos)
 
     }else if(tipotabela == "qualitativaordinal"){
-        elementos = TratarInputQualitativaOrdinal()
-        CalcularQualitativaOrdinal(nome,ordemElementos,elementos)
-        console.log(elementos)
+        elementos = TratarInputString()
+        CalcularQualitativa(nome,elementos)
 
     }else if(tipotabela == "quantitativadiscreta"){
         elementos = TratarInputNumber()
         CalcularQuantitativaDiscreta(nome, elementos)
-        console.log(elementos)
 
     }else if (tipotabela == "quantitativacontinua"){
         elementos = TratarInputNumber()
         CalcularQuantitativaContinua(nome,elementos)
-        console.log(elementos)
 
     }else{
         alert("Selecione o tipo de tabela para podermos continuar!")
     }
 }
 
-function TratarInputQualitativaNominal(){
+function TratarInputString(){
     let inputelementos = document.getElementById("InputDadosVariavel")
     let elementos =[]
     if(inputelementos.value == ""){
         alert("Insira os elementos para que possamos continuar!")
     }else{
         elementos = (inputelementos.value).split(" ")
-        elementos = elementos.sort()
     }
     elementos = elementos.filter(a => a != "")
     return elementos

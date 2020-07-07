@@ -16,12 +16,12 @@ function CalcularFacPorcentagem(fr){
     let facporcentagem = [0]
     fr.forEach((a,b) => facporcentagem.push(facporcentagem[b] + Number(a)))
     facporcentagem.splice(0,1)
-    facporcentagem = facporcentagem.map(a => a + "%")
+    facporcentagem = facporcentagem.map(a => a.toFixed(2) + "%")
     return facporcentagem
 }
 
 //Funções Principais
-function CalcularQualitativaNominal(nome, array){ 
+function CalcularQualitativa(nome, array){ 
     let newArray = array.map(a => a.toLowerCase(a))
     let elementos = [... new Set(newArray)]
     let frequenciaSimples = elementos.map(a => QuantidadeOcorrencia(a, newArray))
@@ -42,8 +42,9 @@ function CalcularQualitativaNominal(nome, array){
     ))
      
     let novadiv = CriarDiv()
-    novadiv.innerHTML = `<p class="lead">Moda : ${moda}</p>`
-    novadiv.innerHTML += `<p class="lead">mediana :  ${mediana}</p>`
+    novadiv.innerHTML = "<hr>"
+    novadiv.innerHTML += `<p class="lead"><strong>Moda</strong> : ${moda}</p>`
+    novadiv.innerHTML += `<p class="lead"><strong>mediana</strong> :  ${mediana}</p>`
 
     let tabela = CriarTabela(novadiv)
     GerarTableHead(tabela, titulosTabela)
@@ -167,7 +168,7 @@ function CalcularQuantitativaContinua(nome,array){// VERIFICAR A MEDIANA E SEPAR
 function CriarDiv(){
     let divMostrarDados = document.getElementById("MostrarDados")
     let newdiv = document.createElement("div")
-    newdiv.setAttribute("class", "container mb-3")
+    newdiv.setAttribute("class", "jumbotron pt-0 mb-2")
     divMostrarDados.appendChild(newdiv)
     return newdiv
 }
@@ -175,7 +176,7 @@ function CriarDiv(){
 function CriarTabela(div){
     let tabela = document.createElement("table")
     div.appendChild(tabela)
-    tabela.setAttribute("class", "table mt-5")
+    tabela.setAttribute("class", "table table-bordered table-dark")
     return(tabela)
 }
 
