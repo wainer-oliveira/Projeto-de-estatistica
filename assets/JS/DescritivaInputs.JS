@@ -60,6 +60,7 @@ btngerar.onclick = function CapturarElementos(){
 
     }else if(tipotabela == "qualitativaordinal"){
         elementos = TratarInputQualitativaOrdinal()
+        CalcularQualitativaOrdinal(nome,ordemElementos,elementos)
         console.log(elementos)
 
     }else if(tipotabela == "quantitativadiscreta"){
@@ -69,6 +70,7 @@ btngerar.onclick = function CapturarElementos(){
 
     }else if (tipotabela == "quantitativacontinua"){
         elementos = TratarInputNumber()
+        CalcularQuantitativaContinua(nome,elementos)
         console.log(elementos)
 
     }else{
@@ -102,5 +104,6 @@ function TratarInputNumber(){
     elementos = elementos.filter(a => a != "")
     elementos = elementos.sort((a,b) => a - b)
     elementos = elementos.filter(Number)
+    elementos = elementos.map(a => Number(a))
     return elementos
 }

@@ -82,3 +82,4 @@ function FuncaoMediana(array, freqAcum){
     }
     return mediana
 }
+
