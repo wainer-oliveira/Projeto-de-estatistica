@@ -103,13 +103,11 @@ function TratarInputString(){
 function TratarInputNumber(){
     let inputelementos = document.getElementById("InputDadosVariavel")
     let elementos = []
-
     if(inputelementos.value == ""){
         alert("Insira os elementos para que possamos continuar!")
     }else{
         elementos = (inputelementos.value).split(" ")
     }
-  
     elementos = elementos.filter(a => a != "")
     elementos = elementos.sort((a,b) => a - b)
     elementos = elementos.filter(a => Number(a) == a)
