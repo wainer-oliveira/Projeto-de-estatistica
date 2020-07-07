@@ -253,11 +253,10 @@ function FuncaoSeparatriz(array, freqAcum){
 }
 
 //FUNÇÕES DE MEDIDAS DE DISPERSÃO
-function FuncaoDesvioPadrao(variavel, frequencia, media){
-    let separatrizes = CapturaElementosSeparatrizes()
-    let DP = variavel.map((a,b) => ((a - media) ** 2) * frequencia[b])
+function FuncaoDesvioPadrao(elementos, frequencia, media,tipoamostra){
+    let DP = elementos.map((a,b) => ((a - media) ** 2) * frequencia[b])
     DP = DP.reduce((a,b) => a + b)
-    DP = Math.sqrt(DP / ((frequencia.reduce((a,b) => a + b) - separatrizes[0])))
+    DP = Math.sqrt(DP / ((frequencia.reduce((a,b) => a + b) - tipoamostra)))
     return DP.toFixed(2)
 }
 

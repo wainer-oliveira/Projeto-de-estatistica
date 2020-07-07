@@ -35,20 +35,6 @@ function FuncaoModa(array, freqArray){
     return moda
 }
 
-function FuncaoMedianaContinua(array, freq, IntervaloClasse, freqacumulada){
-    let posicao = freq.reduce((a,b) => a + b) / 2
-    let mediana
-    let auxiliar
-    
-    for(let i=0; i < freq.length; i++){
-        if(freqacumulada[i] >= posicao ){
-            i == 0 ? auxiliar = 0: auxiliar = freqacumulada[i-1]
-            mediana = (array[i][0] + (((posicao - auxiliar) / freq[i]) * IntervaloClasse))
-            return mediana.toFixed(2)
-        }
-    }
-}
-
 function FuncaoMediana(array, freqAcum){
     let acum = freqAcum[freqAcum.length - 1]
     let posicao
@@ -83,3 +69,22 @@ function FuncaoMediana(array, freqAcum){
     return mediana
 }
 
+function FuncaoSeparatriz(array, freqAcum,valorseparatriz ){   
+    let posicao = Math.round((freqAcum[freqAcum.length - 1]) * valorseparatriz)
+    let resultado
+
+    for(let i = 0; i < freqAcum.length; i++){
+        if(freqAcum[i] >= posicao){
+            resultado = array[i]
+              break
+        }
+    }
+    return resultado
+}
+
+function FuncaoDesvioPadrao(elementos, frequencia, media,tipoamostra){
+    let DP = elementos.map((a,b) => ((a - media) ** 2) * frequencia[b])
+    DP = DP.reduce((a,b) => a + b)
+    DP = Math.sqrt(DP / ((frequencia.reduce((a,b) => a + b) - tipoamostra)))
+    return DP.toFixed(2)
+}

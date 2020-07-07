@@ -50,24 +50,38 @@ btngerar.onclick = function CapturarElementos(){
         nome = inputnome.value
     }
 
+    let separatriz = []
+    separatriz.push(document.querySelector('input[name="TipoDados"]:checked').value);
+    if(separatriz[0] == "populacao"){
+        separatriz[0] = 0
+    }else{
+        separatriz[0] = 1
+    }
+    separatriz.push(document.getElementById("SelectMedidaSeparatriz").value)
+    if(separatriz[1]!= "inativo"){
+        separatriz.push(Number(document.getElementById("valorseparatriz").value))
+        separatriz.push(separatriz[2] / (Number(document.getElementById("valorseparatriz").step)))
+        separatriz[2] = separatriz[2] / 100   
+    }
+
     let tipotabela = document.getElementById("TipoTabela").value
     let elementos
     if(tipotabela == "qualitativanominal"){
         let array = TratarInputString()
         elementos = array.sort()
-        CalcularQualitativa(nome, elementos)
+        CalcularQualitativa(nome, elementos, separatriz)
 
     }else if(tipotabela == "qualitativaordinal"){
         elementos = TratarInputString()
-        CalcularQualitativa(nome,elementos)
+        CalcularQualitativa(nome,elementos,separatriz)
 
     }else if(tipotabela == "quantitativadiscreta"){
         elementos = TratarInputNumber()
-        CalcularQuantitativaDiscreta(nome, elementos)
+        CalcularQuantitativaDiscreta(nome, elementos,separatriz)
 
     }else if (tipotabela == "quantitativacontinua"){
         elementos = TratarInputNumber()
-        CalcularQuantitativaContinua(nome,elementos)
+        CalcularQuantitativaContinua(nome,elementos,separatriz)
 
     }else{
         alert("Selecione o tipo de tabela para podermos continuar!")
@@ -98,7 +112,11 @@ function TratarInputNumber(){
   
     elementos = elementos.filter(a => a != "")
     elementos = elementos.sort((a,b) => a - b)
-    elementos = elementos.filter(Number)
-    elementos = elementos.map(a => Number(a))
-    return elementos
+    elementos = elementos.filter(a => Number(a) == a)
+    if(elementos.length == 0){
+        alert("DADOS INVÁLIDOS!")
+    }else{
+        elementos = elementos.map(a => Number(a))
+        return elementos
+    }
 }

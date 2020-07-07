@@ -21,7 +21,7 @@ function CalcularFacPorcentagem(fr){
 }
 
 //Funções Principais
-function CalcularQualitativa(nome, array){ 
+function CalcularQualitativa(nome, array, separatriz){ 
     let newArray = array.map(a => a.toLowerCase(a))
     let elementos = [... new Set(newArray)]
     let frequenciaSimples = elementos.map(a => QuantidadeOcorrencia(a, newArray))
@@ -42,16 +42,23 @@ function CalcularQualitativa(nome, array){
     ))
      
     let novadiv = CriarDiv()
-    novadiv.innerHTML = "<hr>"
-    novadiv.innerHTML += `<p class="lead"><strong>Moda</strong> : ${moda}</p>`
-    novadiv.innerHTML += `<p class="lead"><strong>mediana</strong> :  ${mediana}</p>`
 
     let tabela = CriarTabela(novadiv)
     GerarTableHead(tabela, titulosTabela)
     GerarTable(tabela, dadostabela)
+    novadiv.innerHTML += `<hr>`
+    let separatrizvalue = "---"
+    if(separatriz[1] != "inativo"){
+        separatrizvalue = FuncaoSeparatriz(elementos, frequenciaAcumulada, separatriz[2])
+    }
+    titulosTabela2 = ["Moda", "Mediana", "Separatriz"]
+    dadostabela2 = [[`${moda}`, `${mediana}`, `${separatriz[1]} ${separatriz[3]} : ${separatrizvalue}`]]
+    let tabela2 = CriarTabela(novadiv)
+    GerarTableHead(tabela2, titulosTabela2)
+    GerarTable(tabela2, dadostabela2)
 }
 
-function CalcularQuantitativaDiscreta(nome, array){ 
+function CalcularQuantitativaDiscreta(nome, array, separatriz){ 
     let arraysort = array.sort((a,b) => a - b)
     let elementos = [... new Set(arraysort)]
     let frequenciaSimples = elementos.map(a => QuantidadeOcorrencia(a, arraysort))
@@ -63,6 +70,8 @@ function CalcularQuantitativaDiscreta(nome, array){
     let media = FuncaoMedia(elementos, frequenciaSimples)
     let moda = FuncaoModa(elementos, frequenciaSimples)
     let mediana = FuncaoMediana(elementos, frequenciaAcumulada)
+    let DesvioPadrao = FuncaoDesvioPadrao(elementos, frequenciaSimples, media, separatriz[0])
+    let CoeficienteVariacao = (((DesvioPadrao/media) * 100).toFixed(2) + "%" )
 
     let titulosTabela = [` ${nome}`, " Fi ", " Fr% ", " Fac ", " Fac % "]
 
@@ -72,18 +81,23 @@ function CalcularQuantitativaDiscreta(nome, array){
     ))
      
     let novadiv = CriarDiv()
-    console.log(media)
-    novadiv.innerHTML = `<hr>`
-    novadiv.innerHTML += `<p class="lead">Média : ${media}</p>` 
-    novadiv.innerHTML += `<p class="lead">Moda : ${moda}</p>`
-    novadiv.innerHTML += `<p class="lead">mediana :  ${mediana}</p>`
-
     let tabela = CriarTabela(novadiv)
     GerarTableHead(tabela, titulosTabela)
     GerarTable(tabela, dadostabela)
+    novadiv.innerHTML += `<hr>`
+    let separatrizvalue = "---"
+    if(separatriz[1] != "inativo"){
+        separatrizvalue = FuncaoSeparatriz(elementos, frequenciaAcumulada, separatriz[2])
+    }
+
+    titulosTabela2 = ["Média" , "Moda", "Mediana", "Desvio Padrão", "Coeficiente de Variação", "Separatriz"]
+    dadostabela2 = [[`${media}`,`${moda}`, `${mediana}`, `${DesvioPadrao}`, `${CoeficienteVariacao}`, `${separatriz[1]} ${separatriz[3]} : ${separatrizvalue}`]]
+    let tabela2 = CriarTabela(novadiv)
+    GerarTableHead(tabela2, titulosTabela2)
+    GerarTable(tabela2, dadostabela2)
 }
 
-function CalcularQuantitativaContinua(nome,array){// VERIFICAR A MEDIANA E SEPARATRIZ
+function CalcularQuantitativaContinua(nome,array, separatriz){
     let Rol = array.sort((a,b) => a - b);
     let Xmin = Rol[0];
     let Xmax = Rol[(Rol.length)-1];
@@ -137,32 +151,36 @@ function CalcularQuantitativaContinua(nome,array){// VERIFICAR A MEDIANA E SEPAR
 
     let media = FuncaoMedia(xi,frequenciaSimples)
     let moda = FuncaoModa(xi, frequenciaSimples)
-    let mediana = FuncaoMedianaContinua(elementos, frequenciaSimples, IC, frequenciaAcumulada)
+    let mediana = FuncaoSeparatriz(xi, frequenciaAcumulada, separatriz[2])
+    let DesvioPadrao = FuncaoDesvioPadrao(xi, frequenciaSimples, media, 0.5)
+    let CoeficienteVariacao = (((DesvioPadrao/media) * 100).toFixed(2) + "%" )
 
-    //let DesvioPadrao = FuncaoDesvioPadrao(xi, frequenciaSimples, media)
-    //let CoeficienteVariacao = (((DesvioPadrao/media) * 100).toFixed(2) + "%" )
-    //let separatriz = FuncaoSeparatriz(xi, frequenciaAcumulada)
     elementos = elementos.map(a => a[0] + " |-- " + a[1])
 
-    
     let titulosTabela = ["Classe",` ${nome}`, " Fi ", " Fr% ", " Fac ", " Fac % "]
 
     let dadostabela = []
     frequenciaSimples.forEach((a,b) => dadostabela.push(
     [`${classe[b]}`,`${elementos[b]}`, `${frequenciaSimples[b]}`, `${frequenciaRelativa[b]}`, `${frequenciaAcumulada[b]}`, `${frequenciaAcumuladaPorcentagem[b]}`]
     ))
-     
-    let novadiv = CriarDiv()
-    novadiv.innerHTML = `<hr>`
-    novadiv.innerHTML += `<p class="lead">Média : ${media}</p>` 
-    novadiv.innerHTML += `<p class="lead">Moda : ${moda}</p>`
-    novadiv.innerHTML += `<p class="lead">mediana :  ${mediana}</p>`
 
+    let novadiv = CriarDiv()
     let tabela = CriarTabela(novadiv)
     GerarTableHead(tabela, titulosTabela)
     GerarTable(tabela, dadostabela)
-}
+    novadiv.innerHTML += `<hr>`
+    let separatrizvalue = "---"
+    if(separatriz[1] != "inativo"){
+        separatrizvalue = FuncaoSeparatriz(xi, frequenciaAcumulada, separatriz[2])
+    }
 
+    titulosTabela2 = ["Média" , "Moda", "Mediana", "Desvio Padrão", "Coeficiente de Variação", "Separatriz"]
+    dadostabela2 = [[`${media}`,`${moda}`, `${mediana}`, `${DesvioPadrao}`, `${CoeficienteVariacao}`, `${separatriz[1]} ${separatriz[3]} : ${separatrizvalue}`]]
+    let tabela2 = CriarTabela(novadiv)
+    GerarTableHead(tabela2, titulosTabela2)
+    GerarTable(tabela2, dadostabela2)
+
+}
 
 //Funções de Tabela
 function CriarDiv(){
