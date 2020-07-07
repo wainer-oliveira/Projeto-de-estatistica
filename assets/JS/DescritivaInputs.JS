@@ -88,13 +88,17 @@ btngerar.onclick = function CapturarElementos(){
     }
 }
 
+function zerar(local){
+    local.value = ""
+}
+
 function TratarInputString(){
     let inputelementos = document.getElementById("InputDadosVariavel")
     let elementos =[]
     if(inputelementos.value == ""){
         alert("Insira os elementos para que possamos continuar!")
     }else{
-        elementos = (inputelementos.value).split(" ")
+        elementos = (inputelementos.value).split(",")
     }
     elementos = elementos.filter(a => a != "")
     return elementos
@@ -106,7 +110,7 @@ function TratarInputNumber(){
     if(inputelementos.value == ""){
         alert("Insira os elementos para que possamos continuar!")
     }else{
-        elementos = (inputelementos.value).split(" ")
+        elementos = (inputelementos.value).split(",")
     }
     elementos = elementos.filter(a => a != "")
     elementos = elementos.sort((a,b) => a - b)
@@ -118,3 +122,23 @@ function TratarInputNumber(){
         return elementos
     }
 }
+
+let InputFile = document.getElementById("uploadFile")
+InputFile.addEventListener('change',() => {
+    readXlsxFile(InputFile.files[0]).then((data) => {
+        let nome = document.getElementById("InputNomeVariavel")
+        let dados = document.getElementById("InputDadosVariavel")
+
+        zerar(nome)
+        zerar(dados)
+        nome.value = data[0]
+        
+      for(let i = 1; i < data.length; i++){
+        if(i == data.length-1){
+            dados.value += `${data[i]}`
+            break
+        }
+        dados.value += `${data[i]},`
+      }
+    })
+})
