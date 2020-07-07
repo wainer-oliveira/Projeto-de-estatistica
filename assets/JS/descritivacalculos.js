@@ -59,6 +59,7 @@ function CalcularQualitativa(nome, array, separatriz){
     let tabela2 = CriarTabela(novadiv)
     GerarTableHead(tabela2, titulosTabela2)
     GerarTable(tabela2, dadostabela2)
+    desenharchart(novadiv,nome, elementos, frequenciaSimples,'pie')
 }
 
 function CalcularQuantitativaDiscreta(nome, array, separatriz){ 
@@ -100,6 +101,7 @@ function CalcularQuantitativaDiscreta(nome, array, separatriz){
     let tabela2 = CriarTabela(novadiv)
     GerarTableHead(tabela2, titulosTabela2)
     GerarTable(tabela2, dadostabela2)
+    desenharchart(novadiv,nome, elementos, frequenciaSimples,'bar')
 }
 
 function CalcularQuantitativaContinua(nome,array, separatriz){
