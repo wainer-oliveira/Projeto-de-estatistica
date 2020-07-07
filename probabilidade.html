@@ -12,70 +12,130 @@
     <title>Probabilidade</title>
 </head>
 <body>
-    <h2>Probabilidade</h2>
-    <br>
-    <div>
-        <fieldset><legend><b>Distribuição Binomial</b></legend>
-            <form>
-                <input type="number" placeholder="Tamanho da Amostra N" id="n">
-                <br><br>
-                <input type="text" placeholder="Eventos separados por espaço" id="k">
-                <br><br>
-                <input type="number" placeholder="Sucesso sem % P" id="p">
-                <br><br>
-                <input type="number" placeholder="Fracasso sem % Q" id="q">
-                <br><br>
-                <input type="button" id="btnbinomal" value="Enviar">
-            </form> 
-        </fieldset>
-</div>
-<br><br><br>
 
-    <div>
-        <fieldset><legend><b>Distribuição Normal</b></legend>
-            <form>
-                <input type="number" placeholder="Média" id="media">
-                <br><br>
-                <input type="number" placeholder="Desvio Padrão" id="dp">
-                <br><br>
-                <input type="text" placeholder="Valor pesquiasdo" id="valor">
-                <br><br>
-                <select id="selectCalculo">
-                    <option selected disabled >Selecione</option>
-                    <option id="maiornormal" >Maior que</option>
-                    <option id="entrenormal" >Entre</option>
-                    <option id="menornormal" >Menor que</option>
-                </select>
-                <br><br>
-                <input type="button" value="Enviar" id="btnnormal">
-            </form> 
-        </fieldset>
+  <header >
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+      <a class="navbar-brand" href="#"> <img src="./assets/Imagens/testeicon.png" alt="logo">  </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      </button>
+    
+      <div class="collapse navbar-collapse " id="navbarSupportedContent">
+
+        <ul class="navbar-nav ml-auto">
+
+          <li class="nav-item px-3">
+            <a class="nav-link " href="index.html" ><i class="fas fa-home"></i> Home </a>
+          </li>
+
+          <li class="nav-item px-3">
+            <a class="nav-link " href="#AboutUs"> <i class="fas fa-address-card"></i> Sobre nós</a>
+          </li>
+
+          <li class="nav-item dropdown px-3">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="far fa-chart-bar"></i>
+              Estatística
+            </a>
+
+            <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+              <a class="dropdown-item " href="descritiva.html">Descritiva</a>
+              <a class="dropdown-item " href="probabilidade.html">Pobrabilística</a>
+              <a class="dropdown-item " href="regressao.html">Regressão</a>
+          </li>
+          
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container justify-content-center">
+
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Distribuição Binomial</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Distribuição Normal</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Distribuição Uniforme</a>
+        </li>
+    </ul>
+    <div class=" justify-content-center ">
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                <div class="form-row justify-content-center formulario">
+                    <form>
+                        <h3 class="display-6">Distribuição Binomial</h3>
+                        <div class="form-group">
+                            <input type="number" placeholder="Tamanho da Amostra N" id="n">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="Eventos separados por espaço" id="k">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" placeholder="Sucesso sem % P" id="p">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" placeholder="Fracasso sem % Q" id="q">
+                        </div>
+                        <div class="form-group">
+                            <input type="button" id="btnbinomal" value="Enviar">
+                        </div>
+                        
+                    </form>
+                </div>
+
+            </div>
+    
+            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                <fieldset><legend><b>Distribuição Normal</b></legend>
+                    <form>
+                        <input type="number" placeholder="Média" id="media">
+                        <br><br>
+                        <input type="number" placeholder="Desvio Padrão" id="dp">
+                        <br><br>
+                        <input type="text" placeholder="Valor pesquiasdo" id="valor">
+                        <br><br>
+                        <select id="selectCalculo">
+                            <option selected disabled >Selecione</option>
+                            <option id="maiornormal" >Maior que</option>
+                            <option id="entrenormal" >Entre</option>
+                            <option id="menornormal" >Menor que</option>
+                        </select>
+                        <br><br>
+                        <input type="button" value="Enviar" id="btnnormal">
+                    </form> 
+                </fieldset>
+            </div>
+    
+            <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                <fieldset><legend><b>Distribuição Uniforme</b></legend>
+                    <form>
+                        <input type="number" placeholder="Ponto Mínimo" id="pontominimo">
+                        <br><br>
+                        <input type="number" placeholder="Ponto Máximo" id="pontomaximo">
+                        <br><br>
+                        <select id="selecionar">
+                            <option selected disabled >Selecione</option>
+                            <option id="maioruniforme" value="maior" >Maior que</option>
+                            <option id="entreuniforme" value="entre" >Entre</option>
+                            <option id="menoruniforme" value="menor" >Menor que</option>
+                            <option id="exatamenteuniforme" value="exatamente">Exatamente</option>
+                        </select>
+                        <br><br>
+                        <input type="text" id="escopo" placeholder="separado por espaço">
+                        <br>
+                        <input type="button" value="Enviar" id="btnDistUni">
+                    </form> 
+                </fieldset>
+            </div>
+        </div>
     </div>
-    <br><br><br>
 
-    <div>
-        <fieldset><legend><b>Distribuição Uniforme</b></legend>
-            <form>
-                <input type="number" placeholder="Ponto Mínimo" id="pontominimo">
-                <br><br>
-                <input type="number" placeholder="Ponto Máximo" id="pontomaximo">
-                <br><br>
-                <select id="selecionar">
-                    <option selected disabled >Selecione</option>
-                    <option id="maioruniforme" value="maior" >Maior que</option>
-                    <option id="entreuniforme" value="entre" >Entre</option>
-                    <option id="menoruniforme" value="menor" >Menor que</option>
-                    <option id="exatamenteuniforme" value="exatamente">Exatamente</option>
-                </select>
-                <br><br>
-                <input type="text" id="escopo" placeholder="separado por espaço">
-                <br>
-                <input type="button" value="Enviar" id="btnDistUni">
-            </form> 
-        </fieldset>
-    </div>
 
-    <div id="testes"></div>
+  </div>
 
     <script src="assets/JS/probabilidade.js"></script>
 </body>
