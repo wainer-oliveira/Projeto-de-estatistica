@@ -51,14 +51,26 @@
   <div class="container-fluid mt-5"> 
     <h2 class="display-5 text-center"> Estatística Descritiva</h2>
     <div class="form-row justify-content-center formulario"> 
-      <form action="">
+      <form action="" id="formulario">
+
+        <div class="input-group mb-5 mt-5">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+          </div>
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="uploadFile" accept=".xlsx"  aria-describedby="inputGroupFileAddon01">
+            <label class="custom-file-label" for="uploadFile">Escolha o arquivo tipo .xlsx</label>
+          </div>
+        </div>
+
+
         <div class="form-group">
           <label for="InputNomeVariavel">Nome da variável</label>
           <input type="text" class="form-control" id="InputNomeVariavel" placeholder="exemplo: exemplo">
         </div>
         <div class="form-group">
           <label for="InputDadosVariavel">Insira os dados</label>
-          <input type="text" class="form-control" id="InputDadosVariavel" placeholder="Separados por espaço">
+          <input type="text" class="form-control" id="InputDadosVariavel" placeholder="Separados por vírgula ( , )">
         </div>
         <div class="input-group mb-2 mt-2">
           <div class="input-group-prepend">
@@ -104,18 +116,17 @@
             <p class="form-text" id="valorinputrange"> </p>
           </div>
         </div>
-        
+
         <button type="button" class="btn btn-primary" id="btn-gerar">Gerar</button>
       </form> 
     </div>
     <div class="container mt-3" id="MostrarDados"></div>
   </div>
-
-  <canvas id="grafico"></canvas>
-
+  
   <footer class="jumbotron jumbotron-fluid bg-dark mb-0">
     <p class="text-center">Criado com <a href="#">Bootstrap</a></p>
   </footer>
+  <script src="https://unpkg.com/read-excel-file@4.x/bundle/read-excel-file.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
   <script src="./assets/JS/DescritivaInputs.JS"></script>
   <script src="./assets/JS/descritivacalculos.js"></script>
