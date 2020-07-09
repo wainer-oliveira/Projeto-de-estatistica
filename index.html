@@ -1,44 +1,115 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="./assets/Bootstrap/CSS/bootstrap.min.css">
-        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css">
-        <link rel="stylesheet" href="https://m.w3newbie.com/you-tube.css">
-        <link rel="stylesheet" href="./assets/CSS/stylegeral.css">
-        <link rel="stylesheet" href="./assets/CSS/style.css">
-        <script src="./assets/Bootstrap/JS/Jquery/popper.min.js"></script>
-        <script src="./assets/Bootstrap/JS/Jquery/jquery-3.3.1.slim.min.js"></script>
-        <script src="./assets/Bootstrap/JS/bootstrap.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-        <title>Tela de login</title>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="./assets/Bootstrap/CSS/bootstrap.min.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css">
+    <link rel="stylesheet" href="./assets/CSS/stylegeral.css">
+    <script src="./assets/Bootstrap/JS/Jquery/popper.min.js"></script>
+    <script src="./assets/Bootstrap/JS/Jquery/jquery-3.3.1.slim.min.js"></script>
+    <script src="./assets/Bootstrap/JS/bootstrap.min.js"></script>
+    <title>Home</title>
+</head>
 <body>
+
+  <header >
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+      <a class="navbar-brand" href="#"> <img src="./assets/Imagens/testeicon.png" alt="logo">  </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      </button>
     
-    <div class="modal-dialog text-center">
-        <div class="col-sm-8 main-section">
-            <div class="modal-content">
+      <div class="collapse navbar-collapse " id="navbarSupportedContent">
 
-                <form class="col-12" action=".\home.html">
-                        <h1 class="display-4" style="color: #DC143C;">Statistics's Hell</h1>
-                    <div class="form-group">
-                      <input type="email" class="form-control" placeholder="Entre o email do usuário">  
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Entre a senha do usuário">  
-                      </div>
-                    <input type="submit" class="btn" value="Login"></button>
-                </form>
+        <ul class="navbar-nav ml-auto">
 
-                <div class="col-12 forget">
-                    <a href="#">Esqueceu sua senha?</a>
-                </div>
+          <li class="nav-item px-3">
+            <a class="nav-link " href=".\home.html" ><i class="fas fa-home"></i> Home </a>
+          </li>
 
+          <li class="nav-item px-3">
+            <a class="nav-link " href="#AboutUs"> <i class="fas fa-address-card"></i> Sobre nós</a>
+          </li>
 
-            </div> <!--- final dos modals-->
+          <li class="nav-item dropdown px-3">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="far fa-chart-bar"></i>
+              Estatística
+            </a>
+
+            <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+              <a class="dropdown-item " href="descritiva.html">Descritiva</a>
+              <a class="dropdown-item " href="probabilidade.html">Pobrabilística</a>
+              <a class="dropdown-item " href="regressao.html">Regressão</a>
+          </li>
+          
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <div class="jumbotron jumbotron-fluid intro-index mb-0">
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="col-sm-6 col-md-5 col-xl-5">
+          <h1 class="display-4" style="color: #DC143C;">Statistics's Hell</h1>
+          <p class="lead">Software de estatistica, para aqueles </p>
         </div>
+
+        <div class="col-sm-6">
+            <img src="assets/Imagens/img-intro.jpg" alt="imagem-introdução" class="img-fluid">
+        </div>
+      </div>
     </div>
+  </div><!-- Final Intro-->
+
+  <div class="container-fluid main-index">
+    <h2 class="text-center mb-3">Vamos calcular!</h2>
+    <div class="row">
+
+      <div class="card mx-auto mb-3" style="width: 20rem;">
+        <img src="./assets/Imagens/img-descritiva.jpg" class="card-img-top" alt="Imagem Descritiva">
+        <div class="card-body">
+          <h5 class="card-title text-center mt-5"><strong>Descritiva</strong></h5>
+          <p class="card-text text-center mt-5">Ir para Tela de Estatística Descritiva
+            <br><br>
+            <a href="./descritiva.html" class="btn btn-primary mt-5">Vamos lá!</a>
+          </p>
+        </div>
+      </div>
+      
+      <div class="card mx-auto mb-3" style="width: 20rem;">
+        <img src="./assets/Imagens/img-probabilidade.jpg" class="card-img-top" alt="Imagem Descritiva">
+        <div class="card-body">
+          <h5 class="card-title text-center"><strong>Probabilidade</strong></h5>
+          <p class="card-text text-center">Ir para Estatística Probabilística
+            <br><br>
+            <a href="./probabilidade.html" class="btn btn-primary">Vamos lá!</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="card mx-auto mb-3" style="width: 20rem;">
+        <img src="./assets/Imagens/img-regressaolinear.jpg" class="card-img-top" alt="Imagem Descritiva">
+        <div class="card-body">
+          <h5 class="card-title text-center"><strong>Correlação e Regressão</strong></h5>
+          <p class="card-text text-center">Ir para Estatística de Correlação e Regressão
+            <br><br>
+            <a href="./descritiva.html" class="btn btn-primary">Vamos lá!</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div> <!-- FIM CONTAINER MAIN-->
+
+  <footer class="jumbotron jumbotron-fluid bg-dark mb-0">
+    <p class="text-center">Criado com <a href="#">Bootstrap</a></p>
+  </footer>
+
+    
+
 </body>
 </html>
