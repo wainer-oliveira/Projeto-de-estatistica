@@ -29,6 +29,7 @@ function CalcularQualitativa(nome, array, separatriz){
     let frequenciaRelativa = CalcularFrequenciaRelativa(frequenciaSimples, frequenciaAcumulada)
     let frequenciaAcumuladaPorcentagem = CalcularFacPorcentagem(frequenciaRelativa)
 
+    let graf = frequenciaRelativa
     frequenciaRelativa = frequenciaRelativa.map(a => a + "%")
 
     let mediana = FuncaoMediana(elementos, frequenciaAcumulada)
@@ -59,7 +60,7 @@ function CalcularQualitativa(nome, array, separatriz){
     let tabela2 = CriarTabela(novadiv)
     GerarTableHead(tabela2, titulosTabela2)
     GerarTable(tabela2, dadostabela2)
-    desenharchart(novadiv,nome, elementos, frequenciaSimples,'pie')
+    desenharchart(novadiv,nome, elementos, graf,'pie')
 }
 
 function CalcularQuantitativaDiscreta(nome, array, separatriz){ 
@@ -69,6 +70,7 @@ function CalcularQuantitativaDiscreta(nome, array, separatriz){
     let frequenciaAcumulada = CalcularFrequenciaAcumulada(frequenciaSimples)
     let frequenciaRelativa = CalcularFrequenciaRelativa(frequenciaSimples, frequenciaAcumulada)
     let frequenciaAcumuladaPorcentagem = CalcularFacPorcentagem(frequenciaRelativa)
+    let graf = frequenciaRelativa
     frequenciaRelativa = frequenciaRelativa.map(a => a + "%")
 
     let media = FuncaoMedia(elementos, frequenciaSimples)
@@ -101,7 +103,7 @@ function CalcularQuantitativaDiscreta(nome, array, separatriz){
     let tabela2 = CriarTabela(novadiv)
     GerarTableHead(tabela2, titulosTabela2)
     GerarTable(tabela2, dadostabela2)
-    desenharchart(novadiv,nome, elementos, frequenciaSimples,'bar')
+    desenharchart(novadiv,nome, elementos, graf,'bar')
 }
 
 function CalcularQuantitativaContinua(nome,array, separatriz){
@@ -149,6 +151,7 @@ function CalcularQuantitativaContinua(nome,array, separatriz){
     frequenciaRelativa.forEach((a,b) => frequenciaAcumuladaPorcentagem.push(frequenciaAcumuladaPorcentagem[b] + a))
     frequenciaAcumuladaPorcentagem.splice(0,1)
     frequenciaAcumuladaPorcentagem = frequenciaAcumuladaPorcentagem.map(a => a.toFixed(2) + "%")
+    let graf = frequenciaRelativa
     frequenciaRelativa = frequenciaRelativa.map(a => a.toFixed(2) + "%") 
 
     elementos.map((a,b) => elementos[b] = [elementos[b],elementos[b+1] ])
@@ -189,7 +192,7 @@ function CalcularQuantitativaContinua(nome,array, separatriz){
     let tabela2 = CriarTabela(novadiv)
     GerarTableHead(tabela2, titulosTabela2)
     GerarTable(tabela2, dadostabela2)
-    desenharchartContinua(novadiv,nome, elementos, frequenciaSimples)
+    desenharchartContinua(novadiv,nome, elementos, graf)
 }
 
 //Funções de Tabela

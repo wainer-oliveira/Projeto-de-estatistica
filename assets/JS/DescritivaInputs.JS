@@ -128,7 +128,6 @@ InputFile.addEventListener('change',() => {
     readXlsxFile(InputFile.files[0]).then((data) => {
         let nome = document.getElementById("InputNomeVariavel")
         let dados = document.getElementById("InputDadosVariavel")
-
         zerar(nome)
         zerar(dados)
         nome.value = data[0]
