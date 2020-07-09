@@ -48,14 +48,17 @@ function CalcularQualitativa(nome, array, separatriz){
     GerarTableHead(tabela, titulosTabela)
     GerarTable(tabela, dadostabela)
     novadiv.innerHTML += `<hr>`
+    let titulosTabela2 
     let separatrizvalue = "---"
     if(separatriz[1] != "inativo"){
         separatrizvalue = FuncaoSeparatriz(elementos, frequenciaAcumulada, separatriz[2])
-        dadostabela2 = [[`${moda}`, `${mediana}`, `${separatriz[1]} ${separatriz[3]} : ${separatrizvalue}`]]
-    }else{
+        titulosTabela2 = ["Moda", "Mediana", `${separatriz[1]} ${separatriz[3]}`]
         dadostabela2 = [[`${moda}`, `${mediana}`, `${separatrizvalue}`]]
+    }else{
+        titulosTabela2 = ["Moda", "Mediana"]
+        dadostabela2 = [[`${moda}`, `${mediana}`]]
     }
-    titulosTabela2 = ["Moda", "Mediana", "Separatriz"]
+    
     
     let tabela2 = CriarTabela(novadiv)
     GerarTableHead(tabela2, titulosTabela2)
@@ -91,15 +94,17 @@ function CalcularQuantitativaDiscreta(nome, array, separatriz){
     GerarTableHead(tabela, titulosTabela)
     GerarTable(tabela, dadostabela)
     novadiv.innerHTML += `<hr>`
+    let titulosTabela2
     let separatrizvalue = "---"
     if(separatriz[1] != "inativo"){
         separatrizvalue = FuncaoSeparatriz(elementos, frequenciaAcumulada, separatriz[2])
-        dadostabela2 = [[`${media}`,`${moda}`, `${mediana}`, `${DesvioPadrao}`, `${CoeficienteVariacao}`, `${separatriz[1]} ${separatriz[3]} : ${separatrizvalue}`]]
+        titulosTabela2 = ["Média" , "Moda", "Mediana", "Desvio Padrão", "Coeficiente de Variação", `${separatriz[1]} ${separatriz[3]} `]
+        dadostabela2 = [[`${media}`,`${moda}`, `${mediana}`, `${DesvioPadrao}`, `${CoeficienteVariacao}`, ` ${separatrizvalue}`]]
     }else{
-        dadostabela2 = [[`${media}`,`${moda}`, `${mediana}`, `${DesvioPadrao}`, `${CoeficienteVariacao}`, `${separatrizvalue}`]]
+        titulosTabela2 = ["Média" , "Moda", "Mediana", "Desvio Padrão", "Coeficiente de Variação"]
+        dadostabela2 = [[`${media}`,`${moda}`, `${mediana}`, `${DesvioPadrao}`, `${CoeficienteVariacao}`]]
     }
 
-    titulosTabela2 = ["Média" , "Moda", "Mediana", "Desvio Padrão", "Coeficiente de Variação", "Separatriz"]
     let tabela2 = CriarTabela(novadiv)
     GerarTableHead(tabela2, titulosTabela2)
     GerarTable(tabela2, dadostabela2)
@@ -161,9 +166,20 @@ function CalcularQuantitativaContinua(nome,array, separatriz){
 
     let media = FuncaoMedia(xi,frequenciaSimples)
     let moda = FuncaoModa(xi, frequenciaSimples)
-    let mediana = FuncaoSeparatriz(xi, frequenciaAcumulada, separatriz[2])
+    //let mediana = FuncaoSeparatriz(xi, frequenciaAcumulada, separatriz[2])
+    let mediana = FuncaoMedianaContinua(elementos, frequenciaSimples, IC, frequenciaAcumulada)
     let DesvioPadrao = FuncaoDesvioPadrao(xi, frequenciaSimples, media, 0.5)
     let CoeficienteVariacao = (((DesvioPadrao/media) * 100).toFixed(2) + "%" )
+    let titulosTabela2
+    let separatrizvalue = "---"
+    if(separatriz[1] != "inativo"){
+        separatrizvalue = FuncaoSeparatrizContinua(elementos, frequenciaSimples, IC, frequenciaAcumulada, separatriz[2])
+        titulosTabela2 = ["Média" , "Moda", "Mediana", "Desvio Padrão", "Coeficiente de Variação", `${separatriz[1]} ${separatriz[3]}`]
+        dadostabela2 = [[`${media}`,`${moda}`, `${mediana}`, `${DesvioPadrao}`, `${CoeficienteVariacao}`, `${separatrizvalue}`]]
+    }else{
+        titulosTabela2 = ["Média" , "Moda", "Mediana", "Desvio Padrão", "Coeficiente de Variação"]
+        dadostabela2 = [[`${media}`,`${moda}`, `${mediana}`, `${DesvioPadrao}`, `${CoeficienteVariacao}`, `${separatrizvalue}`]]
+    }
 
     elementos = elementos.map(a => a[0] + " |-- " + a[1])
 
@@ -179,16 +195,7 @@ function CalcularQuantitativaContinua(nome,array, separatriz){
     GerarTableHead(tabela, titulosTabela)
     GerarTable(tabela, dadostabela)
     novadiv.innerHTML += `<hr>`
-    let separatrizvalue = "---"
-    if(separatriz[1] != "inativo"){
-        separatrizvalue = FuncaoSeparatriz(xi, frequenciaAcumulada, separatriz[2])
-        dadostabela2 = [[`${media}`,`${moda}`, `${mediana}`, `${DesvioPadrao}`, `${CoeficienteVariacao}`, `${separatriz[1]} ${separatriz[3]} : ${separatrizvalue}`]]
-    }else{
-        dadostabela2 = [[`${media}`,`${moda}`, `${mediana}`, `${DesvioPadrao}`, `${CoeficienteVariacao}`, `${separatrizvalue}`]]
-    }
 
-    titulosTabela2 = ["Média" , "Moda", "Mediana", "Desvio Padrão", "Coeficiente de Variação", "Separatriz"]
-    
     let tabela2 = CriarTabela(novadiv)
     GerarTableHead(tabela2, titulosTabela2)
     GerarTable(tabela2, dadostabela2)

@@ -88,3 +88,32 @@ function FuncaoDesvioPadrao(elementos, frequencia, media,tipoamostra){
     DP = Math.sqrt(DP / ((frequencia.reduce((a,b) => a + b) - tipoamostra)))
     return DP.toFixed(2)
 }
+
+function FuncaoMedianaContinua(array, freq, IntervaloClasse, freqacumulada){ 
+    let posicao = freq.reduce((a,b) => a + b) / 2
+    let mediana
+    let auxiliar
+    
+    for(let i=0; i < freq.length; i++){
+        if(freqacumulada[i] >= posicao ){
+            i == 0 ? auxiliar = 0: auxiliar = freqacumulada[i-1]
+            mediana = (array[i][0] + (((posicao - auxiliar) / freq[i]) * IntervaloClasse))
+            return mediana.toFixed(2)
+        }
+    }
+}
+
+function FuncaoSeparatrizContinua(array, freq, IntervaloClasse, freqacumulada, valorseparatriz){ 
+    let posicao = (freq.reduce((a,b) => a + b) ) * valorseparatriz
+    let separatriz
+    let auxiliar
+    
+    for(let i=0; i < freq.length; i++){
+        if(freqacumulada[i] >= posicao ){
+            i == 0 ? auxiliar = 0: auxiliar = freqacumulada[i-1]
+            separatriz = (array[i][0] + (((posicao - auxiliar) / freq[i]) * IntervaloClasse))
+            separatriz = Number(separatriz)
+            return separatriz.toFixed(2)
+        }
+    }
+}
