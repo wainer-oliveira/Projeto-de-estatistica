@@ -1,5 +1,5 @@
 # Projeto de Estatística
-> Projeto feito no 3º ciclo de ADS na Fatec Franca, abrangendo as matérias de Estatística Aplicada, Engenharia de Software e Estrutura de Dados. Feito em Javascript, Html, Css e Bootstrap.
+> Projeto feito no 3º ciclo de ADS na Fatec Franca, abrangendo as matérias de Estatística Aplicada, Engenharia de Software, Estrutura de Dados e Interação Humano Computador. Feito em Javascript, Html, Css e Bootstrap.
 
 [Página do projeto](https://wainer97.github.io/Projeto-de-estatistica/)
 
