@@ -22,8 +22,8 @@ function AnaliseCombinatoria(n1,n2){
     }
 }
 
-function teste(k){
-    let n = document.getElementById("n").value;
+function BinomialCalculo(k){
+    let n = Number(document.getElementById("n").value);
     let p = document.getElementById("p").value;
     let q = (100 - p) / 100 ;
     p = p / 100;
@@ -41,21 +41,26 @@ btnBi.onclick = function binomialStart(){ // falta desvio padrão e média
     const elementosInputK = document.getElementById("k");
     let elementos = elementosInputK.value.split(" ");
     elementos = elementos.map(a => Number(a));
-    let n = document.getElementById("n").value;
-    let p = document.getElementById("p").value;
-    let q = (100 - p) / 100 ;
-    p = p / 100;
-
-    let resultado = elementos.map(a => teste(a));
-
+    console.log(elementos)
+    let resultado = elementos.map(a => BinomialCalculo(a));
+    console.log(resultado)
     if( resultado.length > 1){
         resultado = resultado.reduce((a,b) => a + b);
         resultado = resultado.toFixed(2) + ("%");
     }else{
         resultado = resultado[0].toFixed(2) + "%";
     }
-     console.log(resultado)
+    console.log(resultado)
+    let textresultado = `<h3>Probabilidade : ${resultado}</h3>`
+    EscreverResultados(text)
 }   
+
+function EscreverResultados(showme){
+    let divResultados = document.getElementById("resultados")
+    console.log(divResultados)
+    divResultados.innerHTML = ""
+    divResultados.innerHTML = `${showme}`
+}
     // --------------------------------------------------------------------------------------------------------------------------
 
     const botaoDistribuiçãoUniforme = document.getElementById("btnDistUni");
@@ -105,6 +110,8 @@ btnBi.onclick = function binomialStart(){ // falta desvio padrão e média
         console.log(intervalo, media, desvioPadrao);
         console.log(escopo);
         console.log((resultado * 100).toFixed(2) + "%");
+        let resultadofinal =  `<h3>Probabilidade de : ${(resultado * 100).toFixed(2) + "%"}<h3>`
+        EscreverResultados(resultadofinal)
     }
 
     //------------------------------------------------------------------------------------------------
