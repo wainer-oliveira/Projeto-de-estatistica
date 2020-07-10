@@ -52,7 +52,7 @@ btnBi.onclick = function binomialStart(){ // falta desvio padrão e média
     }
     console.log(resultado)
     let textresultado = `<h3>Probabilidade : ${resultado}</h3>`
-    EscreverResultados(text)
+    EscreverResultados(textresultado)
 }   
 
 function EscreverResultados(showme){
@@ -160,6 +160,7 @@ btnnormal.onclick = function DistribuicaoNormal(){
         alert("Escolha o tipo de calculo")
     }
     console.log(probabilidade)
+
 
 }
 
