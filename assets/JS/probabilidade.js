@@ -160,6 +160,8 @@ btnnormal.onclick = function DistribuicaoNormal(){
         alert("Escolha o tipo de calculo")
     }
     console.log(probabilidade)
+    let resultadofinal = `<h3>Probabilidade de : ${probabilidade}</h3>`
+    EscreverResultados(resultadofinal)
 
 
 }
