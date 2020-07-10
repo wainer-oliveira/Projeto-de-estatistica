@@ -51,8 +51,8 @@ btnBi.onclick = function binomialStart(){ // falta desvio padrão e média
         resultado = resultado[0].toFixed(2) + "%";
     }
     console.log(resultado)
-    let textresultado = `<h3>Probabilidade : ${resultado}</h3>`
-    EscreverResultados(textresultado)
+    let resultadofinal = `<h3>Probabilidade : ${resultado}</h3>`
+    EscreverResultados(resultadofinal)
 }   
 
 function EscreverResultados(showme){
