@@ -13,28 +13,22 @@ let totalx = arrayx.reduce(( acumulador, valorAtual ) => acumulador + valorAtual
 let totaly = arrayy.reduce(( acumulador, valorAtual ) => acumulador + valorAtual,0)
 
 // pontenciação dos arrays x e y
-let x2 = Math.pow(totalx, 2)
-let y2 = Math.pow(totaly, 2)
+let arrayx2 = arrayx.map(( acumulador, valorAtual ) => acumulador ** 2)
+let arrayy2 = arrayy.map(( acumulador, valorAtual ) => acumulador ** 2)
+let x2 = arrayx2.reduce(( acumulador, valorAtual ) => acumulador + valorAtual,0)
+let y2 = arrayy2.reduce(( acumulador, valorAtual ) => acumulador + valorAtual,0)
 
-// multiplicação dos dois arrays
-var sum = 0;
-for(var i=0; i< arr1.length; i++) {
-sum += arr1[i]*arr2[i];
-}
-
+// multiplicação dos dois arrays     
 let multXY = (arrayx.reduce(function(r,a,i){return r+a*arrayy[i]},0));
 
 // função da correlação
-let r = (n * multXY - totalx * totaly) / (Math.sqrt((n * x2 - (totalx ** 2)) * (n * y2 - totaly ** 2)))
+let r = (n * multXY - totalx * totaly) / Math.sqrt((n * x2 - totalx ** 2) * (n * y2 - totaly ** 2)).toFixed(2)
+preproX = (n * multXY - totalx * totaly) / (n * x2 - totalx ** 2)
+preproY = (totaly / n) - preproX * (totalx / n)
 
-//=========================//
-console.log(arrayx)
-console.log(arrayy)
-console.log(totalx)
-console.log(totaly) 
-console.log(x2) 
-console.log(y2) 
-console.log(multXY)
-console.log(r) 
-console.log(n) 
+//=========================//   
+console.log(r)
+console.log(preproX) 
+console.log(preproY)
+
 
