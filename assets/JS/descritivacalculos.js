@@ -210,6 +210,7 @@ function CriarDiv(){
     newdiv.setAttribute("class", "jumbotron pt-0 mb-2")
     newdiv.setAttribute("id", "div"+i)
     let btn = document.createElement("button")
+    btn.setAttribute("class","btn btn-danger mt-2 mb-2")
     btn.innerHTML = "Apagar"
     btn.setAttribute("onclick", `apagaItem(${i})`)
     newdiv.appendChild(btn)
@@ -256,7 +257,7 @@ function GerarTable(table, data) {
 function desenharchart(div,nome,nomes, dados,tipo){
     let local = document.createElement("canvas")
     div.appendChild(local)
-    var ctx = local;
+    var ctx = local.getContext("2d");
         var grafico = new Chart(ctx, {
             type: `${tipo}`,
             data: {

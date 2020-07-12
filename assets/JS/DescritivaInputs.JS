@@ -143,9 +143,8 @@ InputFile.addEventListener('change',() => {
         let dados = document.getElementById("InputDadosVariavel")
         zerar(nome)
         zerar(dados)
-        nome.value = data[0]
         
-      for(let i = 1; i < data.length; i++){
+      for(let i = 0; i < data.length; i++){
         if(i == data.length-1){
             dados.value += `${data[i]}`
             break
