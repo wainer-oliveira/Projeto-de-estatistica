@@ -108,14 +108,14 @@ atual.onclick = function atualizar(){
     }
     //=========================//  
     if(projecao != undefined){
-        document.getElementById("atualizar").innerHTML = projecao
+        document.getElementById("atualizar").innerHTML = ` Projeção : ${projecao}`
     }
 }
 
 function PrintarResultados(div,Relacao, Classificacao){
     let p = document.createElement('p')
     p.setAttribute('class','lead')
-    p.innerHTML = `Relação : ${Relacao}`
+    p.innerHTML = `Correlação : ${Relacao}`
     let p2 = document.createElement('p')
     p2.setAttribute('class','lead')
     p2.innerHTML = `Classificação : ${Classificacao}`
