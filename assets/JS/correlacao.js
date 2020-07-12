@@ -1,9 +1,11 @@
 const inputx = document.getElementById("InputX")
 const inputy = document.getElementById("InputY")
+const calcul = document.getElementById("btnReg")
 
 
 
-function calcular(){
+
+calcul.onclick = function calcular(){
     
     // transformando em array
     let arrayx = inputx.value.split(" ")
@@ -49,4 +51,3 @@ function calcular(){
     console.log(preproY)
     console.log(classi)
 }
-
