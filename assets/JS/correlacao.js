@@ -49,9 +49,20 @@ calcul.onclick = function calcular(){
         y : arrayy[b]
     }))
 
+    let dadoslinha = arrayx.map((a,b) => ({
+        x : ((a + arrayy[b]) / 2),
+        y : ((a + arrayy[b]) / 2)
+    }))
+
     let div = CriarDiv()
     PrintarResultados(div, r,classi)
-    desenharchart(div,dadosgrafico)
+    desenharchart(div,dadosgrafico, dadoslinha)
+
+    let divremendo = CriarDiv()
+    let p = document.createElement('p')
+    p.setAttribute('class','lead')
+    p.setAttribute('id','atualizar')
+    divremendo.appendChild(p)
 }
 
 atual.onclick = function atualizar(){
@@ -96,8 +107,9 @@ atual.onclick = function atualizar(){
         alert("Dados Inválidos")
     }
     //=========================//  
-    console.log(projecao)
-
+    if(projecao != undefined){
+        document.getElementById("atualizar").innerHTML = projecao
+    }
 }
 
 function PrintarResultados(div,Relacao, Classificacao){
@@ -117,11 +129,12 @@ function CriarDiv(){
     let divMostrarDados = document.getElementById("result")
     let newdiv = document.createElement("div")
     newdiv.setAttribute("class", "jumbotron pt-0 mb-2")
+    newdiv.setAttribute("id", "teste")
     divMostrarDados.appendChild(newdiv)
     return newdiv
 }
 
-function desenharchart(div,date){
+function desenharchart(div,date, datelinha){
     let local = document.createElement("canvas")
     div.appendChild(local)
     var ctx = local
@@ -130,8 +143,15 @@ function desenharchart(div,date){
         data: {
             datasets: [{
                 pointBackgroundColor: 'red',
-                data: date
-            }]
+                data: date,
+                //borderWidth : 1
+            },{
+                data : datelinha,
+                type : 'line',
+                fill : false,
+                pointRadius : 0
+            }
+        ]
         },
         options: {
             title: {
@@ -150,10 +170,31 @@ function desenharchart(div,date){
             }
         }
     });
-
+    /*
     grafico += new Chart(ctx, {
         type: 'line',
-        data: data,
-        options: options
-    });
+        data: {
+            datasets: [{
+                pointBackgroundColor: 'red',
+                data: datelinha
+            }]
+        },
+        options: {
+            title: {
+                text: 'Regressão',
+                fontSize: 15,
+                display: true,
+            },
+            legend: {
+                display: false
+            },
+            scales: {
+                xAxes: [{
+                    type: 'linear',
+                    position: 'bottom'
+                }]
+            }
+        }
+    });*/
+
 }
