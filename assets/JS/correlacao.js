@@ -59,9 +59,8 @@ function Escreverr(r, preprox, preproX, classi){
     let divResultados = document.getElementById("result")
     console.log(divResultados)
     divResultados.innerHTML = ""
-    divResultados.innerHTML = `Correlação: ${r}  `
+    divResultados.innerHTML = `Correlação: ${r}  ${classi}`
 }
 
 function gerarY(){
-
 }
