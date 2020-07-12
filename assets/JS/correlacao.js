@@ -1,16 +1,11 @@
-const inputx = document.getElementById("InputX")
-const inputy = document.getElementById("InputY")
 const calcul = document.getElementById("btnReg")
-const projeX = document.getElementById("proX")
-const projeY = document.getElementById("proY")
 const atual = document.getElementById("btnAtu")
 
 
 calcul.onclick = function calcular(){
-    
     // transformando em array
-    let arrayx = inputx.value.split(" ")
-    let arrayy = inputy.value.split(" ")
+    let arrayx = ((document.getElementById("InputX").value).split(" "))
+    let arrayy = ((document.getElementById("InputY").value).split(" "))
     arrayx = arrayx.map((conversao) => Number(conversao))
     arrayy = arrayy.map((conversao) => Number(conversao))
     let n = arrayx.length
@@ -54,23 +49,26 @@ calcul.onclick = function calcular(){
     console.log(arrayx)
     console.log(arrayy)
 
-    PrintarResultados(r,classi)
-}
+    let dadosgrafico = arrayx.map((a,b) => ({
+        x : a,
+        y : arrayy[b]
+    }))
 
-function Escreverr(r, classi){
-    let divResultados = document.getElementById("result")
-    console.log(divResultados)
-    divResultados.innerHTML = ""
-    divResultados.innerHTML = `Correlação: ${r}  ${classi}`
+    let div = CriarDiv()
+    PrintarResultados(div, r,classi)
+    desenharchart(div,dadosgrafico)
 }
 
 atual.onclick = function atualizar(){
-    
-    // transformando em array
-    let arrayx = inputx.value.split(" ")
-    let arrayy = inputy.value.split(" ")
-    arrayx = arrayx.map((conversao) => conversao = Number(conversao))
-    arrayy = arrayy.map((conversao) => conversao = Number(conversao))
+    let capX = Number(document.getElementById("proX").value) 
+    let capY = Number(document.getElementById("proY").value)
+    console.log(capX)
+    console.log(capY)
+
+    let arrayx = ((document.getElementById("InputX").value).split(" "))
+    let arrayy = ((document.getElementById("InputY").value).split(" "))
+    arrayx = arrayx.map((conversao) => Number(conversao))
+    arrayy = arrayy.map((conversao) => Number(conversao))
     let n = arrayx.length
 
     // somando os valores dos array X e Y
@@ -92,22 +90,26 @@ atual.onclick = function atualizar(){
     let preproX = (n * multXY - totalx * totaly) / (n * x2 - totalx ** 2)
     let preproY = (totaly / n) - preproX * (totalx / n)
 
-    let pY = (preproX * projeX + preproY) 
-    let pX = ((projeX - preproY) / preproX)
+    
+    //let projecaoX = (preproX * capX + preproY).toFixed(2)
+    //let projecaoY = ((capY - (preproY)) / preproX).toFixed(2)
 
-    //=========================//   
-    console.log(arrayx)
-    console.log(arrayy)
+    let projecao
+    if(capX > 0 && capY > 0){
+        alert("Adicione apenas um dos dados")
+    }else if(capX > 0){
+        projecao = (preproX * capX + preproY).toFixed(2)
+    }else if(capY > 0){
+        projecao = ((capY - (preproY)) / preproX).toFixed(2)
+    }else{
+        alert("Dados Inválidos")
+    }
+    //=========================//  
+    console.log(projecao)
 
-    console.log(r)
-    console.log(preproX) 
-    console.log(preproY)
-    console.log(pY)
-    console.log(pX)
 }
 
-function PrintarResultados(Relacao, Classificacao){
-    let div = CriarDiv()
+function PrintarResultados(div,Relacao, Classificacao){
     let p = document.createElement('p')
     p.setAttribute('class','lead')
     p.innerHTML = `Relação : ${Relacao}`
@@ -126,4 +128,40 @@ function CriarDiv(){
     newdiv.setAttribute("class", "jumbotron pt-0 mb-2")
     divMostrarDados.appendChild(newdiv)
     return newdiv
+}
+
+function desenharchart(div,date){
+    let local = document.createElement("canvas")
+    div.appendChild(local)
+    var ctx = local
+    var grafico = new Chart(ctx, {
+        type: 'scatter',
+        data: {
+            datasets: [{
+                label: 'Regressão',
+                pointBackgroundColor: 'red',
+                data: date
+            }]
+        },
+        options: {
+            scales: {
+                xAxes: [{
+                    type: 'linear',
+                    position: 'bottom'
+                }]
+            }
+        }
+    }, {
+        type: 'line',
+        data: date,
+        options: {
+            scales: {
+                xAxes: [{
+                    type: 'linear',
+                    position: 'bottom'
+                }]
+            }
+        }
+    });
+
 }
