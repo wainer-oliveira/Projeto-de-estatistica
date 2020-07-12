@@ -1,5 +1,6 @@
-const inputx = document.getElementById("InputX")
-const inputy = document.getElementById("InputY")
+ 
+const inputx = ((document.getElementById("InputX").value).split(" "))
+const inputy = ((document.getElementById("InputY").value).split(" "))
 const calcul = document.getElementById("btnReg")
 const projeX = document.getElementById("proX")
 const projeY = document.getElementById("proY")
@@ -9,8 +10,14 @@ const atual = document.getElementById("btnAtu")
 calcul.onclick = function calcular(){
     
     // transformando em array
-    let arrayx = inputx.value.split(" ")
-    let arrayy = inputy.value.split(" ")
+    let arrayx = ((document.getElementById("InputX").value).split(" "))
+    let arrayy = ((document.getElementById("InputY").value).split(" "))
+    let dadosgrafico = arrayx.map((a,b) => ({
+        x : a,
+        y : arrayy[b]
+    }))
+
+
     arrayx = arrayx.map((conversao) => Number(conversao))
     arrayy = arrayy.map((conversao) => Number(conversao))
     let n = arrayx.length
@@ -30,9 +37,9 @@ calcul.onclick = function calcular(){
 
     // função da correlação
     let r = (n * multXY - totalx * totaly) / Math.sqrt((n * x2 - totalx ** 2) * (n * y2 - totaly ** 2))
-    r = r.toFixed(2)
-    preproX = (n * multXY - totalx * totaly) / (n * x2 - totalx ** 2)
-    preproY = (totaly / n) - preproX * (totalx / n)
+    r = r.toFixed(4)
+    let preproX = (n * multXY - totalx * totaly) / (n * x2 - totalx ** 2)
+    let preproY = (totaly / n) - preproX * (totalx / n)
 
     if(r > 0.9 || r < -0.9){
         classi = 'Muito Forte'
@@ -49,13 +56,52 @@ calcul.onclick = function calcular(){
     }
     //=========================//   
     console.log(r)
-    console.log(classi)
+    console.log(preproX) 
+    console.log(preproY)
+    console.log(arrayx)
+    console.log(arrayy)
 
-    PrintarResultados(r,classi)
+    let div = CriarDiv()
+    PrintarResultados(div, r,classi)
+    desenharchart(div,dadosgrafico)
 }
 
-function PrintarResultados(Relacao, Classificacao){
-    let div = CriarDiv()
+atual.onclick = function atualizar(){
+    
+    // transformando em array
+    let arrayx = inputx.value.split(" ")
+    let arrayy = inputy.value.split(" ")
+    arrayx = arrayx.map((conversao) => conversao = Number(conversao))
+    arrayy = arrayy.map((conversao) => conversao = Number(conversao))
+    let n = arrayx.length
+
+    // somando os valores dos array X e Y
+    let totalx = arrayx.reduce(( acumulador, valorAtual ) => acumulador + valorAtual,0)
+    let totaly = arrayy.reduce(( acumulador, valorAtual ) => acumulador + valorAtual,0)
+
+    // pontenciação dos arrays x e y
+    let arrayx2 = arrayx.map(( acumulador, valorAtual ) => acumulador ** 2)
+    let arrayy2 = arrayy.map(( acumulador, valorAtual ) => acumulador ** 2)
+    let x2 = arrayx2.reduce(( acumulador, valorAtual ) => acumulador + valorAtual,0)
+    let y2 = arrayy2.reduce(( acumulador, valorAtual ) => acumulador + valorAtual,0)
+
+    // multiplicação dos dois arrays     
+    let multXY = (arrayx.reduce(function(r,a,i){return r+a*arrayy[i]},0));
+
+    // função da correlação
+    let r = (n * multXY - totalx * totaly) / Math.sqrt((n * x2 - totalx ** 2) * (n * y2 - totaly ** 2))
+    r = r.toFixed(4)
+    let preproX = (n * multXY - totalx * totaly) / (n * x2 - totalx ** 2)
+    let preproY = (totaly / n) - preproX * (totalx / n)
+
+    let pY = (preproX * (projeX + preproY)) 
+    let pX = ((projeX - preproY) / preproX)
+    console.log(projeX + preproY)
+    //=========================//   
+
+}
+
+function PrintarResultados(div,Relacao, Classificacao){
     let p = document.createElement('p')
     p.setAttribute('class','lead')
     p.innerHTML = `Relação : ${Relacao}`
@@ -76,3 +122,58 @@ function CriarDiv(){
     return newdiv
 }
 
+function desenharchart(div,date){
+    let local = document.createElement("canvas")
+    div.appendChild(local)
+    var ctx = local
+    /*
+    var scatterChart = new Chart(ctx, {
+        type: 'scatter',
+        data: {
+            datasets: [{
+                label: 'Scatter Dataset',
+                data: date
+            }]
+        },
+        options: {
+            scales: {
+                xAxes: [{
+                    type: 'linear',
+                    position: 'bottom'
+                }]
+            }
+        }
+    });
+    */
+    //canvas.appendChild(scatterChart)
+    var grafico = new Chart(ctx, {
+        type: 'scatter',
+        data: {
+            datasets: [{
+                label: 'Regressão',
+                pointBackgroundColor: 'red',
+                data: date
+            }]
+        },
+        options: {
+            scales: {
+                xAxes: [{
+                    type: 'linear',
+                    position: 'bottom'
+                }]
+            }
+        }
+    }, {
+        type: 'line',
+        data: date,
+        options: {
+            scales: {
+                xAxes: [{
+                    type: 'linear',
+                    position: 'bottom'
+                }]
+            }
+        }
+    });
+
+}
