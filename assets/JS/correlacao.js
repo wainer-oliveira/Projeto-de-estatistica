@@ -1,8 +1,9 @@
 const inputx = document.getElementById("InputX")
 const inputy = document.getElementById("InputY")
 const calcul = document.getElementById("btnReg")
-
-
+const projeX = document.getElementById("proX")
+const projeY = document.getElementById("proY")
+const atual = document.getElementById("btnAtu")
 
 
 calcul.onclick = function calcular(){
