@@ -28,7 +28,8 @@ calcul.onclick = function calcular(){
     let multXY = (arrayx.reduce(function(r,a,i){return r+a*arrayy[i]},0));
 
     // função da correlação
-    let r = (n * multXY - totalx * totaly) / Math.sqrt((n * x2 - totalx ** 2) * (n * y2 - totaly ** 2)).toFixed(2)
+    let r = (n * multXY - totalx * totaly) / Math.sqrt((n * x2 - totalx ** 2) * (n * y2 - totaly ** 2))
+    r = r.toFixed(2)
     preproX = (n * multXY - totalx * totaly) / (n * x2 - totalx ** 2)
     preproY = (totaly / n) - preproX * (totalx / n)
 
@@ -47,7 +48,30 @@ calcul.onclick = function calcular(){
     }
     //=========================//   
     console.log(r)
-    console.log(preproX) 
-    console.log(preproY)
     console.log(classi)
+
+    PrintarResultados(r,classi)
 }
+
+function PrintarResultados(Relacao, Classificacao){
+    let div = CriarDiv()
+    let p = document.createElement('p')
+    p.setAttribute('class','lead')
+    p.innerHTML = `Relação : ${Relacao}`
+    let p2 = document.createElement('p')
+    p2.setAttribute('class','lead')
+    p2.innerHTML = `Classificação : ${Classificacao}`
+    div.appendChild(p)
+    div.appendChild(p2)
+    document.getElementById("result").innerHTML = ""
+    document.getElementById("result").appendChild(div)
+}
+
+function CriarDiv(){
+    let divMostrarDados = document.getElementById("result")
+    let newdiv = document.createElement("div")
+    newdiv.setAttribute("class", "jumbotron pt-0 mb-2")
+    divMostrarDados.appendChild(newdiv)
+    return newdiv
+}
+
