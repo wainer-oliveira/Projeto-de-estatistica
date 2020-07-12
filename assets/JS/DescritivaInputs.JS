@@ -67,13 +67,15 @@ btngerar.onclick = function CapturarElementos(){
     let tipotabela = document.getElementById("TipoTabela").value
     let elementos
     if(tipotabela == "qualitativanominal"){
-        let array = TratarInputString()
-        elementos = array.sort()
-        CalcularQualitativa(nome, elementos, separatriz)
+        elementos = TratarInputString(document.getElementById("InputDadosVariavel"))
+        let array = [... new Set(elementos)]
+        let ordem = array.sort()
+        CalcularQualitativa(nome,ordem, elementos, separatriz)
 
     }else if(tipotabela == "qualitativaordinal"){
-        elementos = TratarInputString()
-        CalcularQualitativa(nome,elementos,separatriz)
+        elementos = TratarInputString(document.getElementById("InputDadosVariavel"))
+        let ordem = setOrdem(elementos)
+        CalcularQualitativa(nome,ordem ,elementos,separatriz)
 
     }else if(tipotabela == "quantitativadiscreta"){
         elementos = TratarInputNumber()
@@ -88,17 +90,28 @@ btngerar.onclick = function CapturarElementos(){
     }
 }
 
+function setOrdem(elementos){
+    let data = document.getElementById("DivOrdemDados").children
+    let arr = [].slice.call(data);
+    let arrayOrdem = []
+    arr.forEach(x => {
+        arrayOrdem.push((x.children[1]).value)
+    })
+
+    return arrayOrdem
+}
+
 function zerar(local){
     local.value = ""
 }
 
-function TratarInputString(){
-    let inputelementos = document.getElementById("InputDadosVariavel")
+function TratarInputString(inputelementos){
     let elementos =[]
     if(inputelementos.value == ""){
         alert("Insira os elementos para que possamos continuar!")
     }else{
         elementos = (inputelementos.value).split(",")
+        elementos = elementos.map(a => a.toLowerCase(a))
     }
     elementos = elementos.filter(a => a != "")
     return elementos
@@ -140,4 +153,53 @@ InputFile.addEventListener('change',() => {
         dados.value += `${data[i]},`
       }
     })
+})
+
+let choseTable = document.getElementById("TipoTabela")
+choseTable.addEventListener('change',() => {
+    data = document.getElementById("TipoTabela").value
+    if(data == "qualitativaordinal"){
+        document.getElementById('DivOrdemDados').innerHTML = ""
+        let dados = [...new Set(TratarInputString(document.getElementById("InputDadosVariavel")))]
+        
+        for(let i = 1 ; i <= dados.length ; i++){
+
+            let divMae =document.createElement("div")
+            divMae.setAttribute("class", "input-group mb-2 mt-2")
+            divMae.setAttribute("id", "divMaeId")
+
+            let divOrdem =document.createElement("div")
+            divOrdem.setAttribute("class", "input-group-prepend")
+
+            let labelOrdem =document.createElement("label")
+            labelOrdem.setAttribute("class", "input-group-text")
+            labelOrdem.innerHTML = i+"°"
+
+            let selectOrdem = document.createElement("select")
+            selectOrdem.value = i
+            selectOrdem.id = "select"+i
+            selectOrdem.className = "custom-select"
+
+            labelOrdem.setAttribute("for", "select"+i)
+
+            document.getElementById("DivOrdemDados").appendChild(divMae)
+            divMae.appendChild(divOrdem)
+            divOrdem.appendChild(labelOrdem)
+   
+            dados.forEach(x => {
+                let opcaoOrdem = document.createElement("option")
+                opcaoOrdem.value = x
+                opcaoOrdem.innerHTML = x
+                selectOrdem.appendChild(opcaoOrdem)
+            })
+
+            divMae.appendChild(selectOrdem)
+        }
+        
+        document.getElementById('DivOrdemDados').style.display = "block"
+
+    } else {
+        document.getElementById('DivOrdemDados').style.display = "none"
+    }
+    
 })

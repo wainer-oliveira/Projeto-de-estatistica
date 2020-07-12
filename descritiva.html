@@ -73,6 +73,7 @@
           <label for="InputDadosVariavel">Insira os dados</label>
           <input type="text" class="form-control" id="InputDadosVariavel" placeholder="Separados por vírgula ( , )">
         </div>
+        
         <div class="input-group mb-2 mt-2">
           <div class="input-group-prepend">
             <label class="input-group-text" for="TipoTabela"><strong>Tipo de Tabela</strong></label>
@@ -84,6 +85,10 @@
             <option id="quantitativa_discreta" value="quantitativadiscreta">Quantitativa Discreta</option>
             <option id="quantitativa_continua" value="quantitativacontinua">Quantitativa Continua</option>
           </select>
+        </div>
+
+        
+        <div id="DivOrdemDados" style="display: none;">
         </div>
         
         <div class="form-check form-check-inline m-3">
@@ -121,7 +126,8 @@
         <button type="button" class="btn btn-primary" id="btn-gerar">Gerar</button>
       </form> 
     </div>
-    <div class="container mt-3" id="MostrarDados"></div>
+    <div class="container mt-3" id="MostrarDados">
+    </div>
   </div>
 
   <footer class="jumbotron jumbotron-fluid bg-dark mb-0">

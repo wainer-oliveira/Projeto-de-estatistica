@@ -21,10 +21,9 @@ function CalcularFacPorcentagem(fr){
 }
 
 //Funções Principais
-function CalcularQualitativa(nome, array, separatriz){ 
-    let newArray = array.map(a => a.toLowerCase(a))
-    let elementos = [... new Set(newArray)]
-    let frequenciaSimples = elementos.map(a => QuantidadeOcorrencia(a, newArray))
+function CalcularQualitativa(nome,ordem, array, separatriz){ 
+    let elementos = ordem
+    let frequenciaSimples = elementos.map(a => QuantidadeOcorrencia(a, array))
     let frequenciaAcumulada = CalcularFrequenciaAcumulada(frequenciaSimples)
     let frequenciaRelativa = CalcularFrequenciaRelativa(frequenciaSimples, frequenciaAcumulada)
     let frequenciaAcumuladaPorcentagem = CalcularFacPorcentagem(frequenciaRelativa)
@@ -41,7 +40,7 @@ function CalcularQualitativa(nome, array, separatriz){
     frequenciaSimples.forEach((a,b) => dadostabela.push(
     [`${elementos[b]}`, `${frequenciaSimples[b]}`, `${frequenciaRelativa[b]}`, `${frequenciaAcumulada[b]}`, `${frequenciaAcumuladaPorcentagem[b]}`]
     ))
-     
+    
     let novadiv = CriarDiv()
 
     let tabela = CriarTabela(novadiv)
@@ -203,19 +202,30 @@ function CalcularQuantitativaContinua(nome,array, separatriz){
 }
 
 //Funções de Tabela
+let i = 0
 function CriarDiv(){
+    i++
     let divMostrarDados = document.getElementById("MostrarDados")
     let newdiv = document.createElement("div")
     newdiv.setAttribute("class", "jumbotron pt-0 mb-2")
+    newdiv.setAttribute("id", "div"+i)
+    let btn = document.createElement("button")
+    btn.innerHTML = "Apagar"
+    btn.setAttribute("onclick", `apagaItem(${i})`)
+    newdiv.appendChild(btn)
     divMostrarDados.appendChild(newdiv)
     return newdiv
 }
 
+function apagaItem(index){
+    document.getElementById("div"+index).remove()
+}
+
 function CriarTabela(div){
-    let tabela = document.createElement("table")
-    div.appendChild(tabela)
-    tabela.setAttribute("class", "table table-bordered table-dark")
-    return(tabela)
+let tabela = document.createElement("table")
+div.appendChild(tabela)
+tabela.setAttribute("class", "table table-bordered table-dark")
+return(tabela)
 }
 
 function GerarTableHead(table, data){
