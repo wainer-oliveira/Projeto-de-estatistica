@@ -1,23 +1,11 @@
- 
-const inputx = ((document.getElementById("InputX").value).split(" "))
-const inputy = ((document.getElementById("InputY").value).split(" "))
 const calcul = document.getElementById("btnReg")
-const projeX = document.getElementById("proX")
-const projeY = document.getElementById("proY")
 const atual = document.getElementById("btnAtu")
 
 
 calcul.onclick = function calcular(){
-    
     // transformando em array
     let arrayx = ((document.getElementById("InputX").value).split(" "))
     let arrayy = ((document.getElementById("InputY").value).split(" "))
-    let dadosgrafico = arrayx.map((a,b) => ({
-        x : a,
-        y : arrayy[b]
-    }))
-
-
     arrayx = arrayx.map((conversao) => Number(conversao))
     arrayy = arrayy.map((conversao) => Number(conversao))
     let n = arrayx.length
@@ -55,11 +43,11 @@ calcul.onclick = function calcular(){
         classi = 'Incompatível'
     }
     //=========================//   
-    console.log(r)
-    console.log(preproX) 
-    console.log(preproY)
-    console.log(arrayx)
-    console.log(arrayy)
+
+    let dadosgrafico = arrayx.map((a,b) => ({
+        x : a,
+        y : arrayy[b]
+    }))
 
     let div = CriarDiv()
     PrintarResultados(div, r,classi)
@@ -67,12 +55,15 @@ calcul.onclick = function calcular(){
 }
 
 atual.onclick = function atualizar(){
-    
-    // transformando em array
-    let arrayx = inputx.value.split(" ")
-    let arrayy = inputy.value.split(" ")
-    arrayx = arrayx.map((conversao) => conversao = Number(conversao))
-    arrayy = arrayy.map((conversao) => conversao = Number(conversao))
+    let capX = Number(document.getElementById("proX").value) 
+    let capY = Number(document.getElementById("proY").value)
+    console.log(capX)
+    console.log(capY)
+
+    let arrayx = ((document.getElementById("InputX").value).split(" "))
+    let arrayy = ((document.getElementById("InputY").value).split(" "))
+    arrayx = arrayx.map((conversao) => Number(conversao))
+    arrayy = arrayy.map((conversao) => Number(conversao))
     let n = arrayx.length
 
     // somando os valores dos array X e Y
@@ -94,10 +85,18 @@ atual.onclick = function atualizar(){
     let preproX = (n * multXY - totalx * totaly) / (n * x2 - totalx ** 2)
     let preproY = (totaly / n) - preproX * (totalx / n)
 
-    let pY = (preproX * (projeX + preproY)) 
-    let pX = ((projeX - preproY) / preproX)
-    console.log(projeX + preproY)
-    //=========================//   
+    let projecao
+    if(capX > 0 && capY > 0){
+        alert("Adicione apenas um dos dados")
+    }else if(capX > 0){
+        projecao = (preproX * capX + preproY).toFixed(2)
+    }else if(capY > 0){
+        projecao = ((capY - (preproY)) / preproX).toFixed(2)
+    }else{
+        alert("Dados Inválidos")
+    }
+    //=========================//  
+    console.log(projecao)
 
 }
 
@@ -152,4 +151,9 @@ function desenharchart(div,date){
         }
     });
 
+    grafico += new Chart(ctx, {
+        type: 'line',
+        data: data,
+        options: options
+    });
 }
