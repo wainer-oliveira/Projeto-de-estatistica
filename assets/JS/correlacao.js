@@ -126,47 +126,23 @@ function desenharchart(div,date){
     let local = document.createElement("canvas")
     div.appendChild(local)
     var ctx = local
-    /*
-    var scatterChart = new Chart(ctx, {
-        type: 'scatter',
-        data: {
-            datasets: [{
-                label: 'Scatter Dataset',
-                data: date
-            }]
-        },
-        options: {
-            scales: {
-                xAxes: [{
-                    type: 'linear',
-                    position: 'bottom'
-                }]
-            }
-        }
-    });
-    */
-    //canvas.appendChild(scatterChart)
     var grafico = new Chart(ctx, {
         type: 'scatter',
         data: {
             datasets: [{
-                label: 'Regressão',
                 pointBackgroundColor: 'red',
                 data: date
             }]
         },
         options: {
-            scales: {
-                xAxes: [{
-                    type: 'linear',
-                    position: 'bottom'
-                }]
-            }
-        }
-    }, {
-        type: 'line',
-        data: date,
-        options: {
+            title: {
+                text: 'Regressão',
+                fontSize: 15,
+                display: true,
+            },
+            legend: {
+                display: false
+            },
             scales: {
                 xAxes: [{
                     type: 'linear',
