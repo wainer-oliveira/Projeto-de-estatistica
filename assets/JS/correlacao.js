@@ -4,8 +4,13 @@ const atual = document.getElementById("btnAtu")
 
 calcul.onclick = function calcular(){
     // transformando em array
-    let arrayx = ((document.getElementById("InputX").value).split(" "))
-    let arrayy = ((document.getElementById("InputY").value).split(" "))
+    //let arrayx = ((document.getElementById("InputX").value).split(" "))
+    //let arrayy = ((document.getElementById("InputY").value).split(" "))
+    let x =((document.getElementById("InputX").value).split(" "))
+    let y = ((document.getElementById("InputY").value).split(" "))
+    let arrayx = TratarInputNumber(x)
+    let arrayy =  TratarInputNumber(y)
+
     arrayx = arrayx.map((conversao) => Number(conversao))
     arrayy = arrayy.map((conversao) => Number(conversao))
     let n = arrayx.length
@@ -207,26 +212,40 @@ let InputFile = document.getElementById("uploadFileRegressao")
 InputFile.addEventListener('change',() => {
     readXlsxFile(InputFile.files[0]).then((data) => {
         let dados = document.getElementById("InputX")
+        let dados2 = document.getElementById("InputY")
         zerar(dados)
+        zerar(dados2)
+        console.log()
         
       for(let i = 0; i < data.length; i++){
+        console.log(data[i][0])
         if(i == data.length-1){
-            dados.value += `${data[i]}`
+            dados.value += `${data[i][0]}`
+            dados2.value += `${data[i][1]}`
+            
             break
-        }
-        dados.value += `${data[i]},`
-      }
-    })
-    readXlsxFile(InputFile.files[1]).then((data) => {
-        let dados = document.getElementById("InputY")
-        zerar(dados)
-        
-      for(let i = 0; i < data.length; i++){
-        if(i == data.length-1){
-            dados.value += `${data[i]}`
-            break
-        }
-        dados.value += `${data[i]},`
+        }   
+        dados.value += `${data[i][0]}  `
+        dados2.value += `${data[i][1]}  `
       }
     })
 })
+
+function TratarInputNumber(array){
+    let inputelementos = array
+    let elementos = []
+    if(inputelementos.value == ""){
+        alert("Insira os elementos para que possamos continuar!")
+    }else{
+        elementos = inputelementos
+    }
+    elementos = elementos.filter(a => a != "")
+    elementos = elementos.sort((a,b) => a - b)
+    elementos = elementos.filter(a => Number(a) == a)
+    if(elementos.length == 0){
+        alert("DADOS INVÁLIDOS!")
+    }else{
+        elementos = elementos.map(a => Number(a))
+        return elementos
+    }
+}
