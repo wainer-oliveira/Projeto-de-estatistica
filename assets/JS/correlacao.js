@@ -28,9 +28,10 @@ calcul.onclick = function calcular(){
     let multXY = (arrayx.reduce(function(r,a,i){return r+a*arrayy[i]},0));
 
     // função da correlação
-    let r = (n * multXY - totalx * totaly) / Math.sqrt((n * x2 - totalx ** 2) * (n * y2 - totaly ** 2)).toFixed(2)
-    preproX = (n * multXY - totalx * totaly) / (n * x2 - totalx ** 2)
-    preproY = (totaly / n) - preproX * (totalx / n)
+    const r = (n * multXY - totalx * totaly) / Math.sqrt((n * x2 - totalx ** 2) * (n * y2 - totaly ** 2))
+    //r = r.toFixed(2)
+    const preproX = (n * multXY - totalx * totaly) / (n * x2 - totalx ** 2)
+    const preproY = (totaly / n) - preproX * (totalx / n)
 
     if(r > 0.9 || r < -0.9){
         classi = 'Muito Forte'
@@ -50,4 +51,17 @@ calcul.onclick = function calcular(){
     console.log(preproX) 
     console.log(preproY)
     console.log(classi)
+    Escreverr(r, preproY, preproX, classi)
+    
+}
+
+function Escreverr(r, preprox, preproX, classi){
+    let divResultados = document.getElementById("result")
+    console.log(divResultados)
+    divResultados.innerHTML = ""
+    divResultados.innerHTML = `Correlação: ${r}  `
+}
+
+function gerarY(){
+
 }
