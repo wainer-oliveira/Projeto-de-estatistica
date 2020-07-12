@@ -145,12 +145,12 @@ function desenharchart(div,date, datelinha){
                 pointBackgroundColor: 'red',
                 data: date,
                 //borderWidth : 1
-            },{
+            }/*,{
                 data : datelinha,
                 type : 'line',
                 fill : false,
                 pointRadius : 0
-            }
+            }*/
         ]
         },
         options: {
@@ -198,3 +198,35 @@ function desenharchart(div,date, datelinha){
     });*/
 
 }
+
+function zerar(local){
+    local.value = ""
+}
+
+let InputFile = document.getElementById("uploadFileRegressao")
+InputFile.addEventListener('change',() => {
+    readXlsxFile(InputFile.files[0]).then((data) => {
+        let dados = document.getElementById("InputX")
+        zerar(dados)
+        
+      for(let i = 0; i < data.length; i++){
+        if(i == data.length-1){
+            dados.value += `${data[i]}`
+            break
+        }
+        dados.value += `${data[i]},`
+      }
+    })
+    readXlsxFile(InputFile.files[1]).then((data) => {
+        let dados = document.getElementById("InputY")
+        zerar(dados)
+        
+      for(let i = 0; i < data.length; i++){
+        if(i == data.length-1){
+            dados.value += `${data[i]}`
+            break
+        }
+        dados.value += `${data[i]},`
+      }
+    })
+})
