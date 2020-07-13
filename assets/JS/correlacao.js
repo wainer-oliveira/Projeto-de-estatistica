@@ -4,8 +4,8 @@ const atual = document.getElementById("btnAtu")
 
 calcul.onclick = function calcular(){
     // transformando em array
-    let arrayx = ((document.getElementById("InputX").value).split(""))
-    let arrayy = ((document.getElementById("InputY").value).split(""))
+    let arrayx = ((document.getElementById("InputX").value).split(" "))
+    let arrayy = ((document.getElementById("InputY").value).split(" "))
     //let x =((document.getElementById("InputX").value).split(" "))
     //let y = ((document.getElementById("InputY").value).split(" "))
     //let arrayx = TratarInputNumber(x)
